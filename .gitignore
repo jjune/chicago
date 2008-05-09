@@ -3,4 +3,6 @@ log/*.log
 tmp/**/*
 config/database.yml
 db/*.sqlite3
-public/dispatch*
+public/dispatch.cgi
+public/dispatch.fcgi
+public/dispatch.rb
