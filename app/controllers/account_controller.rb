@@ -33,6 +33,9 @@ class AccountController < ApplicationController
     render :action => 'signup'
   end
   
+  def brad
+  end
+  
   def logout
     self.current_user.forget_me if logged_in?
     cookies.delete :auth_token
