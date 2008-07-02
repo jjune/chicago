@@ -23,4 +23,18 @@ ActiveRecord::Schema.define(:version => 2) do
   add_index "prizes", ["center"], :name => "index_prizes_on_center", :spatial=> true 
   add_index "prizes", ["prizearea"], :name => "index_prizes_on_prizearea", :spatial=> true 
 
+  create_table "users", :force => true do |t|
+    t.column "type", :string
+    t.column "login", :string
+    t.column "email", :string
+    t.column "crypted_password", :string, :limit => 40
+    t.column "salt", :string, :limit => 40
+    t.column "created_at", :timestamp
+    t.column "updated_at", :timestamp
+    t.column "remember_token", :string
+    t.column "remember_token_expires_at", :timestamp
+    t.column "device_type", :string
+    t.column "company_name", :string
+  end
+
 end
