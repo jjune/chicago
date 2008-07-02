@@ -12,22 +12,15 @@
 ActiveRecord::Schema.define(:version => 2) do
 
   create_table "prizes", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.column "name", :string
+    t.column "type", :string
+    t.column "created_at", :timestamp
+    t.column "updated_at", :timestamp
+    t.column "prizearea", :polygon, :srid => 4326, :null => false
+    t.column "center", :point, :srid => 4326, :null => false
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "type"
-    t.string   "login"
-    t.string   "email"
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "remember_token"
-    t.datetime "remember_token_expires_at"
-    t.string   "device_type"
-    t.string   "company_name"
-  end
+  add_index "prizes", ["center"], :name => "index_prizes_on_center", :spatial=> true 
+  add_index "prizes", ["prizearea"], :name => "index_prizes_on_prizearea", :spatial=> true 
 
 end
