@@ -1,0 +1,19 @@
+<h1>Listing prizes</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for prize in @prizes %>
+  <tr>
+  	<td><%=prize.name%></td>
+    <td><%= link_to 'Show', prize %></td>
+    <td><%= link_to 'Edit', edit_prize_path(prize) %></td>
+    <td><%= link_to 'Destroy', prize, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New prize', new_prize_path %>
