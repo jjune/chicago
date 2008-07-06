@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" <%= GMap::VML_NAMESPACE %> >
+<head>
+  <title>Query Prizes</title>
+  <%= javascript_include_tag :defaults %>
+  <%= GMap.header %>
+<script>
+ var map=null;
+ var marker=null;
+ function initialize() {
+      if (GBrowserIsCompatible()) {
+        map = new GMap2(document.getElementById("map_div"));
+        map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+  		marker = new GMarker(new GLatLng(37.4419,-122.1419),{title : "Device User",draggable : true});
+  		map.addOverlay(marker);
+  		GEvent.addListener(marker,"dragend",function() {MarkerMoved();});   
+      }
+    }
+ function MarkerMoved()
+ {
+  
+ <%=remote_function(:url => {:action => 'find', :controller => 'query_prize'}, :with => "'lat='+marker.getLatLng().lat()+'&'+'lng='+marker.getLatLng().lng()") %>
+
+ }
+ </script>
+  <style>
+  #map_div {width: 500px; height: 300px; }
+  </style>
+</head>
+	
+<body onload="initialize()" onunload="GUnload()">
+  <div id="main">
+    <div id="map_div" ></div>
+    <div id="notice" style="display:none;"></div>
+  </div>
+  </body>
+
+</html>
