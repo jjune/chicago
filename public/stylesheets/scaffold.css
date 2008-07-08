@@ -2,7 +2,7 @@ body { background-color: #fff; color: #333; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size:   13px;
+  font-size:   100%;
   line-height: 18px;
 }
 
@@ -15,6 +15,12 @@ pre {
 a { color: #000; }
 a:visited { color: #666; }
 a:hover { color: #fff; background-color:#000; }
+
+h1 {font-size: 120%;}
+h2 {font-size: 100%;}
+h3 {font-size: 90%;}
+h4 {font-size: 80%;}
+
 
 .fieldWithErrors {
   padding: 2px;
@@ -71,4 +77,25 @@ div.progressBar div.background {
   height: 18px;
   width: 0%;
 }
+
+.topview {display:block; width: 100%; height:auto; border: 1px solid red;}
+
+.topofheader {border: 1px solid green;}
+.midofheader {border: 1px solid blue;}
+.botmofheader {border:1px solid yellow;}
+
+.leftview {}
+
+.bodyview {display:block; width:100%; height:auto; border: 1px solid #336699; background-color: #339999;}
+.topbodyview {}
+.midbody {}
+.botmbodyview {}
+
+.rightview {}
+
+.bottomview {display:block; width: 100%; height:auto; border: 1px solid red;}
+.topoffooter {border: 1px solid green;}
+.midoffooter {border: 1px solid blue;}
+.botmoffooter {border: 1px solid yellow;}
+
 

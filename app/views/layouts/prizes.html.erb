@@ -10,10 +10,30 @@
  
 </head>
 <body <%=@bodyscript %>>
+	<div class="topview">
+		<div class="topofheader"></div>
+		<div class="midofheader"></div>
+		<div class="botmofheader"></div>	
+	</div>
 
-<p style="color: green"><%= flash[:notice] %></p>
 
-<%= yield  %>
+<div class="leftview"></div>
+
+<div class="bodyview">
+<div class="topbodyview">
+	<p style="color: green"><%= flash[:notice] %></p>
+</div>
+<div class="midbody"><%= yield %></div>
+<div class="botmbodyview"></div>
+</div>
+
+<div class="rightview"></div>
+
+<div class="bottomview">
+	<div class="topoffooter"></div>
+	<div class="midoffooter"></div>
+	<div class="botmoffooter"></div>	
+</div>
 
 </body>
 </html>
