@@ -78,24 +78,30 @@ div.progressBar div.background {
   width: 0%;
 }
 
-.topview {display:block; width: 100%; height:auto; border: 1px solid red;}
+.new_prize {display:block; float:left; width: 100%; height:400px;}
+#map_canvas {display:block; float:left; width: 100%; height:400px;}
 
-.topofheader {border: 1px solid green;}
-.midofheader {border: 1px solid blue;}
-.botmofheader {border:1px solid yellow;}
+.prizes #panel1 {display: inline; float:left; width: 50%; height:auto; }
+.prizes #panel2 {display:inline; float: right; width: 50%; height:auto;}
+
+.topview {display:block; float:left; width: 100%; height:auto; min-height: 100px; border: 1px solid red;}
+
+.topofheader {display:block; float:left; width: 100%; height:auto;border: 1px solid green;}
+.midofheader {display:block; float:left; width: 100%; height:auto;border: 1px solid blue;}
+.botmofheader {display:block; float:left; width: 100%; height:auto;border:1px solid yellow;}
 
 .leftview {}
 
-.bodyview {display:block; width:100%; height:auto; border: 1px solid #336699; background-color: #339999;}
-.topbodyview {}
-.midbody {}
-.botmbodyview {}
+.bodyview {display:block; width:100%; height:auto; min-height: 200px; border: 1px solid #336699; background-color: #339999;}
+.topbodyview {display:block; width:100%; height:auto;min-height: 1px;}
+.midbody {display:block; width:100%; height:450px;min-height: 1px;}
+.botmbodyview {display:block; width:100%; height:auto;min-height: 1px;}
 
 .rightview {}
 
-.bottomview {display:block; width: 100%; height:auto; border: 1px solid red;}
-.topoffooter {border: 1px solid green;}
-.midoffooter {border: 1px solid blue;}
-.botmoffooter {border: 1px solid yellow;}
+.bottomview {display:block; width: 100%; height:auto;  min-height: 100px; border: 1px solid red;}
+.topoffooter {display:block; float:left; width: 100%; height:auto;border: 1px solid green;}
+.midoffooter {display:block; float:left; width: 100%; height:auto;border: 1px solid blue;}
+.botmoffooter {display:block; float:left; width: 100%; height:auto;border: 1px solid yellow;}
 
 
