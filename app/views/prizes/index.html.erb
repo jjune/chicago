@@ -1,19 +1,20 @@
-<h1>Listing prizes</h1>
-
-<table>
-  <tr>
-  </tr>
+<table class="prizes_list">
+<tbody>
+  <tr><th colspan=4>Your Sponsored Prizes</th></tr>
 
 <% for prize in @prizes %>
   <tr>
-  	<td><%=prize.name%></td>
-    <td><%= link_to 'Show', prize %></td>
-    <td><%= link_to 'Edit', edit_prize_path(prize) %></td>
-    <td><%= link_to 'Destroy', prize, :confirm => 'Are you sure?', :method => :delete %></td>
+  	<td class="name"><%=prize.name%></td>
+ 	<td class="status">Status: Active</td>
+<td class="command"><%= link_to 'Show', prize %></td>
+    <td class="command"><%= link_to 'Edit', edit_prize_path(prize) %></td>
+    <td class="command"><%= link_to 'Destroy', prize, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
+
+</tbody>
 </table>
 
 <br />
 
-<%= link_to 'New prize', new_prize_path %>
+<%= link_to 'Add another Prize', new_prize_path %>

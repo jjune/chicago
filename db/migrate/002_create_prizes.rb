@@ -6,6 +6,7 @@ class CreatePrizes < ActiveRecord::Migration
     	t.column "prizearea", :polygon, :null=>false, :srid => 4326, :with_z =>false
     	t.column "center", :point, :null=>false, :srid => 4326, :with_z =>false
       t.timestamps
+    
     end
     
     add_index "prizes", "prizearea", :spatial=>true
