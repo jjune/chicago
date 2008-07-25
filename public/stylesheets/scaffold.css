@@ -84,6 +84,7 @@ div.progressBar div.background {
 .prizes #panel1 {display: inline; float:left; width: 50%; height:auto; }
 .prizes #panel2 {display:inline; float: right; width: 50%; height:auto;}
 
+.prizes_list {display:block; float:left; width:100%;}
 .prizes_list .name {width:300px; background-color: #ffffff;}
 .prizes_list .status {width:140px; background-color: #fff333;}
 .prizes_list .command {width:80px; background-color: #f3f3f3;}
@@ -91,7 +92,7 @@ div.progressBar div.background {
 .topview {display:block; float:left; width: 100%; height:auto; min-height: 10px; border: 1px solid red;}
 
 .topofheader {display:block; float:left; width: 100%; height:auto;border: 1px solid green;}
-.midofheader {display:block; float:left; width: 100%; height:auto;border: 1px solid blue;}
+.midofheader {display:block; float:left; width: 100%; height:auto;border: 1px solid blue; background-image: url (/public/images/duskskybanner.jpg);}
 .botmofheader {display:block; float:left; width: 100%; height:auto;border:1px solid yellow;}
 
 .leftview {}
