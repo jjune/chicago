@@ -3,11 +3,39 @@
 <head>
 	<title>Secret Prize Lab</title>
 	 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.5.2/build/yuiloader/yuiloader-beta-min.js" ></script> 
 </head>
 <body>
 <div class="topview">
-	<div class="topofheader"></div>
+	<div class="topofheader">
+		<script> 
+			// Instantiate and configure Loader: 
+			var loader = new YAHOO.util.YUILoader({ 
+			 
+			    // Identify the components you want to load.  Loader will automatically identify 
+			    // any additional dependencies required for the specified components. 
+			    require: ["colorpicker", "treeview"], 
+			 
+			    // Configure loader to pull in optional dependencies.  For example, animation 
+			    // is an optional dependency for slider. 
+			    loadOptional: true, 
+			 
+			    // The function to call when all script/css resources have been loaded 
+			    onSuccess: function() { 
+			        //this is your callback function; you can use 
+			        //this space to call all of your instantiation 
+			        //logic for the components you just loaded. 
+			    } 
+			}); 
+			 
+			// Load the files using the insert() method. The insert method takes an optional 
+			// configuration object, and in this case we have configured everything in 
+			// the constructor, so we don't need to pass anything to insert(). 
+			loader.insert(); 
+			 
+		</script>
+		
+	</div>
 	<div class="midofheader"></div>
 	<div class="botmofheader"></div>	
 </div>
