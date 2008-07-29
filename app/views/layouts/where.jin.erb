@@ -1,0 +1,13 @@
+xml.instruct! :xml, :version = "1.0"
+<jin cache="false">
+<script>  Test</script>
+
+<body fontSize="small" bg="0xFF9933" fg="0xFFFFFF">	
+<header></header>
+<%= yield %>
+<footer>
+<img id="rightCmd" src="http://www.where.com/images/dd/mobile/240/blank.png"/>
+<img id="leftCmd" src="http://www.where.com/images/dd/mobile/240/back.png" onSelect="home()"/>
+</footer>
+</body>
+</jin>
