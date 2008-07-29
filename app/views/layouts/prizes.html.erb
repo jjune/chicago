@@ -48,9 +48,9 @@
    if (GBrowserIsCompatible()) {
      map = new GMap2(document.getElementById("map_canvas"));
      map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-	map.enableContinuousZoom();
+	//map.enableContinuousZoom();
      map.disableDragging();
-	map.addControl(GSmallZoomControl());
+	//map.addControl(GSmallZoomControl());
 	//map.GMenuMapTypeControl(true);
      prizearea = new GPolygon(map.getCenter(),'#0000FF','5','1','#0000FF','0.2');
      map.addOverlay(prizearea);
