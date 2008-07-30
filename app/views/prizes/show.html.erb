@@ -1,7 +1,4 @@
-
-<%= link_to 'Edit', edit_prize_path(@prize) %> |
-<%= link_to 'Back', prizes_path %>
-
+<div id="panel1">
 
       <script>
        var map = null;
@@ -11,7 +8,7 @@
       if (GBrowserIsCompatible()) {
         map = new GMap2(document.getElementById("map_canvas"));
         
-        	
+        //This is different than code in prizes.html because it centers based on polygon. Ok not to be draggable.	
         map.setCenter(<%=GLatLng.from_georuby(@prize.center).to_javascript%>, 13);
         map.disableDragging();
         prizearea = <%=GPolygon.from_georuby(@prize.prizearea,'#0000FF','5','1','#0000FF','0.2').to_javascript%>
@@ -19,26 +16,24 @@
         
       }
     }
-
-
     </script>
   
 
-    <form action="#" onsubmit="showAddress(this.address.value); return false">
-      <p>
-        <input type="text" size="60" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />
-        <input type="submit" value="Go!" />
-      </p>
+	<table>
+	<tbody>
+	<tr><td>Prize Label: </td><td><%=@prize.name %></td></tr>
+	<tr><td>Prize Type: </td><td><%=@prize.prizetype %></td></tr>
+	<tr><td>Prize Value: </td><td><%=@prize.prizeamt %></td></tr>
+	<tr><td>Cheat Code: </td><td><%=@prize.cheatcode %></td></tr>
+	<tr><td>Winner's Message: </td><td><%=@prize.winnermsg %></td></tr>
+	</tbody>
+	</table>
+
+<p>
+<%= link_to 'Edit Prize', edit_prize_path(@prize) %>
+</p>
+</div> 
+
+<div id="panel2">
       <div id="map_canvas" style="width: 500px; height: 300px"></div>
-    </form>
-    
-
-<p>
-Name: <%=@prize.name%>
-</p>
-<p>
-
-<%= @prize.prizearea.text_representation%>
-
-
-</p>
+</div>
