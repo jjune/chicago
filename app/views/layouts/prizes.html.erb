@@ -46,17 +46,21 @@
    
  function initialize() {
    if (GBrowserIsCompatible()) {
-     map = new GMap2(document.getElementById("map_canvas"));
-     map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+    map = new GMap2(document.getElementById("map_canvas"));
+    map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+	map.addControl(new GLargeMapControl());
+	var mapControl = new GMapTypeControl();
+	map.addControl(mapControl);
+
 	//map.enableContinuousZoom();
-     map.disableDragging();
+    //map.disableDragging();
 	//map.addControl(GSmallZoomControl());
 	//map.GMenuMapTypeControl(true);
-     prizearea = new GPolygon(map.getCenter(),'#0000FF','5','1','#0000FF','0.2');
-     map.addOverlay(prizearea);
-     prizearea.enableDrawing();
-     GEvent.addListener(map, "moveend", function(){whereami(map);});
-     geocoder = new GClientGeocoder();
+    prizearea = new GPolygon(map.getCenter(),'#0000FF','5','1','#0000FF','0.2');
+    map.addOverlay(prizearea);
+    prizearea.enableDrawing();
+    //GEvent.addListener(map, "moveend", function(){whereami(map);});
+    geocoder = new GClientGeocoder();
      
    }
  }
@@ -86,6 +90,7 @@
 
 </head>
 <body <%=@bodyscript %> class="prizes"onload="initialize()" onunload="GUnload()">
+
 	<div class="topview">
 		<div class="topofheader"></div>
 		<div class="midofheader"><h1>Prize Lab</h1></div>
