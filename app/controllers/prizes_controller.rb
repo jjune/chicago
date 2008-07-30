@@ -67,10 +67,10 @@ end
 						:prizearea => Polygon.from_coordinates([points],4326), 
 						:center => Point.from_x_y(params[:center_lng],params[:center_lat],4326),
 						:type => "prize",
-					  :prizetype => params[:prizetype],
-          	:prizeamt => params[:prizeamt],
-          	:cheatcode => params[:cheatcode],
-          	:winnermsg => params[:winnermsg]
+					  :prizetype => params[:prize][:prizetype],
+          	:prizeamt => params[:prize][:prizeamt],
+          	:cheatcode => params[:prize][:cheatcode],
+          	:winnermsg => params[:prize][:winnermsg]
 					  )
     respond_to do |format|
       if @prize.save
