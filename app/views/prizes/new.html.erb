@@ -9,7 +9,13 @@
 	<tbody>
 	<tr><td>Prize Label: </td><td><%= f.text_field :name %></td></tr>
 	<tr><td>Prize Type: </td><td>
-<%= f.text_field :prizetype %>
+<%= f.radio_button "prizetype", "Message" %>Message
+<%= f.radio_button "prizetype", "Money" %>Money<br/>
+<%= f.radio_button "prizetype", "Coupon" %>Coupon
+<%= f.radio_button "prizetype", "Picture" %>Picture<br/>
+<%= f.radio_button "prizetype", "File" %>File
+<%= f.radio_button "prizetype", "Gold" %>Gold<br/>
+
 	</td></tr>
 	<tr><td>Prize Value: </td><td><%= f.text_field :prizeamt %></td></tr>
 	<tr><td>Cheat Code: </td><td><%= f.text_field :cheatcode %></td></tr>
