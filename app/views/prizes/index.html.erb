@@ -20,7 +20,7 @@
 YAHOO.example.Data = { 
 	    bookorders: [ 
 	<% for prize in @prizes %> 
-	        {id:"<%=prize.name%>", date:new Date(1980, 2, 24), quantity:1, amount:4, title:"<%=prize.name%>"}, 
+	        {id:"<%=prize.name%>", date:new Date(1980, 2, 24), quantity:<%= link_to 'Show', prize %>, amount:<%= link_to 'Edit', edit_prize_path(prize) %>, title:<%= link_to 'Destroy', prize, :confirm => 'Are you sure?', :method => :delete %>}, 
 	<% end %>
 	        {id:"po-1482", date:new Date("March 11, 1985"), quantity:6, amount:3.5, title:"Read Me Twice"} 
 	
@@ -33,8 +33,8 @@ YAHOO.util.Event.addListener(window, "load", function() {
 	            {key:"id", sortable:true, resizeable:true}, 
 	            {key:"date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, sortOptions:
 				{defaultDir:YAHOO.widget.DataTable.CLASS_DESC},resizeable:true}, 
-	            {key:"quantity", formatter:YAHOO.widget.DataTable.formatNumber, sortable:true, resizeable:true}, 
-	            {key:"amount", formatter:YAHOO.widget.DataTable.formatCurrency, sortable:true, resizeable:true}, 
+	            {key:"quantity", sortable:true, resizeable:true}, 
+	            {key:"amount", sortable:true, resizeable:true}, 
 	            {key:"title", sortable:true, resizeable:true} 	        ]; 
 	 
 	        this.myDataSource = new YAHOO.util.DataSource(YAHOO.example.Data.bookorders); 

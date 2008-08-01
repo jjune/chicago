@@ -91,7 +91,11 @@
 </head>
 <body <%=@bodyscript %> class="prizes"onload="initialize()" onunload="GUnload()">
 
-<%= render_partial 'prizes/hdr_dashboard' %>
+<div class="topview">
+<%= render_partial @header_above_partial_path %>
+<%= render_partial @header_partial_path %>
+<%= render_partial @header_below_partial_path %>
+</div>
 
 <div class="leftview"></div>
 

@@ -1,7 +1,12 @@
 class PrizesController < ApplicationController
   # GET /prizes
   # GET /prizes.xml
+  
   def index
+    @header_above_partial_path = "prizes/hdr_above"
+    @header_partial_path = "prizes/hdr_dashboard"
+    @header_below_partial_path = "prizes/hdr_below"
+    
     @prizes = Prize.find(:all)
 
     respond_to do |format|
@@ -13,6 +18,10 @@ class PrizesController < ApplicationController
   # GET /prizes/1
   # GET /prizes/1.xml
   def show
+    @header_above_partial_path = "prizes/hdr_above"
+    @header_partial_path = "prizes/hdr_show"
+    @header_below_partial_path = "prizes/hdr_below"
+    
     @prize = Prize.find(params[:id])
 
     respond_to do |format|
@@ -25,6 +34,10 @@ end
   # GET /prizes/new
   # GET /prizes/new.xml
   def new
+    @header_above_partial_path = "prizes/hdr_above"
+    @header_partial_path = "prizes/hdr_new"
+    @header_below_partial_path = "prizes/hdr_below"
+    
     @prize = Prize.new
 
     respond_to do |format|
@@ -35,12 +48,16 @@ end
 
   # GET /prizes/1/edit
   def edit
+    @header_above_partial_path = "prizes/hdr_above" 
+    @header_partial_path = "prizes/hdr_edit"
+    @header_below_partial_path = "prizes/hdr_below"
+    
     @prize = Prize.find(params[:id])
   end
 
   # POST /prizes
   # POST /prizes.xml
-  def create
+  def create  
     #@prize = Prize.new(params[:prize])
     RAILS_DEFAULT_LOGGER.error("post:"+params[:prize][:prizearea])
    	points = params[:prize][:prizearea].split(/:/)
