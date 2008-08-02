@@ -1,7 +1,7 @@
 class PrizesController < ApplicationController
   # GET /prizes
   # GET /prizes.xml
-  
+  before_filter :login_required
   def index
     @header_above_partial_path = "global/hdr_above"
     @header_partial_path = "prizes/hdr_prizelab"

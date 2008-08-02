@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :prizes
+  map.connect 'register/sponsor', :controller => 'account', :action => 'sponsor_registration'
+  map.connect 'register/player', :controller => 'account', :action => 'player_registration'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

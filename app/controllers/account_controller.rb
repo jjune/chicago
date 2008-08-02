@@ -6,7 +6,7 @@ class AccountController < ApplicationController
 
   # say something nice, you goof!  something sweet.
   def index
-    redirect_to(:action => 'signup') unless logged_in? || User.count > 0
+    redirect_to(:action => 'register') unless logged_in? || User.count > 0
   end
 
   def login
@@ -22,7 +22,7 @@ class AccountController < ApplicationController
     end
   end
 
-  def signup
+  def register
     @user = User.new(params[:user])
     return unless request.post?
     @user.save!
@@ -31,6 +31,28 @@ class AccountController < ApplicationController
     flash[:notice] = "Thanks for signing up!"
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
+  end
+  
+  def sponsor_registration
+      @user = Sponsor.new(params[:user])
+      return unless request.post?
+      @user.save!
+      self.current_user = @user
+      redirect_back_or_default(:controller => '/account', :action => 'index')
+      flash[:notice] = "Thanks for signing up!"
+    rescue ActiveRecord::RecordInvalid
+      render :action => 'sponsor_registration'    
+  end
+  
+  def player_registration
+      @user = Player.new(params[:user])
+      return unless request.post?
+      @user.save!
+      self.current_user = @user
+      redirect_back_or_default(:controller => '/account', :action => 'index')
+      flash[:notice] = "Thanks for signing up!"
+    rescue ActiveRecord::RecordInvalid
+      render :action => 'player_registration'
   end
   
   

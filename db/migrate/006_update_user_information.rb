@@ -7,6 +7,7 @@ class UpdateUserInformation < ActiveRecord::Migration
     add_column :users, :city,     :string
     add_column :users, :state,    :string
     add_column :users, :zipcode,  :string
+    add_column :users, :country, :string
     add_column :users, :phone_number, :string
     remove_column :users, :device_type, :string
   end
