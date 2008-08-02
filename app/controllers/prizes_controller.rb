@@ -4,7 +4,7 @@ class PrizesController < ApplicationController
   
   def index
     @header_above_partial_path = "global/hdr_above"
-    @header_partial_path = "prizes/hdr_dashboard"
+    @header_partial_path = "prizes/hdr_prizelab"
     @header_below_partial_path = "global/hdr_below"
     @hdr_below_title = "Dashboard"
     
@@ -20,7 +20,7 @@ class PrizesController < ApplicationController
   # GET /prizes/1.xml
   def show
     @header_above_partial_path = "global/hdr_above"
-    @header_partial_path = "prizes/hdr_show"
+    @header_partial_path = "prizes/hdr_prizelab"
     @header_below_partial_path = "global/hdr_below"
     @hdr_below_title = "Prize Viewer"
     
@@ -37,7 +37,7 @@ end
   # GET /prizes/new.xml
   def new
     @header_above_partial_path = "global/hdr_above"
-    @header_partial_path = "prizes/hdr_new"
+    @header_partial_path = "prizes/hdr_prizelab"
     @header_below_partial_path = "global/hdr_below"
     @hdr_below_title = "Create a Prize"
     
@@ -52,7 +52,7 @@ end
   # GET /prizes/1/edit
   def edit
     @header_above_partial_path = "global/hdr_above" 
-    @header_partial_path = "prizes/hdr_edit"
+    @header_partial_path = "prizes/hdr_prizelab"
     @header_below_partial_path = "global/hdr_below"
     @hdr_below_title = "Edit Prize"
     

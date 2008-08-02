@@ -89,11 +89,35 @@ div.progressBar div.background {
 .prizes_list .status {width:140px; background-color: #fff333;}
 .prizes_list .command {width:80px; background-color: #f3f3f3;}
 
-.topview {display:block; float:left; width: 100%; height:auto; min-height: 10px; border: 1px solid red;}
+.topview {display:block; float:left; width: 100%; height:auto; min-height: 10px; border: 3px solid red;}
 
-.topofheader {display:block; float:left; width: 100%; height:auto;border: 1px solid green;}
-.midofheader {display:block; float:left; width: 100%; height:auto;border: 1px solid blue; background-image: url (/public/images/duskskybanner.jpg);}
-.botmofheader {display:block; float:left; width: 100%; height:auto;border:1px solid yellow;}
+.topofheader {display:block; float:left; width: 100%; height:auto;
+	font-family: arial, helvetica, sans-serif;
+  	font-size:   80%;
+  	line-height: 14px;
+	margin-left: 3px;
+	}
+	
+.midofheader {display:block; float:left; width: 100%; height:auto; 
+	background-image: url (images/duskskybanner.jpg);
+	font-family: verdana, arial, helvetica, sans-serif;
+ 	font-size:   100%;
+ 	line-height: 16px;
+	margin-left: 3px;
+}
+
+.midofheader h1 {
+	font-family: verdana, arial, helvetica, sans-serif;
+ 	font-size:   100%;
+ 	line-height: 16px;
+}
+
+.botmofheader {display:block; float:left; width: 100%; height:auto;
+	font-family: arial, helvetica, sans-serif;
+  	font-size:   90%;
+  	line-height: 16px;
+	margin-left: 10px;
+	}
 
 .leftview {}
 
