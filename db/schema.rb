@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 7) do
 
   create_table "devices", :force => true do |t|
     t.column "player_id", :integer
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 5) do
   add_index "prizes", ["prizearea"], :name => "index_prizes_on_prizearea", :spatial=> true 
 
   create_table "query_transactions", :force => true do |t|
-    t.column "player_id", :integer, :null => false
+    t.column "player_id", :integer
     t.column "device_id", :integer
     t.column "prize_id", :integer
     t.column "created_at", :timestamp
@@ -57,8 +57,15 @@ ActiveRecord::Schema.define(:version => 5) do
     t.column "updated_at", :timestamp
     t.column "remember_token", :string
     t.column "remember_token_expires_at", :timestamp
-    t.column "device_type", :string
     t.column "company_name", :string
+    t.column "first_name", :string
+    t.column "last_name", :string
+    t.column "address1", :string
+    t.column "address2", :string
+    t.column "city", :string
+    t.column "state", :string
+    t.column "zipcode", :string
+    t.column "phone_number", :string
   end
 
 end
