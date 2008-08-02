@@ -1,0 +1,41 @@
+<%= error_messages_for :user %>
+<% form_for :user do |f| -%>
+This is the registration form for sponsors
+<p><label for="login">Login</label><br/>
+<%= f.text_field :login %></p>
+
+<p><label for="password">Password</label><br/>
+<%= f.password_field :password %></p>
+
+<p><label for="password_confirmation">Confirm Password</label><br/>
+<%= f.password_field :password_confirmation %></p>
+
+<p><label for="email">Email</label><br/>
+<%= f.text_field :email %></p>
+
+<p><label for="name">Name</label><br/>
+<%= f.text_field :first_name %> <%= f.text_field :first_name %></p>
+
+<p><label for="address">Address 1</label><br/>
+<%= f.text_field :address1 %></p>
+
+<p><label for="address">Address 2</label><br/>
+<%= f.text_field :address2 %>
+
+<p><label for="city">City</label><br/>
+<%= f.text_field :city %>
+
+<p><label for="state">State</label><br/>
+<%= f.text_field :state %>
+
+<p><label for="state">Zipcode</label><br/>
+<%= f.text_field :zipcode %>
+
+<p><label for="country">Country</label><br/>
+<%= f.text_field :country %>
+
+<p><label for="company">Company</label><br/>
+<%= f.text_field :company_name %>
+
+<p><%= submit_tag 'Register' %></p>
+<% end -%>

@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     self.remember_token            = nil
     save(false)
   end
+  
+  def user_type
+    self.type
+  end
 
   protected
     # before filter 

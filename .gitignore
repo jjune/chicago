@@ -3,7 +3,7 @@ log/*.log
 tmp/**/*
 config/database.yml
 db/*.sqlite3
+db/schema.rb
 public/dispatch.cgi
 public/dispatch.fcgi
 public/dispatch.rb
-db/schema.rb

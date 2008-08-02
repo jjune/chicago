@@ -11,6 +11,8 @@ module AuthenticatedSystem
       @current_user ||= (session[:user] && User.find_by_id(session[:user])) || :false
     end
     
+    
+    
     # Store the given user in the session.
     def current_user=(new_user)
       session[:user] = (new_user.nil? || new_user.is_a?(Symbol)) ? nil : new_user.id
