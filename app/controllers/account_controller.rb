@@ -17,8 +17,14 @@ class AccountController < ApplicationController
         self.current_user.remember_me
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_back_or_default(:controller => '/account', :action => 'index')
-      flash[:notice] = "Logged in successfully"
+      #redirect_back_or_default(:controller => '/account', :action => 'index')
+      if self.current_user.user_type == 'Player'
+        redirect_to(:controller => 'player')
+      else
+        redirect_to(:controller => 'prizes')
+      end
+        
+      flash[:notice] = "Logged in successfully with" + " " + current_user.user_type
     end
   end
 
