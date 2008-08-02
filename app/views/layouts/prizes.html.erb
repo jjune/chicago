@@ -90,7 +90,8 @@
 
 </head>
 <body <%=@bodyscript %> class="prizes"onload="initialize()" onunload="GUnload()">
-
+<div class="main">
+	
 <div class="topview">
 <%= render_partial @header_above_partial_path %>
 <%= render_partial @header_partial_path %>
@@ -105,7 +106,7 @@
 	<%= error_messages_for :prize %>
 </div>
 <div class="midbody"><%= yield %></div>
-<div class="botmbodyview"><%= link_to 'Return to Prize List', prizes_path %></div>
+<div class="botmbodyview"></div>
 </div>
 
 <div class="rightview"></div>
@@ -116,5 +117,6 @@
 	<%= render_partial @footer_below_partial_path %>
 </div>
 
+</div>
 </body>
 </html>
