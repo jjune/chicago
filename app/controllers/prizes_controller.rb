@@ -8,6 +8,11 @@ class PrizesController < ApplicationController
     @header_below_partial_path = "global/hdr_below"
     @hdr_below_title = "Dashboard"
     
+    @footer_above_partial_path = "global/ftr_above"
+    #@footer_partial_path = "prizes/hdr_prizelab"
+    @footer_below_partial_path = "global/ftr_below"
+    #@ftr_below_title = "Dashboard"
+    
     @prizes = Prize.find(:all)
 
     respond_to do |format|
@@ -23,6 +28,11 @@ class PrizesController < ApplicationController
     @header_partial_path = "prizes/hdr_prizelab"
     @header_below_partial_path = "global/hdr_below"
     @hdr_below_title = "Prize Viewer"
+    
+    @footer_above_partial_path = "global/ftr_above"
+    #@footer_partial_path = "prizes/hdr_prizelab"
+    @footer_below_partial_path = "global/ftr_below"
+    #@ftr_below_title = "Dashboard"
     
     @prize = Prize.find(params[:id])
 
@@ -41,6 +51,11 @@ end
     @header_below_partial_path = "global/hdr_below"
     @hdr_below_title = "Create a Prize"
     
+    @footer_above_partial_path = "global/ftr_above"
+    #@footer_partial_path = "prizes/hdr_prizelab"
+    @footer_below_partial_path = "global/ftr_below"
+    #@ftr_below_title = "Dashboard"
+    
     @prize = Prize.new
 
     respond_to do |format|
@@ -55,6 +70,11 @@ end
     @header_partial_path = "prizes/hdr_prizelab"
     @header_below_partial_path = "global/hdr_below"
     @hdr_below_title = "Edit Prize"
+    
+    @footer_above_partial_path = "global/ftr_above"
+    #@footer_partial_path = "prizes/hdr_prizelab"
+    @footer_below_partial_path = "global/ftr_below"
+    #@ftr_below_title = "Dashboard"
     
     @prize = Prize.find(params[:id])
   end
