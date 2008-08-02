@@ -1,3 +1,12 @@
+<% content_for :head_for_prizes do %>
+	<%= stylesheet_link_tag 'prizes' %>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q" type="text/javascript"></script>
+<% end %>
+
+<% content_for :body_for_prizes do %>
+	 <%=@bodyscript %> class="prizes"onload="initialize()" onunload="GUnload()"
+<% end %>
+
 <div id="panel1">
 
       <script>
@@ -10,6 +19,9 @@
         
         //This is different than code in prizes.html because it centers based on polygon. Ok not to be draggable.	
         map.setCenter(<%=GLatLng.from_georuby(@prize.center).to_javascript%>, 13);
+		map.addControl(new GLargeMapControl());
+			var mapControl = new GMapTypeControl();
+			map.addControl(mapControl);
         map.disableDragging();
         prizearea = <%=GPolygon.from_georuby(@prize.prizearea,'#0000FF','5','1','#0000FF','0.2').to_javascript%>
         map.addOverlay(prizearea);
@@ -35,5 +47,5 @@
 </div> 
 
 <div id="panel2">
-      <div id="map_canvas" style="width: 500px; height: 300px"></div>
+      <div id="map_canvas" style="width: 400px; height: 300px"></div><br/>
 </div>
