@@ -6,3 +6,4 @@ db/*.sqlite3
 public/dispatch.cgi
 public/dispatch.fcgi
 public/dispatch.rb
+db/schema.rb

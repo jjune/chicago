@@ -3,9 +3,10 @@ class PrizesController < ApplicationController
   # GET /prizes.xml
   
   def index
-    @header_above_partial_path = "prizes/hdr_above"
+    @header_above_partial_path = "global/hdr_above"
     @header_partial_path = "prizes/hdr_dashboard"
-    @header_below_partial_path = "prizes/hdr_below"
+    @header_below_partial_path = "global/hdr_below"
+    @hdr_below_title = "Dashboard"
     
     @prizes = Prize.find(:all)
 
@@ -18,9 +19,10 @@ class PrizesController < ApplicationController
   # GET /prizes/1
   # GET /prizes/1.xml
   def show
-    @header_above_partial_path = "prizes/hdr_above"
+    @header_above_partial_path = "global/hdr_above"
     @header_partial_path = "prizes/hdr_show"
-    @header_below_partial_path = "prizes/hdr_below"
+    @header_below_partial_path = "global/hdr_below"
+    @hdr_below_title = "Prize Viewer"
     
     @prize = Prize.find(params[:id])
 
@@ -34,9 +36,10 @@ end
   # GET /prizes/new
   # GET /prizes/new.xml
   def new
-    @header_above_partial_path = "prizes/hdr_above"
+    @header_above_partial_path = "global/hdr_above"
     @header_partial_path = "prizes/hdr_new"
-    @header_below_partial_path = "prizes/hdr_below"
+    @header_below_partial_path = "global/hdr_below"
+    @hdr_below_title = "Create a Prize"
     
     @prize = Prize.new
 
@@ -48,9 +51,10 @@ end
 
   # GET /prizes/1/edit
   def edit
-    @header_above_partial_path = "prizes/hdr_above" 
+    @header_above_partial_path = "global/hdr_above" 
     @header_partial_path = "prizes/hdr_edit"
-    @header_below_partial_path = "prizes/hdr_below"
+    @header_below_partial_path = "global/hdr_below"
+    @hdr_below_title = "Edit Prize"
     
     @prize = Prize.find(params[:id])
   end
