@@ -1,55 +1,13 @@
+<table class="prizes_list">
+<tbody>
+  <tr><th colspan=4>Your Sponsored Prizes</th></tr>
 
+<% for prize in @prizes %>
+<%= render_partial 'prizes/prizelist_table' %>
+<% end %>
 
-<style>
-	.yui-skin-sam .yui-dt-liner { white-space:nowrap; }  
-	.yui-skin-sam .yui-dt-bd table{border:1px solid #7F7F7F;}
-	
-</style>
-
-
-<!-- css --> 
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/base/base-min.css"> 
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/datatable/assets/skins/sam/datatable.css"> 
-<!-- js --> 
-<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.5.2/build/yahoo-dom-event/yahoo-dom-event.js&2.5.2/build/dragdrop/dragdrop-min.js&2.5.2/build/element/element-beta-min.js&2.5.2/build/datasource/datasource-beta-min.js&2.5.2/build/datatable/datatable-beta-min.js&2.5.2/build/json/json-min.js">
-</script>
-
-<div id="basic24" style="float:left;"></div> 
-
-<script type="text/javascript">
-YAHOO.example.Data = { 
-	    bookorders: [ 
-	<% for prize in @prizes %> 
-	        {id:"<%=prize.name%>", date:new Date(1980, 2, 24), quantity:<%= link_to 'Show', prize %>, amount:<%= link_to 'Edit', edit_prize_path(prize) %>, title:<%= link_to 'Destroy', prize, :confirm => 'Are you sure?', :method => :delete %>}, 
-	<% end %>
-	        {id:"po-1482", date:new Date("March 11, 1985"), quantity:6, amount:3.5, title:"Read Me Twice"} 
-	
-	    ] 
-	}
-
-YAHOO.util.Event.addListener(window, "load", function() { 
-	    YAHOO.example.Basic = new function() { 
-	        var myColumnDefs = [ 
-	            {key:"id", sortable:true, resizeable:true}, 
-	            {key:"date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, sortOptions:
-				{defaultDir:YAHOO.widget.DataTable.CLASS_DESC},resizeable:true}, 
-	            {key:"quantity", sortable:true, resizeable:true}, 
-	            {key:"amount", sortable:true, resizeable:true}, 
-	            {key:"title", sortable:true, resizeable:true} 	        ]; 
-	 
-	        this.myDataSource = new YAHOO.util.DataSource(YAHOO.example.Data.bookorders); 
-	        this.myDataSource.responseType = YAHOO.util.DataSource.TYPE_JSARRAY; 
-	        this.myDataSource.responseSchema = { 
-	            fields: ["id","date","quantity","amount","title"] 
-	        }; 
-	 
-	        this.myDataTable = new YAHOO.widget.DataTable("basic24", 
-	                myColumnDefs, this.myDataSource, {caption:"DataTable Caption"}); 
-	    }; 
-	});
-</script>
-
-
+</tbody>
+</table>
 <br />
 
 <%= link_to 'Add another Prize', new_prize_path %>

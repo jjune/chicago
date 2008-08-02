@@ -1,0 +1,6 @@
+<tr><td class="name"><%=prize.name%></td>
+ 	<td class="status">Status: Active</td>
+	<td class="command"><%= link_to 'Show', prize %></td>
+    <td class="command"><%= link_to 'Edit', edit_prize_path(prize) %></td>
+    <td class="command"><%= link_to 'Destroy', prize, :confirm => 'Are you sure?', :method => :delete %></td>
+</tr>

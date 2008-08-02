@@ -1,1 +1,1 @@
-<div class="topofheader"><%= link_to 'Super Secret Labs', '/' %> Nav Test Welcome @current_user logout</h4></div>
+<div class="topofheader"><%= link_to 'Super Secret Labs', '/' %> Nav Test Welcome <%= @current_user %> <%= link_to 'logout', {:controller => 'account', :action => 'logout'}, :confirm => 'Are you sure you want to log out of Super Secret Labs?' %></h4></div>
