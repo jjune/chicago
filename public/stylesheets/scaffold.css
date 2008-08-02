@@ -1,4 +1,6 @@
-body { background-color: #000; color: #fff; }
+body { background-color: #000; color: #fff; 
+	margin:50px 0px; padding:0px;
+		text-align:center;}
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
@@ -90,6 +92,12 @@ div.progressBar div.background {
 .prizes_list .status {width:140px; background-color: #fff333;}
 .prizes_list .command {width:80px; background-color: #f3f3f3;}
 
+.main {width:960px;
+	margin:0px auto;
+	text-align:left;
+	padding:15px;
+	}
+
 .topview {display:block; float:left; width: 100%; height:auto; min-height: 10px; 
 	background-color:red;
 	}
@@ -130,11 +138,11 @@ div.progressBar div.background {
 
 .leftview {float:left;}
 
-.bodyview {display:block;float:left; width:100%; min-height: 200px;  
+.bodyview {display:block;float:left; width:100%;height:auto; min-height: 200px;  
 	background-color: #99ccff;}
 	
 .topbodyview {display:block; width:100%; height:auto;min-height: 1px;}
-.midbody {display:block; width:100%; min-height: 1px;}
+.midbody {display:block; width:100%; height:auto; min-height: 1px;}
 .botmbodyview {display:block; width:100%; height:auto;min-height: 1px;}
 
 .rightview {float:right;}
