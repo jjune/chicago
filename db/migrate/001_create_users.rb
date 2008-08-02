@@ -2,7 +2,6 @@ class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table "users", :force => true do |t|
       t.column :type,                      :string
-
       # common attributes      
       t.column :login,                     :string
       t.column :email,                     :string
