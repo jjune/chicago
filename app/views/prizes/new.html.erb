@@ -1,6 +1,5 @@
 <div id="panel1">
 
-	
 <% form_for(@prize) do |f| %>
 	
 	<%= f.hidden_field 'prizearea' %>
@@ -16,11 +15,11 @@
 <%= f.radio_button "prizetype", "Picture" %>Picture<br/>
 <%= f.radio_button "prizetype", "File" %>File
 <%= f.radio_button "prizetype", "Gold" %>Gold<br/>
-
 	</td></tr>
+	
 	<tr><td>Prize Value: </td><td><%= f.text_field :prizeamt %></td></tr>
 	<tr><td>Cheat Code: </td><td><%= f.text_field :cheatcode %></td></tr>
-	<tr><td>Winner's Message: </td><td><%= f.text_area :winnermsg %></td></tr>
+	<tr><td>Winner's Message: </td><td><%= f.text_area :winnermsg, :cols => 30, :rows => 5 %></td></tr>
 	</tbody>
 	</table>
 
@@ -35,14 +34,10 @@
 <div id="panel2">
     <form action="#" onsubmit="showAddress(this.address.value); return false">
       <p>
-        <input type="text" size="60" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />
+        <input type="text" size="50" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />
         <input type="submit" value="Go!" />
       </p>
       <div id="map_canvas" style="width: 400px; height: 300px"></div>
     </form>
-
-<br/>
-	<a href="javascript:whereami();"/>Where am i?</a><br/>
-	<a href="javascript:whereistheprizearea();"/>Where is the prize area?</a>
 <br/>
 </div>
