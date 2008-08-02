@@ -1,7 +1,7 @@
 <table class="prizes_list">
 <tbody>
   <tr><th colspan=4>Your Sponsored Prizes</th></tr>
-
+ <tr><th>Title</th><th>Status</th><th colspan=2>Menu</th></tr>
 <% for prize in @prizes %>
 <tr><td class="name"><%=prize.name%></td>
  	<td class="status">Status: Active</td>
@@ -14,5 +14,4 @@
 </tbody>
 </table>
 <br />
-
-<%= link_to 'Add another Prize', new_prize_path %>
+<%= link_to (image_tag("createaprize.gif", :border => 0)), new_prize_path %>
