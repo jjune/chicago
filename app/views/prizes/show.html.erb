@@ -1,9 +1,9 @@
-<% content_for :head_for_prizes do %>
+<% content_for :head do %>
 	<%= stylesheet_link_tag 'prizes' %>
 	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q" type="text/javascript"></script>
 <% end %>
 
-<% content_for :body_for_prizes do %>
+<% content_for :body do %>
 	 <%=@bodyscript %> class="prizes"onload="initialize()" onunload="GUnload()"
 <% end %>
 

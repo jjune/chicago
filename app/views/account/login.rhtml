@@ -1,10 +1,19 @@
+<% content_for :head do %>
+	<%= stylesheet_link_tag 'authentication' %>
+<% end %>
+
+<div id="panel1">
 <% form_tag do -%>
-<p><label for="login">Login</label><br/>
-<%= text_field_tag 'login' %></p>
-
-<p><label for="password">Password</label><br/>
-<%= password_field_tag 'password' %></p>
-
+<table>
+	<tr>
+		<td><label for="login">Login</label></td>
+		<td><%= text_field_tag 'login' %></td>
+	</tr>
+	<tr>
+		<td><label for="password">Password</label></td>
+		<td><%= password_field_tag 'password' %></td>
+	</tr>
+</table>
 <!-- Uncomment this if you want this functionality
 <p><label for="remember_me">Remember me:</label>
 <%= check_box_tag 'remember_me' %></p>
@@ -12,3 +21,14 @@
 
 <p><%= submit_tag 'Log in' %></p>
 <% end -%>
+
+
+</div>
+
+<div id="panel2">
+<div class="warning_box">
+<h2>Authorized Users Only</h2>
+<p>
+This is a game. The game is for use by GPS mobile phone operators and Federal, state, and local government officials only. Unauthorized access is a violation of U.S. Law and Super Secret Labs policy and may result in criminal or administrative penalties. Users shall not access other user's or system files without proper authority. Absence of access controls IS NOT authorization for access. All data contained in this application intercepted, recorded, read, copied, or captured in any manner and disclosed in any manner by authorized personnel. There is no right of privacy in this application. System personnel may give to law enforcement officials any potential evidence of crime found on this application. Use of this application by any user, authorized or unauthorized, constitutes consent to this monitoring, interception, recording, reading, copying, or capturing.</p>    
+</div>
+</div>
