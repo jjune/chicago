@@ -13,5 +13,15 @@ class UpdateUserInformation < ActiveRecord::Migration
   end
 
   def self.down
+  	remove_column :users, :first_name
+    remove_column :users, :last_name
+    remove_column :users, :address1
+    remove_column :users, :address2
+    remove_column :users, :city
+    remove_column :users, :state
+    remove_column :users, :zipcode
+    remove_column :users, :country
+    remove_column :users, :phone_number
+    add_column :users, :device_type, :string
   end
 end

@@ -18,11 +18,15 @@ class QueryPrizeController < ApplicationController
   
   def find
   	@map = Variable.new("map")
-	current_marker = Point.from_lon_lat(params[:lng],params[:lat],4326)
-  	prizes = Prize.find_all_by_prizearea(current_marker)
-  
-  	prizes.each do |prize|
-  		@polygon = GPolygon.from_georuby(prize.prizearea,'#0000FF','5','1','#0000FF','0.2')
+	#current_marker = Point.from_lon_lat(params[:lng],params[:lat],4326)
+  	#prizes = Prize.find_all_by_prizearea(current_marker)
+  	#prizes = []
+  	#prizes= Prize.find_all_exact_by_georuby_point(current_marker)
+  	#prizes =Prize.find_all_exact_by_lng_lat(params[:lng],params[:lat])
+  	prizes = Prize.find_winning_prize_by_lng_lat(params[:lng],params[:lat])
+  	
+  	if prizes.length>0
+  		@polygon = GPolygon.from_georuby(prizes[0].prizearea,'#0000FF','5','1','#0000FF','0.2')
   		render :update do |page|
 	   		notice=prizes.length
 	
@@ -33,8 +37,16 @@ class QueryPrizeController < ApplicationController
 			
 			page << @map.clear_overlays
 			page << @map.add_overlay(@polygon)	
-  		end
-  		
+		 end
+	else
+		render :update do |page|
+	   		notice="Nothing for you beeotch!!!!"
+	
+			page.hide 'notice'
+			
+			page.replace_html 'notice', notice
+			page.visual_effect :appear, 'notice', :duration => 0.5
+		 end  			
   	end
   end
   	

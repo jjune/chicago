@@ -8,5 +8,10 @@ class PrizeMetadata < ActiveRecord::Migration
   end
 
   def self.down
+  	remove_column :prizes, :"prizetype"
+    remove_column :prizes, :"prizeamt"
+    remove_column :prizes, :"shapeparent"
+    remove_column :prizes, :"winnermsg"
+    remove_column :prizes, :"cheatcode"
   end
 end
