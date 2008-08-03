@@ -21,7 +21,11 @@ class Prize < ActiveRecord::Base
 				"ORDER BY ST_Area(prizearea) ASC " +
 				"LIMIT 1"	
 		prize = Prize.find_by_sql(query)
-		return prize
+		if prize.length>0
+			return prize[0]
+		else
+			return nil
+		end
 	end
 	
 	protected

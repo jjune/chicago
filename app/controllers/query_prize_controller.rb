@@ -23,13 +23,15 @@ class QueryPrizeController < ApplicationController
   	#prizes = []
   	#prizes= Prize.find_all_exact_by_georuby_point(current_marker)
   	#prizes =Prize.find_all_exact_by_lng_lat(params[:lng],params[:lat])
-  	prizes = Prize.find_winning_prize_by_lng_lat(params[:lng],params[:lat])
+  	prize = Prize.find_winning_prize_by_lng_lat(params[:lng],params[:lat])
   	
-  	if prizes.length>0
-  		@polygon = GPolygon.from_georuby(prizes[0].prizearea,'#0000FF','5','1','#0000FF','0.2')
+  	#if prizes.length>0
+  	if not prize.nil?
+  		#@polygon = GPolygon.from_georuby(prizes[0].prizearea,'#0000FF','5','1','#0000FF','0.2')
+  		@polygon = GPolygon.from_georuby(prize.prizearea,'#0000FF','5','1','#0000FF','0.2')
   		render :update do |page|
-	   		notice=prizes.length
-	
+	   		#notice=prizes.length
+			notice="winner!"	
 			page.hide 'notice'
 			
 			page.replace_html 'notice', notice
