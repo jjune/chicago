@@ -24,7 +24,7 @@ class AccountController < ApplicationController
         redirect_to(:controller => 'prizes')
       end
         
-      flash[:notice] = "Logged in successfully with" + " " + current_user.user_type
+     # flash[:notice] = "Logged in successfully with" + " " + current_user.user_type
     end
   end
 
