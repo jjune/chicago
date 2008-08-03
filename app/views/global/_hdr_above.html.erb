@@ -1,1 +1,19 @@
-<div class="topofheader"><%= link_to 'Super Secret Labs', '/' %> Welcome <%= @current_user.login unless @current_user.nil? %> <%= link_to 'logout', {:controller => 'account', :action => 'logout'}, :confirm => 'Are you sure you want to log out of Super Secret Labs?' %></h4></div>
+<div class="topofheader">
+
+<div id="left">
+<%= link_to 'Super Secret Labs', '/' unless @current_user.nil? %> 
+
+<%= if @current_user.nil? 
+'You are not authorized to see anything' 
+else 
+'Welcome back ' + @current_user.login 
+end %>
+
+</div>
+
+<div id="right">
+<%= link_to 'logout', {:controller => 'account', :action => 'logout'}, :confirm => 'Are you sure you want to log out of Super Secret Labs?' unless @current_user.nil? %>
+ Today is <%=Date.today.to_formatted_s(:long) %>
+</div>
+
+</div>

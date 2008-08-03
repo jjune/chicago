@@ -4,11 +4,11 @@
 	<title>Secret Prize Lab application</title>
 	 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	<%= stylesheet_link_tag 'scaffold' %>
-	<%=yield :head_for_prizes%>
+	<%=yield :head%>
 	
   <%= javascript_include_tag :defaults %>
 </head>
-<body <%=yield :body_for_prizes %>>
+<body <%=yield :body %>>
 	<div class="main">
 <div class="topview">
 	<%= render_partial "global/hdr_above" %>

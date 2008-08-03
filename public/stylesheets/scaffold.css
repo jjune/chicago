@@ -80,5 +80,45 @@ div.progressBar div.background {
   width: 0%;
 }
 
+.main {width:960px;
+	margin:0px auto;
+	text-align:left;
+	padding:15px;
+	}
+	
+.topview {display:block; float:left; width: 100%; height:auto; min-height: 10px; 
+	background-color:red;
+	}
 
+.topview a,.topview a:visited,.topview a:hover {
+	text-decoration:none;
+	color: #000;
+	}	
 
+.topview a:hover {background-color:#fff333;}
+
+.topofheader {display:block; float:left; width: 100%; height:auto;
+	font-family: arial, helvetica, sans-serif;
+  	font-size:   80%;
+  	line-height: 14px;
+	}
+
+.topofheader #left {display:inline; float:left; width:45%;margin-left:5px;text-align:left;}
+.topofheader #right {display:inline; float:right; width: 45%;margin-right:5px;text-align:right;}
+	
+.bodyview {display:block;float:left; width:100%;height:auto; min-height: 200px;  
+		background-color: #99ccff;
+		}
+
+.bottomview {display:block; float:left; width: 100%; height:auto;  min-height: 10px;
+	background-color:red;
+	}
+	
+.topoffooter {display:block; float:left; width: 100%; height:auto; min-height: 1px; }
+.midoffooter {display:block; float:left; width: 100%; height:auto; min-height: 1px; }
+.botmoffooter {display:block; float:left; width: 100%; height:auto;
+		font-family: arial, helvetica, sans-serif;
+	  	font-size:   80%;
+	  	line-height: 14px;
+}
+.botmoffooter #left {display:inline; float:left; width:95%;margin-left:5px;text-align:left;}

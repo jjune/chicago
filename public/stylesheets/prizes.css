@@ -10,28 +10,8 @@
 .prizes_list .status {width:140px; background-color: #fff333;}
 .prizes_list .command {width:80px; background-color: #f3f3f3;}
 
-.main {width:960px;
-	margin:0px auto;
-	text-align:left;
-	padding:15px;
-	}
 
-.topview {display:block; float:left; width: 100%; height:auto; min-height: 10px; 
-	background-color:red;
-	}
-	
-.topview a,.topview a:visited,.topview a:hover {
-		text-decoration:none;
-		color: #000;}
 
-.topview a:hover {background-color:#fff333;}
-
-.topofheader {display:block; float:left; width: 100%; height:auto;
-	font-family: arial, helvetica, sans-serif;
-  	font-size:   80%;
-  	line-height: 14px;
-	margin-left: 3px;
-	}
 	
 .midofheader {display:block; float:left; width: 100%; height:auto; 
 	background-image: url (images/duskskybanner.jpg);
@@ -65,14 +45,5 @@
 
 .rightview {float:right;}
 
-.bottomview {display:block; float:left; width: 100%; height:auto;  min-height: 10px;
-	background-color:red;
-}
 
-.topoffooter {display:block; float:left; width: 100%; height:auto; min-height: 1px; }
-.midoffooter {display:block; float:left; width: 100%; height:auto; min-height: 1px; }
-.botmoffooter {display:block; float:left; width: 100%; height:auto;
-	font-family: arial, helvetica, sans-serif;
-  	font-size:   80%;
-  	line-height: 14px;
-	margin-left: 3px;}
+
