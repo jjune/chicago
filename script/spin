@@ -1,0 +1,9 @@
+#!/bin/sh
+
+/var/www/vhosts/supersecretlabs.com/subdomains/chicago/current/script/process/spawner \
+  mongrel \
+  --environment=production \
+  --instances=3 \
+  --address=127.0.0.1 \
+  --port=4000,4001,4002
+
