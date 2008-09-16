@@ -1,0 +1,9 @@
+user: mongrel
+cwd: /var/www/vhosts/supersecretlabs.com/subdomains/chicago/current
+log_file: log/mongrel.log
+port: "4000"
+environment: production
+group: mongrel
+address: 127.0.0.1
+pid_file: /var/run/mongrel_cluster/mongrel.pid
+servers: 3
