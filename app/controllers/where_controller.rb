@@ -18,12 +18,14 @@ class WhereController < ApplicationController
   
   def gen_xml
       @xml = Builder::XmlMarkup.new
-      @prize=Prize.find(:all)
-       respond_to do |format|
-          #format.html # new.html.erb
-          format.xml  { render :xml => @prize }
-        end
+      @prizes=Prize.find(:all)
       
+        respond_to do |format|
+          #format.html # index.html.erb
+          #format.xml  { render :xml => @prize }
+          format.xml  { render :xml => @prizes, :action => "gen_xml.xml.builder", :layout => false }
+        end
+
   end
   
   
