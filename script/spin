@@ -1,0 +1,1 @@
+/etc/init.d/mongrel_cluster::start -C/ /var/www/vhosts/supersecretlabs.com/subdomains/chicago/current/config/mongrel_cluster.yml
