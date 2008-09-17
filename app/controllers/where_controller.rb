@@ -16,6 +16,17 @@ class WhereController < ApplicationController
     
   end
   
+  def gen_xml
+      @xml = Builder::XmlMarkup.new
+      @prize=Prize.find(:all)
+       respond_to do |format|
+          #format.html # new.html.erb
+          format.xml  { render :xml => @prize }
+        end
+      
+  end
+  
+  
   def debugwhere
     #intentionally left blank
   end
