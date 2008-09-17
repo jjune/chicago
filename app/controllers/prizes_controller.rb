@@ -13,10 +13,11 @@ class PrizesController < ApplicationController
     @footer_below_partial_path = "global/ftr_below"
     #@ftr_below_title = "Dashboard"
     
-    #@prizes = Prize.find(:all)
+    
     
     #This is the problem because I used old technique for pagination
-    @prize_pages, @prizes = paginate :prizes, :per_page => 3
+    #@prize_pages, @prizes = paginate :prizes, :per_page => 3
+    @prizes = Prize.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
