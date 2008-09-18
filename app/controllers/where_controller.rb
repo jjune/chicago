@@ -52,9 +52,13 @@ class WhereController < ApplicationController
       	end
       
       if @device.screenwidth.nil?
-      @textsize = "small"
+        @device.screenwidth = "176"
+      end
+      
+      if @device.screenwidth = "176" then
+        @textsize = "small"
       else
-      @textsize = "medium"
+        @textsize = "medium"
       end
       
         respond_to do |format|

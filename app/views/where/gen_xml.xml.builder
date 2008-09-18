@@ -33,8 +33,8 @@ xml.text! "}"
 
 xml.text! "function doShowPopup() {"
 xml.text! "	transparencyOn(0x99000000);"
-xml.text! "	document.rightCmd.src = 'http://www.where.com/images/dd/mobile/<Computed Value>/widget_selected.png';"
-xml.text! "	document.leftCmd.src = 'http://www.where.com/images/dd/mobile/<Computed Value>/back_selected.png';"
+xml.text! "	document.rightCmd.src = 'http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/widget_selected.png';"
+xml.text! "	document.leftCmd.src = 'http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/back_selected.png';"
 xml.text! "	document.rightCmd.onSelect = 'doHidePopup()';"
 xml.text! "	document.leftCmd.onSelect = 'doHidePopup()';"
 xml.text! "	showPopup();"
@@ -42,8 +42,8 @@ xml.text! "}"
 
 xml.text! "function doHidePopup() {"
 xml.text! "	transparencyOff();"
-xml.text! "	document.rightCmd.src = 'http://www.where.com/images/dd/mobile/<Computed Value>/widget.png';"
-xml.text! "	document.leftCmd.src = 'http://www.where.com/images/dd/mobile/<Computed Value>/back.png';"
+xml.text! "	document.rightCmd.src = 'http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/widget.png';"
+xml.text! "	document.leftCmd.src = 'http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/back.png';"
 xml.text! "	document.rightCmd.onSelect = 'doShowPopup()';"
 xml.text! "	document.leftCmd.onSelect = 'back()';"
 xml.text! "	hidePopup();"
@@ -54,20 +54,20 @@ end #script
 xml.form(:id=>"addapoint", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/addapoint.jin?openpage", :method=>"GET")
 xml.form(:id=>"mapisliceprefs", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/mapislices.jin?openpage", :method=>"GET")
 
-xml.body(:bg=>"0xAFCAE5", :fontSize=>"<Computed Value>", :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
+xml.body(:bg=>"0xAFCAE5", :fontSize=>"@textsize", :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
 
 xml.header do
 xml.img(:src=>"http://www.mapicurious.com/maps/where.nsf/mapicuriositiesheader.png?open", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
 end #header
 
 
-xml.pop(:id=>"pop", :fontSize=>"<Computed Value>", :align=>"left", :valign=>"bottom", :sliding=>"up") do
+xml.pop(:id=>"pop", :fontSize=>@textsize, :align=>"left", :valign=>"bottom", :sliding=>"up") do
 xml.pr(:height=>"1") do
-xml.img(:src=>"http://www.where.com/images/dd/mobile/<Computed Value>/h_spacer.png")
+xml.img(:src=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/h_spacer.png")
 end
 
 xml.pr do
-xml.list(:id=>"popList", :border=>"0", :fg=>"0xFFFFFF", :fgfocus=>"0xCF5719", :bgfocusimg=>"http://www.where.com/images/dd/mobile/<Computed Value>/over_bg_menu.png", :bg=>"0x000000") do
+xml.list(:id=>"popList", :border=>"0", :fg=>"0xFFFFFF", :fgfocus=>"0xCF5719", :bgfocusimg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/over_bg_menu.png", :bg=>"0x000000") do
 
 
 xml.listitem(:onSelect=>"addapoint();doHidePopup();") do
@@ -167,11 +167,11 @@ for prize in @prizes
 end
 
 xml.footer do
-xml.img(:id=>"rightCmd", :src=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/widget.png", :onSelect=>"doShowPopup();", :bgfocusimg=>"http://www.where.com/images/dd/mobile/<Computed Value>/widget_selected.png")
-xml.img(:id=>"leftCmd", :src=>"http://www.where.com/images/dd/mobile/<Computed Value>/back.png", :onSelect=>"home();")
+xml.img(:id=>"rightCmd", :src=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/widget.png", :onSelect=>"doShowPopup();", :bgfocusimg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/widget_selected.png")
+xml.img(:id=>"leftCmd", :src=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/back.png", :onSelect=>"home();")
 end #footer
 
-xml.footer(:bgImg=>"http://www.where.com/images/dd/mobile/<Computed Value>/where_banner.png")
+xml.footer(:bgImg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/where_banner.png")
 
 end #body
 
