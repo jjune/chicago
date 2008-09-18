@@ -21,13 +21,13 @@ xml.text! "function doTriggerSetup() {"
 xml.text! "addTrigger('menu', doShowPopup());"
 xml.text! "}"
 
-#xml.text! "function addapoint() {"
-#xml.text! "              var formObj = document.addapoint;"
+#xml.text! "function doSnoop() {"
+#xml.text! "              var formObj = document.snoop;"
 #xml.text! "              formObj.submit();"
 #xml.text! "}"
 
-#xml.text! "function sliceprefs() {"
-#xml.text! "              var formObj = document.mapisliceprefs;"
+#xml.text! "function doAbout() {"
+#xml.text! "              var formObj = document.aboutssl;"
 #xml.text! "              formObj.submit();"
 #xml.text! "}"
 
@@ -51,13 +51,13 @@ xml.text! "}"
 
 end #script
 
-xml.form(:id=>"addapoint", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/addapoint.jin?openpage", :method=>"GET")
-xml.form(:id=>"mapisliceprefs", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/mapislices.jin?openpage", :method=>"GET")
+xml.form(:id=>"snoop", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/addapoint.jin?openpage", :method=>"GET")
+xml.form(:id=>"aboutssl", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/mapislices.jin?openpage", :method=>"GET")
 
 xml.body(:bg=>"0xAFCAE5", :fontSize=>@textsize, :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
 
 xml.header do
-xml.img(:src=>"http://www.mapicurious.com/maps/where.nsf/mapicuriositiesheader.png?open", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
+xml.img(:src=>"http://chicago.supersecretlabs.com/images/logo_small.png", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
 end #header
 
 
@@ -70,49 +70,33 @@ xml.pr do
 xml.list(:id=>"popList", :border=>"0", :fg=>"0xFFFFFF", :fgfocus=>"0xCF5719", :bgfocusimg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/over_bg_menu.png", :bg=>"0x000000") do
 
 
-xml.listitem(:onSelect=>"addapoint();doHidePopup();") do
+xml.listitem(:onSelect=>"doSnoop();doHidePopup();") do
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
-xml.text "Add A Point (Quick Form)"
+xml.text "Snoop for Loot"
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 
 xml.selected do
 xml.listitem do
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
-xml.text "Add A Point (Quick Form)"
+xml.text "Snoop for Loot"
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 end #listitem
 end #selected
 end #listitem 
 
-xml.listitem(:onSelect=>"sliceprefs();doHidePopup();") do
+xml.listitem(:onSelect=>"doAbout();doHidePopup();") do
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
-xml.text "Search Preferences"
+xml.text "About SuperSecretLabs"
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 
 xml.selected do
 xml.listitem do
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
-xml.text "Search Preferences"
-xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
-end #listitem
-end #selected
-end #listitem
-
-xml.listitem(:onSelect=>"doshowLayer();doHidePopup();") do
-xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
-xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
-xml.text "About Mapicurious"
-xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
-
-xml.selected do
-xml.listitem do
-xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
-xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
-xml.text "About Mapicurious"
+xml.text "About SuperSecretLabs"
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 end #listitem
 end #selected
@@ -140,15 +124,19 @@ end #pr
 end #pop
 
 xml.pr do
-xml.text("Mapicuriosities Around You", :align=>"center", :valign=>"center") 
+xml.text("Our satellites see you here:", :align=>"center", :valign=>"center") 
 end #pr
 
 xml.pr do
-xml.text("Add A Point to Mapicurious.com", :align=>"center", :valign=>"center") 
+xml.img(:src=>"http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14&size=176x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
 end #pr
 
 xml.pr do
-xml.input(:type=>"button", :value=>"Add A Point", :onSelect=>"addapoint();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0xF27E1F")
+xml.text("Are you near the money?", :align=>"center", :valign=>"center") 
+end #pr
+
+xml.pr do
+xml.input(:type=>"button", :value=>"Snoop for Loot", :onSelect=>"doSnoop();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0xF27E1F")
 end #pr
 
 xml.pr do
@@ -167,7 +155,7 @@ for prize in @prizes
 end
 
 
-if @device.carrier = "Blackberry" || @device.device = "Blackberry"
+if @device.carrier.include? "Blackberry" || @device.device.include? "Blackberry"
 xml.footer(:bgImg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/where_banner.png")
 else
 xml.footer do
