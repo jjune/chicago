@@ -16,13 +16,48 @@ class WhereController < ApplicationController
     
   end
   
+  def welcomewidget
+  
+  #This is the first form the device will see
+  # Need to determine if current player or not
+  #need to be a query start form
+  #Might want to show a map here with user's current position
+  #Big ass button that says - QUERY AWAY
+  
+  respond_to do |format|
+    #format.xml  { render :xml => @prizes, :action => "gen_xml.xml.builder", :layout => false }
+  end
+  
+  end
+  
+  
   def gen_xml
+    
+      #This works 9/17/08
+      #Need to pass a single prize and hints
+      
       @xml = Builder::XmlMarkup.new
       @prizes=Prize.find(:all)
+      @device = Device.find_by_deviceid(params[:deviceid])
+
+      	if @device.nil?
+      		@device = Device.new()
+      		@device.deviceid = params[:deviceid]
+      		@device.device = params[:device]
+      		@device.carrier = params[:carrier]
+      		@device.screenwidth = params[:screenwidth] 
+      		@device.save!
+      	else
+      		@player = @device.player	
+      	end
+      
+      if @device.screenwidth.nil?
+      @textsize = "small"
+      else
+      @textsize = "medium"
+      end
       
         respond_to do |format|
-          #format.html # index.html.erb
-          #format.xml  { render :xml => @prize }
           format.xml  { render :xml => @prizes, :action => "gen_xml.xml.builder", :layout => false }
         end
 
