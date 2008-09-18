@@ -3,11 +3,11 @@
 <div id="left">
 <%= link_to 'Super Secret Labs', '/' unless @current_user.nil? %> 
 
-<%= if @current_user.nil? 
-'You are not authorized to see anything' 
-else 
-'Welcome back ' + @current_user.login 
-end %>
+<% if @current_user.nil? %>
+You are not authorized to see anything'
+<% else %> 
+Welcome back + @current_user.login 
+<% end %>
 
 </div>
 

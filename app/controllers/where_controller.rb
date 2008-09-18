@@ -1,4 +1,5 @@
 class WhereController < ApplicationController  
+  before_filter :login_required
   def show
     
     #validate query strings
