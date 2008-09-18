@@ -147,9 +147,9 @@ xml.pr do
 xml.text("Add A Point to Mapicurious.com", :align=>"center", :valign=>"center") 
 end #pr
 
-xml.pr do
-xml.input(:type=>"button", :value=>"Add A Point", :onSelect=>"addapoint();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0xF27E1F")
-end #pr
+#xml.pr do
+#xml.input(:type=>"button", :value=>"Add A Point", :onSelect=>"addapoint();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0xF27E1F")
+#end #pr
 
 xml.pr do
 xml.text("Blackberry Users:", :align=>"center", :valign=>"center") 
