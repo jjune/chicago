@@ -54,7 +54,7 @@ end #script
 #xml.form(:id=>"addapoint", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/addapoint.jin?openpage", :method=>"GET")
 #xml.form(:id=>"mapisliceprefs", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/mapislices.jin?openpage", :method=>"GET")
 
-xml.body(:bg=>"0xAFCAE5", :fontSize=>"@textsize", :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
+xml.body(:bg=>"0xAFCAE5", :fontSize=>@textsize, :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
 
 xml.header do
 xml.img(:src=>"http://www.mapicurious.com/maps/where.nsf/mapicuriositiesheader.png?open", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
