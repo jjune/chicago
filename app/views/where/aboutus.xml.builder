@@ -135,10 +135,6 @@ xml.text("8. I almost forgot - this is WORLDWIDE, so don't be afraid to snoop ar
 end #pr
 
 xml.pr do
-xml.text :"&br;"
-end #pr
-
-xml.pr do
 xml.text("Thanks for checking us out - here is a cheat code for you: ", :align=>"center", :valign=>"center") 
 end #pr
 
