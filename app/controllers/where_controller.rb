@@ -35,8 +35,36 @@ class WhereController < ApplicationController
    
    #Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
    
+     @device = Device.find_by_deviceid(params[:deviceid])
+
+     	if @device.nil? then
+     		@device = Device.new()
+     		@device.deviceid = params[:deviceid]
+     		@device.device = params[:device]
+     		@device.carrier = params[:carrier]
+     		@device.screenwidth = params[:screenwidth] 
+     		@device.save!
+     	else
+     		@player = @device.player	
+     	end
+     
+     #test for Emulator
+     if @device.screenwidth.nil? then
+       @device.screenwidth = "240"
+     end
+     
+     if @device.carrier.nil? then
+     @device.carrier = "Emulator"
+     end
+     
+     if @device.screenwidth = "176" then
+       @textsize = "small"
+     else
+       @textsize = "medium"
+     end
+   
      respond_to do |format|
-       format.xml  { render :action => "aboutus.xml.builder", :layout => false }
+       format.xml  {render :xml => @device, :action => "aboutus.xml.builder", :layout => false }
      end
   end
   
@@ -76,6 +104,15 @@ class WhereController < ApplicationController
         @textsize = "medium"
       end
       
+      #Need to add custom WHERE message set here.
+      #This will change default message above map from:
+      #Our satellites have spotted you here:
+      #Agent Anonymous - we have you positioned below:
+      #personal messages like: 
+      #Agent G-dawg you have 3 secret items to claim on the website
+      #A special cheat for today only
+      #Site maintenance messages
+      #other stuff
       
       
         respond_to do |format|
