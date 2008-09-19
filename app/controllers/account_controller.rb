@@ -10,6 +10,8 @@ class AccountController < ApplicationController
   end
 
   def login
+    @title = 'SupersecretLabs Login'
+    @action_class = 'login'
     return unless request.post?
     self.current_user = User.authenticate(params[:login], params[:password])
     if logged_in?
@@ -28,8 +30,34 @@ class AccountController < ApplicationController
     end
   end
 
-  def register
+  def register_login
+    @action_class = 'register'
     @user = User.new(params[:user])
+    return unless request.post?
+    @user.save!
+    self.current_user = @user
+    redirect_back_or_default(:controller => '/account', :action => 'register_contact')
+    flash[:notice] = "Login successfully created"
+  rescue ActiveRecord::RecordInvalid
+    flash[:error] = "Uh oh, problem."
+    render :action => 'register_login'
+  end
+  
+  def register_contact
+    @title = 'New Player Registration | Contact Information'
+    @action_class = 'register'
+    return unless request.post?
+    @user.save!
+    self.current_user = @user
+    redirect_back_or_default(:controller => '/account', :action => 'index')
+    flash[:notice] = "Thanks for signing up!"
+  rescue ActiveRecord::RecordInvalid
+    render :action => 'signup'
+  end
+  
+  def register_device
+    @title = 'New Player Registration | Add Device'
+    @action_class = 'register'
     return unless request.post?
     @user.save!
     self.current_user = @user

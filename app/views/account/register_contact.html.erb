@@ -1,0 +1,64 @@
+<div id="wrapper" class="quick-sign-up">        
+	<div id="cap-top" class="container"></div>
+	<div id="header" class="container">
+		<div class="inner">
+			 <img id="imgLogo" src="/images/super.jpg" />
+		        </div>
+	        </div>
+	        <div id="cap-body" class="container">	       	        
+	            <div id="panelSteps">
+		 
+	                <div id="steps" class="column span-6">
+			            <ol>
+				            <li><a href="/register/login">Login Details</a></li>
+				            <li class="current"><a href="#">Contact Information</a></li>
+				            <li><a href="#">Device</a></li>
+				            <li><a disabled="disabled">Finish</a></li>
+			            </ol>
+			        </div>
+	</div> 
+		        <div id="content" class="column prepend-1 span-16 append-1 last">
+		            <div id="panelStyle1" class="inner">
+							<% form_for :user do |f| -%>
+              <table class="default" border="0">
+							<tbody>
+							<tr><td colspan="2" class="heading"><h2>Your Contact Information</h2></td></tr>
+							<tr><td class="var"><label>First Name</label></td><td><%= f.text_field :login, :class => "textbox340" %> </td></tr>
+							<tr><td class="var"><label>Last Name</label></td><td><%= f.text_field :email, :class => "textbox340" %></td></tr>
+							<tr><td class="var"><label>Street Address</label></td><td><%= f.password_field :password, :class => "textbox340" %></td></tr>
+							<tr><td class="var"><label>City</label></td><td><%= f.password_field :password_confirmation, :class => "textbox340" %></td></tr>
+							<tr><td class="var"><label>State</label></td><td><%= f.password_field :password_confirmation, :class => "textbox340" %></td></tr>
+							<tr><td class="var"><label>Zipcode</label></td><td><%= f.password_field :password_confirmation, :class => "textbox340" %></td></tr>
+							<tr><td class="var"><label>Country</label></td><td><%= f.password_field :password_confirmation, :class => "textbox340" %></td></tr>
+							<tr><td class="var"><label>Phone Number</label></td><td><%= f.password_field :password_confirmation, :class => "textbox340" %></td></tr>
+							
+							<tr>
+							<td>		
+						</td>
+			</tr>
+			</tbody>
+		</table>
+		<% end -%>
+				            <hr />
+				            <div class="footer clear">
+				                <a id="FinishStyle1" class="finish" href="">Finish</a>
+				                <a id="NextStyle1" class="next" href="">Next</a>
+				            </div>
+	</div>
+		        </div>
+	        </div>
+	        <div id="cap-bottom" class="container"></div>
+        </div>
+       
+</div>        
+        
+
+</div>
+
+
+
+
+
+
+
+
