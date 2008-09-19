@@ -40,6 +40,89 @@ class WhereController < ApplicationController
   
   end
   
+  def snoop
+  @xml = Builder::XmlMarkup.new
+  
+  #Emulator Guard
+  if params[:lng].nil? then
+  @lng = "-84.49008"
+  else
+  @lng = params[:lng]
+  end
+  
+  if params[:lat].nil? then
+  @lat = "33.84275"
+  else
+  @lat = params[:lat]
+  end
+  
+  prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
+  
+  #Device Checks
+    @device = Device.find_by_deviceid(params[:deviceid])
+   	if @device.nil? then
+   		@device = Device.new()
+   		@device.deviceid = params[:deviceid]
+   		@device.device = params[:device]
+   		@device.carrier = params[:carrier]
+   		@device.screenwidth = params[:screenwidth] 
+   		@device.save!
+   		
+   		#need to retrieve device short code and present to user - whether they win or not
+   		
+   	else
+   		@player = @device.player
+   		
+   		#Also need shortcode here possibly
+   			
+   	end
+   
+   #test for Emulator
+   if @device.screenwidth.nil? then
+     @device.screenwidth = "240"
+   end
+   
+   if @device.carrier.nil? then
+   @device.carrier = "Emulator"
+   end
+   
+   #WHERE required to get the correct generic graphics
+   if @device.screenwidth = "176" then
+     @textsize = "small"
+   else
+     @textsize = "medium"
+   end
+ 
+   #Prize Checks
+   if not prize.nil? then
+	  
+	  #We have a winner
+	  
+	  @playermsg = "Congrats"
+	  
+	  #tell them what they won
+	  #Tell them how to claim it
+	  
+	  
+	  
+	  else
+	    
+	    #Are there hints? - Done by searching area
+	    #Is there broadcast news? 
+	    #What about cheat code processing?
+	    
+	    @playermsg = "Not even close"
+	    
+	  end #prize check
+  
+    
+    #Builder code formats winning message or losing message
+     respond_to do |format|
+       format.xml  {render :xml => @device, :action => "snoop.xml.builder", :layout => false }
+     end #respond to
+  
+  end
+  
   
   
   def aboutus
@@ -81,15 +164,28 @@ class WhereController < ApplicationController
   end
   
   
-  def gen_xml
+  def widget
     
       #This works 9/17/08
       #Need to pass a single prize and hints
       
       @xml = Builder::XmlMarkup.new
-      @prizes=Prize.find(:all)
+      #@prizes=Prize.find(:all)
       @device = Device.find_by_deviceid(params[:deviceid])
+      
+      #Emulator Guard
+      if params[:lng].nil? then
+      @lng = "-84.49008"
+      else
+      @lng = params[:lng]
+      end
 
+      if params[:lat].nil? then
+      @lat = "33.84275"
+      else
+      @lat = params[:lat]
+      end
+      
       	if @device.nil? then
       		@device = Device.new()
       		@device.deviceid = params[:deviceid]
@@ -116,6 +212,19 @@ class WhereController < ApplicationController
         @textsize = "medium"
       end
       
+      #http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14
+      #&size=240x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png
+      #&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q
+      #Google static map info
+      @googleapikey = "ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q"
+      @googlebaseurl = "http://maps.google.com/staticmap?"
+      @googlecoord = @lat + "," + @lng
+      @googlemapsize = @device.screenwidth + "x128"
+      @googleimageurl = @googlebaseurl + "center=" + @googlecenter + "&zoom=14&size=" + @googlemapsize + "&maptype=mobile&markers=" + @googlecenter + ",blue&format=png&key=" + @googleapikey
+      
+      
+      
+      
       #Need to add custom WHERE message set here.
       #This will change default message above map from:
       #Our satellites have spotted you here:
@@ -128,7 +237,7 @@ class WhereController < ApplicationController
       
       
         respond_to do |format|
-          format.xml  { render :xml => @prizes, :action => "gen_xml.xml.builder", :layout => false }
+          format.xml  { render :xml => @device, :action => "widget.xml.builder", :layout => false }
         end
 
   end
