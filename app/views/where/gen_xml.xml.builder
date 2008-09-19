@@ -128,7 +128,7 @@ xml.text("Our satellites see you here:", :align=>"center", :valign=>"center")
 end #pr
 
 xml.pr do
-xml.img(:src=>"http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14&size=176x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
+xml.img(:src=>:"http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14&size=176x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
 end #pr
 
 xml.pr do
