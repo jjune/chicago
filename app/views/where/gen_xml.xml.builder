@@ -54,10 +54,10 @@ end #script
 xml.form(:id=>"snoop", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/addapoint.jin?openpage", :method=>"GET")
 xml.form(:id=>"aboutssl", :action=>"http://www.mapicurious.com/maps/mapsearch.nsf/mapislices.jin?openpage", :method=>"GET")
 
-xml.body(:bg=>"0xAFCAE5", :fontSize=>@textsize, :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
+xml.body(:bg=>"0xFFFFFF", :fontSize=>@textsize, :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
 
 xml.header do
-xml.img(:src=>"http://chicago.supersecretlabs.com/images/logo_small.png", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
+xml.img(:src=>"http://chicago.supersecretlabs.com/images/logo_small.png", :align=>"center", :valign=>"center", :bg=>"0xFFFFFF")	
 end #header
 
 
@@ -128,7 +128,7 @@ xml.text("Our satellites see you here:", :align=>"center", :valign=>"center")
 end #pr
 
 xml.pr do
-xml.img(:src=>:"http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14&size=176x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
+xml.img(:src=>:"http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14&size=" + @device.screenwidth + "x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q", :align=>"center", :valign=>"center", :bg=>"0xF27E1F")	
 end #pr
 
 xml.pr do
@@ -136,8 +136,17 @@ xml.text("Are you near the money?", :align=>"center", :valign=>"center")
 end #pr
 
 xml.pr do
-xml.input(:type=>"button", :value=>"Snoop for Loot", :onSelect=>"doSnoop();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0xF27E1F")
+xml.input(:type=>"button", :value=>"Snoop for Loot", :onSelect=>"doSnoop();", :align=>"center", :valign=>"center", :fgfocus=>"0x000000", :bgfocus=>"0xFFFFFF")
 end #pr
+
+#This could be taken out in live app
+for prize in @prizes
+	xml.pr do
+		xml.text prize.name
+	end
+end
+
+if @device.carrier.include? "Blackberry" then
 
 xml.pr do
 xml.text("Blackberry Users:", :align=>"center", :valign=>"center") 
@@ -147,15 +156,6 @@ xml.pr do
 xml.text("Use your menu and back keys to access options and navigate.", :align=>"center", :valign=>"center") 
 end #pr
 
-
-for prize in @prizes
-	xml.pr do
-		xml.text prize.name
-	end
-end
-
-
-if @device.carrier.include? "Blackberry" then
 xml.footer(:bgImg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/where_banner.png")
 else
 xml.footer do
