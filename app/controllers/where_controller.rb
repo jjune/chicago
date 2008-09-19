@@ -30,6 +30,16 @@ class WhereController < ApplicationController
   
   end
   
+  def aboutus
+   @xml = Builder::XmlMarkup.new
+   
+   #Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
+   
+     respond_to do |format|
+       format.xml  { render :action => "aboutus.xml.builder", :layout => false }
+     end
+  end
+  
   
   def gen_xml
     
@@ -40,7 +50,7 @@ class WhereController < ApplicationController
       @prizes=Prize.find(:all)
       @device = Device.find_by_deviceid(params[:deviceid])
 
-      	if @device.nil?
+      	if @device.nil? then
       		@device = Device.new()
       		@device.deviceid = params[:deviceid]
       		@device.device = params[:device]
@@ -51,8 +61,13 @@ class WhereController < ApplicationController
       		@player = @device.player	
       	end
       
-      if @device.screenwidth.nil?
-        @device.screenwidth = "176"
+      #test for Emulator
+      if @device.screenwidth.nil? then
+        @device.screenwidth = "240"
+      end
+      
+      if @device.carrier.nil? then
+      @device.carrier = "Emulator"
       end
       
       if @device.screenwidth = "176" then
@@ -60,6 +75,8 @@ class WhereController < ApplicationController
       else
         @textsize = "medium"
       end
+      
+      
       
         respond_to do |format|
           format.xml  { render :xml => @prizes, :action => "gen_xml.xml.builder", :layout => false }
