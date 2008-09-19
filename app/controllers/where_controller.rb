@@ -30,6 +30,18 @@ class WhereController < ApplicationController
   
   end
   
+  def claims
+     @xml = Builder::XmlMarkup.new
+    
+    respond_to do |format|
+       format.xml  {render :action => "claims.rss.builder", :layout => false }
+     end
+  
+  
+  end
+  
+  
+  
   def aboutus
    @xml = Builder::XmlMarkup.new
    
