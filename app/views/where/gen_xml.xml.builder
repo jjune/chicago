@@ -155,7 +155,7 @@ for prize in @prizes
 end
 
 
-if @device.carrier.include? "Blackberry" || @device.device.include? "Blackberry"
+if @device.carrier.include? "Blackberry" then
 xml.footer(:bgImg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/where_banner.png")
 else
 xml.footer do
