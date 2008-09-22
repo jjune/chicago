@@ -1,8 +1,8 @@
-/* @override http://localhost:3000/stylesheets/secret.css?1221746426 */
+/* @override http://localhost:3000/stylesheets/login.css?1221774302 */
 
 body {
 	color: #333;
-	font: 12px "Lucida Grande",Helvetica,Arial,Verdana,sans-serif
+	font: 12px "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 }
 
 body.login {
@@ -38,10 +38,10 @@ div#cap-bottom {
 }
 
 
-div#login div#panelLogin div,div#login div#panelResetPass div,div#login div#panelChangePass div {
+div#login div#panelLogin div {
 	margin: 0 auto;
-	padding-bottom: 18px;
-	width: 456px
+	width: 456px;
+	padding-bottom: 10px;
 }
 
 div#login div#branding {
@@ -153,7 +153,14 @@ div.warning_box h2 {
 }
 
 div.error_message {
-	background: #FDC0C1 no-repeat 18px 18px;
-	border: 1px solid #E59D9E
+	font-size: 11px;
+	margin-left: 45px;
+	margin-right: 51px;
+	padding-left: 15px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	background: #FDC0C1 url(../CatalystImages/a16/delete.png) no-repeat 18px 18px;
+	border: 1px solid #E59D9E;
+	margin-bottom: 20px;
 }
 

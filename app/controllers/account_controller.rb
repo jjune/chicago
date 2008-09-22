@@ -12,6 +12,7 @@ class AccountController < ApplicationController
   def login
     @title = 'SupersecretLabs Login'
     @action_class = 'login'
+    
     return unless request.post?
     self.current_user = User.authenticate(params[:login], params[:password])
     if logged_in?
@@ -24,9 +25,12 @@ class AccountController < ApplicationController
         redirect_to(:controller => 'player')
       else
         redirect_to(:controller => 'prizes')
-      end
-        
+      end      
      # flash[:notice] = "Logged in successfully with" + " " + current_user.user_type
+    else
+     # assumes authentication was unsuccessful
+     # TODO: return result code based description of why the authentication failed
+     flash[:error] = "ERROR: Authentication Failed. "
     end
   end
 
