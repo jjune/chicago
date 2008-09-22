@@ -16,7 +16,10 @@
 				<div class="submit clearfix">
 					<%= image_submit_tag "/images/login-button.png",  :style => "border-width:0px", :class => "button-right" %>
 				</div>
-				<% end -%>		
+				<% end -%>
+				<div class="loginpanel_text">
+				Do you need to <a href="/register/sponsor">register as a Sponsor</a>?
+			    </div>		
 </div>
 <% if flash[:error] %><div class="error_message"><%= flash[:error] %></div><% end %>
 <div class="warning_box">

@@ -30,7 +30,7 @@ class AccountController < ApplicationController
     else
      # assumes authentication was unsuccessful
      # TODO: return result code based description of why the authentication failed
-     flash[:error] = "ERROR: Authentication Failed. "
+     flash[:error] = "ERROR: Authentication Failed."
     end
   end
 
