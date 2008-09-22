@@ -17,11 +17,13 @@
 					<%= image_submit_tag "/images/login-button.png",  :style => "border-width:0px", :class => "button-right" %>
 				</div>
 				<% end -%>
+				<% if flash[:error] %><div class="error_message"><%= flash[:error] %></div><% end %>
+				<% if flash[:notice] %><div class="notification_message"><%= flash[:notice] %></div><% end %>
 				<div class="loginpanel_text">
 				Do you need to <a href="/register/sponsor">register as a Sponsor</a>?
 			    </div>		
 </div>
-<% if flash[:error] %><div class="error_message"><%= flash[:error] %></div><% end %>
+
 <div class="warning_box">
 <h2>Authorized Users Only</h2>
 This is a game. The game is for use by GPS mobile phone operators and Federal, state, and local government officials only. Unauthorized access is a violation of U.S. Law and Super Secret Labs policy and may result in criminal or administrative penalties. Users shall not access other user's or system files without proper authority. Absence of access controls IS NOT authorization for access. All data contained in this application intercepted, recorded, read, copied, or captured in any manner and disclosed in any manner by authorized personnel. There is no right of privacy in this application. System personnel may give to law enforcement officials any potential evidence of crime found on this application. Use of this application by any user, authorized or unauthorized, constitutes consent to this monitoring, interception, recording, reading, copying, or capturing.

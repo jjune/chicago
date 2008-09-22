@@ -11,9 +11,7 @@
 		 
 	                <div id="steps" class="column span-6">
 			            <ol>
-				            <li class="current"><a id="lbStyle1" href="#">Login Details</a></li>
-				            <li><a disabled="disabled">Contact Information</a></li>
-				            <li><a disabled="disabled">Device</a></li>
+				            <li class="current"><a id="lbStyle1" href="#">Register</a></li>
 				            <li><a disabled="disabled">Finish</a></li>
 			            </ol>
 			        </div>
@@ -23,7 +21,7 @@
 		            <div id="panelStyle1" class="inner">
 		    		        <br>		
     		        		<h1>We will guide you through the player registration process.  You are not committing to anything by signing up here, but we do need few information about you.</h1>
-                          
+                         
 							<hr>
 							<% form_for :user do |f| -%>
                             <table class="default" border="0">
@@ -33,13 +31,9 @@
 							<tr><td class="var"><label>Email</label></td><td><%= f.text_field :email, :class => "textbox340" %></td></tr>
 							<tr><td class="var"><label>Password</label></td><td><%= f.password_field :password, :class => "textbox340" %></td></tr>
 							<tr><td class="var"><label>Confirm Password</label></td><td><%= f.password_field :password_confirmation, :class => "textbox340" %></td></tr>
-							<tr>
-							<td>		
-						</td>
-			</tr>
+							
 			</tbody>
 		</table>
-		
 				            <hr />
 				            <div class="footer clear">
 				               <%= image_submit_tag '/images/create-login-button.png', :class => "wizard-button" %>

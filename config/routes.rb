@@ -2,8 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :prizes
   map.connect 'register/sponsor', :controller => 'account', :action => 'sponsor_registration'
   map.connect 'register/player', :controller => 'account', :action => 'player_registration'
-  map.connect 'register', :controller => 'account', :action => 'register_login'
-  map.connect 'register/login', :controller => 'account', :action => 'register_login'
+  map.connect 'register', :controller => 'account', :action => 'player_registration'
   map.connect 'register/contact', :controller => 'account', :action => 'register_contact'
   map.connect 'login', :controller => 'account', :action => 'login'
   map.connect 'register/device', :controller => 'account', :action => 'register_device'

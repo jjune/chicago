@@ -33,6 +33,23 @@ class AccountController < ApplicationController
      flash[:error] = "ERROR: Authentication Failed."
     end
   end
+  
+  def process_player_registration
+    @user = User.new(params[:user])
+    @user.save!
+    flash[:notice] = "User account " + @user.login + " successfully created."
+    redirect_to (:action => 'login')
+  end
+  
+  def check_shortcode
+    if params[:shortcode] == "123"
+       @shortcode_device = "yes"
+    else
+       @shortcode_device = "no"
+    end
+   render :partial => 'global/shortcode_device_description'
+  end
+  
 
   def register_login
     @action_class = 'register'
@@ -47,29 +64,7 @@ class AccountController < ApplicationController
     render :action => 'register_login'
   end
   
-  def register_contact
-    @title = 'New Player Registration | Contact Information'
-    @action_class = 'register'
-    return unless request.post?
-    @user.save!
-    self.current_user = @user
-    redirect_back_or_default(:controller => '/account', :action => 'index')
-    flash[:notice] = "Thanks for signing up!"
-  rescue ActiveRecord::RecordInvalid
-    render :action => 'signup'
-  end
   
-  def register_device
-    @title = 'New Player Registration | Add Device'
-    @action_class = 'register'
-    return unless request.post?
-    @user.save!
-    self.current_user = @user
-    redirect_back_or_default(:controller => '/account', :action => 'index')
-    flash[:notice] = "Thanks for signing up!"
-  rescue ActiveRecord::RecordInvalid
-    render :action => 'signup'
-  end
   
   def sponsor_registration
       @user = Sponsor.new(params[:user])
@@ -83,6 +78,8 @@ class AccountController < ApplicationController
   end
   
   def player_registration
+      @action_class = 'register'
+      @title = "New Player Registration"
       @user = Player.new(params[:user])
       return unless request.post?
       @user.save!

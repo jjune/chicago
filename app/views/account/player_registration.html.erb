@@ -1,42 +1,80 @@
 <%= error_messages_for :user %>
-<% form_for :user do |f| -%>
-This is the registration form for player
-<p><label for="login">Login</label><br/>
-<%= f.text_field :login %></p>
+<div id="wrapper" class="quick-sign-up">        
+	<div id="cap-top" class="container"></div>
+	<div id="header" class="container">
+		<div class="inner">
+			 <img id="imgLogo" src="/images/super.jpg" />
+		        </div>
+	        </div>
+	        <div id="cap-body" class="container">	       	        
+	        
+	            <div id="panelSteps">
+		 
+	                <div id="steps" class="column span-6">
+			            
+			        </div>
+	</div> 
+		        <div id="content" class="column prepend-1 span-16 append-1 last">
+		        
+		            <div id="panelStyle1" class="inner">
+		    		        <br>		
+    		        		<h1>We will guide you through the player registration process.  You are not committing to anything by signing up here, but we do need few information about you.</h1>
+                         
+							<% form_for :user, :url => {:action => 'process_player_registration'} do |f| -%>
+							  
+						 <hr>
+             <table class="default" border="0">
 
-Enter shortcode:
-<%= text_field_tag :shortcode %>
+							<tbody>
+							     <tr><td colspan="2" class="heading"><h2>Create Your Player Account</h2></td></tr>
+							     <tr><td class="var"><label>Login</label></td><td><%= f.text_field :login, :class => "textbox340" %> </td></tr>
+							     <tr><td class="var"><label>Email</label></td><td><%= f.text_field :email, :class => "textbox340" %></td></tr>
+							     <tr><td class="var"><label>Password</label></td><td><%= f.password_field :password, :class => "textbox340" %></td></tr>
+							     <tr><td class="var"><label>Confirm Password</label></td><td><%= f.password_field :password_confirmation, :class => "textbox340" %></td></tr>			
+			        </tbody>
+		          </table>
+		          <hr>
+							<table class="default" border="0">
 
-<p><label for="password">Password</label><br/>
-<%= f.password_field :password %></p>
+ 							<tbody>
+ 							     <tr><td colspan="2" class="heading"><h2>Enter Your Shortcode (Optional)</h2></td></tr>
+ 							     <tr><td class="var"><label>Shortcode</label></td><td><%= text_field_tag :shortcode, '', :class => "textbox340" %></td>
+ 							         <td class="shortcode_validation"></td>
+ 							     </tr>
+ 							     <tr><td></div></td>
+ 							     <td><div id="shortcode_device"></td>
+ 							     </tr>
+ 			        </tbody>
+ 		          </table>
+<%= observe_field ("shortcode",
+                  :frequency => 5.0, 
+                  :update =>  "shortcode_device",
+                  :with => "shortcode",
+                  :url => {:action => "check_shortcode"})
 
-<p><label for="password_confirmation">Confirm Password</label><br/>
-<%= f.password_field :password_confirmation %></p>
+                  %>
+ 		          
+ 		          <table class="default" border="0" width="500">
+              <hr>
+ 							<tbody>
+ 							     <tr><td colspan="2" class="heading"><h2>Review, accept terms &amp; Complete Signup</h2></td></tr>
+ 							     <tr><td class="agreement">Please review our Terms of Service and <a href="#">User Agreement</a>.</td></tr>
+ 							     <tr><td class="agreement"><span class="highlight"><input type="checkbox">I have reviewed and agree to all conditions outlined in the User Agreement.</span></td></tr>
+ 			        </tbody>
+ 		          </table>
+ 		          <hr>
+		
+				            
+				            <div class="footer clear">
+				               <%= image_submit_tag '/images/create-login-button.png', :class => "wizard-button" %>
+				            </div>
+	</div>
+		        </div>
+	        </div>
+	        <div id="cap-bottom" class="container"></div>
+        </div>
+       <% end -%>
+</div>        
+        
 
-<p><label for="email">Email</label><br/>
-<%= f.text_field :email %></p>
-
-<p><label for="name">Name</label><br/>
-<%= f.text_field :first_name %> <%= f.text_field :first_name %></p>
-
-<p><label for="address">Address 1</label><br/>
-<%= f.text_field :address1 %></p>
-
-<p><label for="address">Address 2</label><br/>
-<%= f.text_field :address2 %>
-
-<p><label for="city">City</label><br/>
-<%= f.text_field :city %>
-
-<p><label for="state">State</label><br/>
-<%= f.text_field :state %>
-
-<p><label for="state">Zipcode</label><br/>
-<%= f.text_field :zipcode %>
-
-<p><label for="country">Country</label><br/>
-<%= f.text_field :country %>
-
-
-<p><%= submit_tag 'Register' %></p>
-<% end -%>
+</div>

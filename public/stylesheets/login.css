@@ -1,4 +1,7 @@
-/* @override http://localhost:3000/stylesheets/login.css?1221774302 */
+/* @override 
+	http://localhost:3000/stylesheets/login.css?1221774302
+	http://localhost:3000/stylesheets/login.css?1222055083
+*/
 
 body {
 	color: #333;
@@ -158,14 +161,24 @@ div.error_message {
 	margin-left: 45px;
 	margin-right: 51px;
 	padding-left: 15px;
-	padding-bottom: 10px;
+	padding-bottom: 40px;
 	padding-top: 10px;
-	background: #FDC0C1 url(../CatalystImages/a16/delete.png) no-repeat 18px 18px;
+	background-color: #FDC0C1;
 	border: 1px solid #E59D9E;
-	margin-bottom: 20px;
+}
+div.notification_message {
+	font-size: 11px;
+	margin-left: 45px;
+	margin-right: 51px;
+	padding-left: 15px;
+	padding-bottom: 40px;
+	padding-top: 10px;
+	background-color: #E8FCEA;
+	border: 1px solid #7ed566;
 }
 div.loginpanel_text {
 	font-size: 11px;
+	padding-top: 15px;
 }
 
 div.loginpanel_text div#login a:active, div#login a:visited {

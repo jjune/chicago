@@ -1,4 +1,7 @@
-/* @override http://localhost:3000/stylesheets/register.css?1221784883 */
+/* @override 
+	http://localhost:3000/stylesheets/register.css?1221801485
+	http://localhost:3000/stylesheets/register.css?1222057161
+*/
 
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 	margin: 0;
@@ -95,7 +98,6 @@ table   { margin-bottom: 1.4em; }
 .quiet      { color: #666; }
 
 .hide       { display: none; }
-.highlight  { background:#ff0; }
 .added      { color:#060; }
 .removed    { color:#900; }
 
@@ -466,7 +468,7 @@ div#pick-image {
 	margin: 18px auto;
 } 
 
-td.var { width: 20%; padding: 0 9px 0 0; text-align: right; color: #888; font-size: 11px; }
+td.var { width: 100px; padding: 0 9px 0 0; text-align: right; color: #888; font-size: 11px; }
 
 input[type="text"], input[type="password"], select#ddCountry, select#ddTimeZone { width: 200px; }
 
@@ -611,4 +613,28 @@ div.syserror {
 
 .wizard-button {
 	float: right;
+}
+td.agreement { width: 100px; padding: 0 9px 0 0; text-align: left; color: #888; font-size: 11px; }
+
+.highlight { text-align: left; color: #888; font-size: 11px;
+	background-color: #ffc;
+}
+.register-error-message {
+	color: #d3473f;
+	font-weight: bold;
+}
+div#shortcode-device {
+	text-align: left;
+	width: 400;
+	font-size: 0.85em;
+	color: #4c4c4c;
+	}
+div#shortcode-error {
+	text-align: left;
+	padding-top: 2px;
+	width: 400;
+	font-size: 0.85em;
+	margin-top: -15px;
+	color: red;
+	font-weight: bold;
 }
