@@ -8,7 +8,6 @@ class CreatePrizes < ActiveRecord::Migration
       t.timestamps
     
     end
-    
     add_index "prizes", "prizearea", :spatial=>true
     add_index "prizes", "center", :spatial=>true
   end
