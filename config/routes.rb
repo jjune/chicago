@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :users
   map.resources :prizes
   map.connect 'register/sponsor', :controller => 'account', :action => 'sponsor_registration'
   map.connect 'register/player', :controller => 'account', :action => 'player_registration'

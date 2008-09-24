@@ -622,6 +622,7 @@ td.agreement { width: 100px; padding: 0 9px 0 0; text-align: left; color: #888; 
 .register-error-message {
 	color: #d3473f;
 	font-weight: bold;
+	font-size: 0.85em;
 }
 div#shortcode-device {
 	text-align: left;
@@ -629,12 +630,3 @@ div#shortcode-device {
 	font-size: 0.85em;
 	color: #4c4c4c;
 	}
-div#shortcode-error {
-	text-align: left;
-	padding-top: 2px;
-	width: 400;
-	font-size: 0.85em;
-	margin-top: -15px;
-	color: red;
-	font-weight: bold;
-}

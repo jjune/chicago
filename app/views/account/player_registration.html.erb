@@ -1,5 +1,5 @@
-<%= error_messages_for :user %>
 <div id="wrapper" class="quick-sign-up">        
+
 	<div id="cap-top" class="container"></div>
 	<div id="header" class="container">
 		<div class="inner">
@@ -27,9 +27,36 @@
 
 							<tbody>
 							     <tr><td colspan="2" class="heading"><h2>Create Your Player Account</h2></td></tr>
-							     <tr><td class="var"><label>Login</label></td><td><%= f.text_field :login, :class => "textbox340" %> </td></tr>
-							     <tr><td class="var"><label>Email</label></td><td><%= f.text_field :email, :class => "textbox340" %></td></tr>
-							     <tr><td class="var"><label>Password</label></td><td><%= f.password_field :password, :class => "textbox340" %></td></tr>
+							     <tr><td class="var"><label>Login</label></td><td><%= f.text_field :login, :class => "textbox340" %></td>
+							         <td class="register-error-message">
+							           <% if @user.errors[:login] %>
+							             <% if @user.errors[:login][0] == 104 %>
+							               Login not available - please choose a different login.
+							              <% else %>
+							                Login <%= @user.errors[:login][0] %>
+							              <% end %>
+							           <% end %>     
+							         </td>
+							     </tr>
+							     <tr>
+							         <td class="var"><label>Email</label></td><td><%= f.text_field :email, :class => "textbox340" %></td>
+							         <td class="register-error-message">
+                       		<% if @user.errors[:email] %>
+                     				Email Address <%= @user.errors[:email][0] %>
+                     				<% end %>
+                     		</td>							         
+							     </tr>
+							     <tr><td class="var"><label>Password</label></td><td><%= f.password_field :password, :class => "textbox340" %></td>
+							      <td class="register-error-message">
+                    		 <% if @user.errors[:password] %>
+							             <% if @user.errors[:password][0] == 100 %>
+                             Passwords do not match.  Please verify and retype.  
+							              <% else %>
+							                Login <%= @user.errors[:password][0] %>
+							              <% end %>
+							           <% end %>
+                  		</td>
+							     </tr>
 							     <tr><td class="var"><label>Confirm Password</label></td><td><%= f.password_field :password_confirmation, :class => "textbox340" %></td></tr>			
 			        </tbody>
 		          </table>
@@ -47,7 +74,7 @@
  			        </tbody>
  		          </table>
 <%= observe_field ("shortcode",
-                  :frequency => 5.0, 
+                  :frequency => 3.0, 
                   :update =>  "shortcode_device",
                   :with => "shortcode",
                   :url => {:action => "check_shortcode"})
@@ -59,7 +86,7 @@
  							<tbody>
  							     <tr><td colspan="2" class="heading"><h2>Review, accept terms &amp; Complete Signup</h2></td></tr>
  							     <tr><td class="agreement">Please review our Terms of Service and <a href="#">Player Agreement</a>.</td></tr>
- 							     <tr><td class="agreement"><span class="highlight"><input type="checkbox">I have reviewed and agree to all conditions outlined in the User Agreement.</span></td></tr>
+ 							     <tr><td class="agreement"><span class="highlight"><%= check_box('terms_of_service', 'terms_of_service') %>I have reviewed and agree to all conditions outlined in the User Agreement.</span></td></tr>
  			        </tbody>
  		          </table>
  		          <hr>

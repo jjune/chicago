@@ -34,12 +34,22 @@ class AccountController < ApplicationController
     end
   end
   
+  def create
+  end
+  
   def process_player_registration
     @user = User.new(params[:user])
     @user.type = 'player'
-    @user.save!
-    flash[:notice] = "User account " + @user.login + " successfully created."
-    redirect_to (:action => 'login')
+    
+    if @user.save
+      flash[:notice] = "User account #{@user.login} successfully created."
+      redirect_to(:action => 'login')
+    else
+      @action_class = 'register'
+      @title = "New Player Registration"
+      render :action => 'player_registration'
+    end
+     
   end
   
   def process_sponsor_registration
@@ -47,12 +57,20 @@ class AccountController < ApplicationController
     @user.type = 'sponsor'
     @user.save!
     flash[:notice] = "User account " + @user.login + " successfully created."
-    redirect_to (:action => 'login')
+    redirect_to(:action => 'login')
+  end
+  
+  def player_registration
+    @action_class = 'register'
+    @title = "New Player Registration"
+    @user = Player.new(params[:user])
   end
   
   def check_shortcode
     if params[:shortcode] == "123"
        @shortcode_device = "yes"
+    elsif params[:shortcode] == ""
+       @shortcode_device = "empty"
     else
        @shortcode_device = "no"
     end
@@ -88,18 +106,7 @@ class AccountController < ApplicationController
       render :action => 'sponsor_registration'    
   end
   
-  def player_registration
-      @action_class = 'register'
-      @title = "New Player Registration"
-      @user = Player.new(params[:user])
-      return unless request.post?
-      @user.save!
-      self.current_user = @user
-      redirect_back_or_default(:controller => '/account', :action => 'index')
-      flash[:notice] = "Thanks for signing up!"
-    rescue ActiveRecord::RecordInvalid
-      render :action => 'player_registration'
-  end
+
   
   
   def logout
