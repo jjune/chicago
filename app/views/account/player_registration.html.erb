@@ -65,14 +65,18 @@
 
 
  							     <tr><td colspan="2" class="heading"><h2>Enter Your Shortcode (Optional)</h2></td></tr>
- 							     <tr valign="top"><td class="var"><label>Shortcode</label></td><td><%= text_field_tag :shortcode, '', :class => "textbox340" %></td></tr>
+ 							     <tr valign="top"><td class="var"><label>Shortcode</label></td><td><%= text_field_tag :shortcode, '', :class => "textbox340" %>
+ 							     <%= image_tag '/images/loader.gif', :id=>'spinner', :style=>"display:none" %>
+ 							     </td></tr>
  							     <tr><td></td><td class="register-error-message" valign="top"><div id="shortcode_device"></div></td></tr>
  							     </tr>
 
  		          </table>
 <%= observe_field ("shortcode",
-                  :frequency => 4.0, 
+                  :frequency => 3.0, 
                   :update =>  "shortcode_device",
+                  :before => "Element.show('spinner')",
+                  :complete => "Element.hide('spinner')",
                   :with => "shortcode",
                   :url => {:action => "check_shortcode"})
 
