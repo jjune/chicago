@@ -1,6 +1,7 @@
 /* @override 
 	http://localhost:3000/stylesheets/register.css?1221801485
 	http://localhost:3000/stylesheets/register.css?1222057161
+	http://localhost:3000/stylesheets/register.css?1222071916
 */
 
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
@@ -625,8 +626,19 @@ td.agreement { width: 100px; padding: 0 9px 0 0; text-align: left; color: #888; 
 	font-size: 0.85em;
 }
 div#shortcode-device {
+	
+	padding-top: -10px;
 	text-align: left;
 	width: 400;
-	font-size: 0.85em;
+	font-size: 1.00em;
+	text-decoration: none;
 	color: #4c4c4c;
-	}
+	position: static;
+}
+.notification-message {
+	
+	color: #7ed566;
+	position: static;
+	float: none;
+	display: block;
+}

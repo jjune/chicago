@@ -61,27 +61,24 @@
 			        </tbody>
 		          </table>
 		          <hr>
-							<table class="default" border="0">
+							<table class="default" border="0" valign="top">
 
- 							<tbody>
+
  							     <tr><td colspan="2" class="heading"><h2>Enter Your Shortcode (Optional)</h2></td></tr>
- 							     <tr><td class="var"><label>Shortcode</label></td><td><%= text_field_tag :shortcode, '', :class => "textbox340" %></td>
- 							         <td class="shortcode_validation"></td>
+ 							     <tr valign="top"><td class="var"><label>Shortcode</label></td><td><%= text_field_tag :shortcode, '', :class => "textbox340" %></td></tr>
+ 							     <tr><td></td><td class="register-error-message" valign="top"><div id="shortcode_device"></div></td></tr>
  							     </tr>
- 							     <tr><td></div></td>
- 							     <td><div id="shortcode_device"></td>
- 							     </tr>
- 			        </tbody>
+
  		          </table>
 <%= observe_field ("shortcode",
-                  :frequency => 3.0, 
+                  :frequency => 4.0, 
                   :update =>  "shortcode_device",
                   :with => "shortcode",
                   :url => {:action => "check_shortcode"})
 
                   %>
  		          
- 		          <table class="default" border="0" width="500">
+ 		          <table border="2" width="500">
               <hr>
  							<tbody>
  							     <tr><td colspan="2" class="heading"><h2>Review, accept terms &amp; Complete Signup</h2></td></tr>
