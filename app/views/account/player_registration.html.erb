@@ -52,7 +52,7 @@
 							             <% if @user.errors[:password][0] == 100 %>
                              Passwords do not match.  Please verify and retype.  
 							              <% else %>
-							                Login <%= @user.errors[:password][0] %>
+							                Password <%= @user.errors[:password][0] %>
 							              <% end %>
 							           <% end %>
                   		</td>
