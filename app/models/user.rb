@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
 
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
-  #validates_presence_of     :password_confirmation,      :if => :password_required?
   validates_length_of       :password, :within => 4..40, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
   validates_length_of       :login,    :within => 3..40
@@ -13,6 +12,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :case_sensitive => false
   before_save :encrypt_password
   validates_acceptance_of :terms_of_service
+  
+  #Validates against contact information only for sponsor registration
+  validates_presence_of      :first_name, :last_name, :address1, :city, :state, :zipcode, :country, :phone_number,  :if => :sponsor_registration?
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
@@ -65,5 +67,9 @@ class User < ActiveRecord::Base
     
     def password_required?
       crypted_password.blank? || !password.blank?
+    end
+    
+    def sponsor_registration?
+      true
     end
 end
