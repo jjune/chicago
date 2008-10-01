@@ -220,8 +220,8 @@ class WhereController < ApplicationController
       @googlebaseurl = "http://maps.google.com/staticmap?"
       @googlecoord = @lat + "," + @lng
       @googlemapsize = @device.screenwidth + "x128"
-      @googleimageurl = @googlebaseurl + "center=" + @googlecenter + "&zoom=14&size=" + @googlemapsize + "&maptype=mobile&markers=" + @googlecenter + ",blue&format=png&key=" + @googleapikey
-      
+      @googleimageurl = @googlebaseurl + "center=" + @googlecoord + "&zoom=14&size=" + @googlemapsize + "&maptype=mobile&markers=" + @googlecoord + ",blue&format=png&key=" + @googleapikey
+      #@googleimageurl = @googlebaseurl & "center=" + @googlecenter 
       
       
       
