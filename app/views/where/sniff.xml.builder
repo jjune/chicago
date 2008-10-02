@@ -21,13 +21,8 @@ xml.text! "function doTriggerSetup() {"
 xml.text! "addTrigger('menu', doShowPopup());"
 xml.text! "}"
 
-xml.text! "function doSnoop() {"
-xml.text! "              var formObj = document.snoop;"
-xml.text! "              formObj.submit();"
-xml.text! "}"
-
-xml.text! "function doSniff() {"
-xml.text! "              var formObj = document.sniff;"
+xml.text! "function doSSLHome() {"
+xml.text! "              var formObj = document.sslhome;"
 xml.text! "              formObj.submit();"
 xml.text! "}"
 
@@ -56,8 +51,7 @@ xml.text! "}"
 
 end #script
 
-xml.form(:id=>"snoop", :action=>"http://chicago.supersecretlabs.com/where/snoop", :method=>"GET")
-xml.form(:id=>"sniff", :action=>"http://chicago.supersecretlabs.com/where/sniff", :method=>"GET")
+xml.form(:id=>"sslhome", :action=>"http://chicago.supersecretlabs.com/where/widget", :method=>"GET")
 xml.form(:id=>"aboutssl", :action=>"http://chicago.supersecretlabs.com/where/aboutus", :method=>"GET")
 
 xml.body(:bg=>"0xFFFFFF", :fontSize=>@textsize, :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
@@ -76,17 +70,17 @@ xml.pr do
 xml.list(:id=>"popList", :border=>"0", :fg=>"0xFFFFFF", :fgfocus=>"0xCF5719", :bgfocusimg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/over_bg_menu.png", :bg=>"0x000000") do
 
 
-xml.listitem(:onSelect=>"doSnoop();doHidePopup();") do
+xml.listitem(:onSelect=>"doSSLHome();doHidePopup();") do
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
-xml.text "Snoop for Loot"
+xml.text "Back to Supersecret Labs"
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 
 xml.selected do
 xml.listitem do
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
-xml.text "Snoop for Loot"
+xml.text "Back to Supersecret Labs"
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 end #listitem
 end #selected
@@ -130,30 +124,13 @@ end #pr
 end #pop
 
 xml.pr do
-xml.text("Our satellites see you here:", :align=>"center", :valign=>"center") 
-end #pr
-
-xml.pr do
-xml.img(:src=>@googleimageurl, :align=>"center", :valign=>"center", :bg=>"0xFFFFFF")	
+xml.text("Snoop Response", :align=>"center", :valign=>"center") 
 end #pr
 
 
 xml.pr do
-xml.text("Are you near the money?", :align=>"center", :valign=>"center") 
+xml.text(@playermsg, :align=>"center", :valign=>"center") 
 end #pr
-
-xml.pr do
-xml.input(:type=>"button", :value=>"Snoop for Loot", :onSelect=>"doSnoop();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0x009900")
-end #pr
-
-xml.pr do
-xml.text("Or do you know the code word?", :align=>"center", :valign=>"center") 
-end #pr
-
-xml.pr do
-xml.input(:type=>"button", :value=>"Sniff", :onSelect=>"doSniff();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0x009900")
-end #pr
-
 
 
 if @device.carrier.include? "Blackberry" then
@@ -170,7 +147,7 @@ xml.footer(:bgImg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth
 else
 xml.footer do
 xml.img(:id=>"rightCmd", :src=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/widget.png", :onSelect=>"doShowPopup();", :bgfocusimg=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/widget_selected.png")
-xml.img(:id=>"leftCmd", :src=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/back.png", :onSelect=>"home();")
+xml.img(:id=>"leftCmd", :src=>"http://www.where.com/images/dd/mobile/"+ @device.screenwidth + "/back.png", :onSelect=>"back();")
 end #footer
 end
 
