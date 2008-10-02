@@ -221,6 +221,8 @@ class WhereController < ApplicationController
       @googlecoord = @lat + "," + @lng
       @googlemapsize = @device.screenwidth + "x128"
       @googleimageurl = @googlebaseurl + "center=" + @googlecoord + "&zoom=14&size=" + @googlemapsize + "&maptype=mobile&markers=" + @googlecoord + ",blue&format=png&key=" + @googleapikey
+      @googleimageurl = @googleimageurl.to_sym
+      #"http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14&size=176x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q
       #@googleimageurl = @googlebaseurl & "center=" + @googlecenter 
       
       
