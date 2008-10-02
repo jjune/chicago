@@ -34,9 +34,6 @@ class AccountController < ApplicationController
     end
   end
   
-  def create
-  end
-  
   def process_player_registration
     @user = User.new(params[:user])
     @user.type = 'player'
@@ -55,9 +52,15 @@ class AccountController < ApplicationController
   def process_sponsor_registration
     @user = User.new(params[:user])
     @user.type = 'sponsor'
-    @user.save!
-    flash[:notice] = "User account " + @user.login + " successfully created."
-    redirect_to(:action => 'login')
+
+    if @user.save
+      flash[:notice] = "User account #{@user.login} successfully created."
+      redirect_to(:action => 'login')
+    else
+      @action_class = 'register'
+      @title = "New Sponsor Registration"
+      render :action => 'sponsor_registration'
+    end
   end
   
   def player_registration

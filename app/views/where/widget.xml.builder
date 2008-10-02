@@ -128,7 +128,7 @@ xml.text("Our satellites see you here:", :align=>"center", :valign=>"center")
 end #pr
 
 xml.pr do
-xml.img(:src=>: @googleimageurl, :align=>"center", :valign=>"center", :bg=>"0xFFFFFF")	
+xml.img(:src=>@googleimageurl, :align=>"center", :valign=>"center", :bg=>"0xFFFFFF")	
 end #pr
 
 
