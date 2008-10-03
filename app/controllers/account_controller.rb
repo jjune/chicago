@@ -36,7 +36,7 @@ class AccountController < ApplicationController
   
   def process_player_registration
     @user = User.new(params[:user])
-    @user.type = 'player'
+    @user.type = 'Player'
     
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
