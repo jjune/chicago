@@ -51,7 +51,7 @@ class AccountController < ApplicationController
   
   def process_sponsor_registration
     @user = User.new(params[:user])
-    @user.type = 'sponsor'
+    @user.type = 'Sponsor'
 
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
