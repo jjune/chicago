@@ -93,12 +93,18 @@ class WhereController < ApplicationController
       @textsize = "medium"
     end
   
-  
-  #prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
-  
+  #Cheat code validation check
+  if params[:cheatcode].nil? then
+    #Friendly error msg
+    @cheathint = "You cannot cheat with this code."
+  else
+    prizewithcheat = Prize.find(params[:cheatcode])
+    @cheathint = prizewithcheat.cheathint
+  end
+    
       #Builder code formats cheat code response
       respond_to do |format|
-        format.xml  {render :xml => @device, :action => "sniff.xml.builder", :layout => false }
+        format.xml  {render :xml => @cheathint, :action => "sniff.xml.builder", :layout => false }
       end #respond to
   
   end

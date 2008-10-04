@@ -124,12 +124,11 @@ end #pr
 end #pop
 
 xml.pr do
-xml.text("Snoop Response", :align=>"center", :valign=>"center") 
+xml.text("You Sniffed and Received the following:", :align=>"center", :valign=>"center") 
 end #pr
 
-
 xml.pr do
-xml.text(@playermsg, :align=>"center", :valign=>"center") 
+xml.text(@cheathint, :align=>"center", :valign=>"center") 
 end #pr
 
 

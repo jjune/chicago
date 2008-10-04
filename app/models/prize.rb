@@ -1,7 +1,9 @@
 class Prize < ActiveRecord::Base
 	has_many :query_transactions
 	belongs_to :sponsor
-		
+	
+	#validates_uniqueness_of :cheatcode #need to supress error message here or allow non-unique via query
+	
 	def self.find_all_exact_by_georuby_point(point)
 		return find_all_exact_by_lng_lat(point.lng,point.lat)
 	end
