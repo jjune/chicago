@@ -124,13 +124,24 @@ end #pr
 end #pop
 
 xml.pr do
-xml.text("Snoop Response", :align=>"center", :valign=>"center") 
+xml.text("&br;", :align=>"center", :valign=>"center") 
 end #pr
+
+
+xml.pr do
+xml.text(@headline, :align=>"center", :valign=>"center") 
+end #pr
+
 
 
 xml.pr do
 xml.text(@playermsg, :align=>"center", :valign=>"center") 
 end #pr
+
+xml.pr do
+xml.text(@standardclaimmsg, :align=>"center", :valign=>"center") 
+end #pr
+
 
 
 if @device.carrier.include? "Blackberry" then

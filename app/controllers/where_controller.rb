@@ -125,8 +125,6 @@ class WhereController < ApplicationController
   @lat = params[:lat]
   end
   
-  prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
-  
   #Device Checks
     @device = Device.find_by_deviceid(params[:deviceid])
    	if @device.nil? then
@@ -161,26 +159,40 @@ class WhereController < ApplicationController
    else
      @textsize = "medium"
    end
+
+   #Prize Checks 
+   prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
  
-   #Prize Checks
-   if not prize.nil? then
-	  
-	  #We have a winner
-	  
-	  @playermsg = "Congrats"
-	  
-	  #tell them what they won
-	  #Tell them how to claim it
-	  
-	  
-	  
+   if not prize.nil? then #We have a winner
+	  @headline = "You found " + prize.name #tell them they won
+	  @playermsg = prize.winnermsg #tell them what they won
+
+    #Tell them how to claim it
+    if prize.prizetype == "Message" 
+      @standardclaimmsg = ""
+    elsif prize.prizetype == "Money"
+      @standardclaimmsg = "Login to the Player Dashboard and give us your PayPal email to claim."
+      #register too
+    elsif prize.prizetype == "Coupon"
+      @standardclaimmsg = "Show this coupon from your phone. If you close this screen, your coupon disappears."
+    elsif prize.prizetype == "Picture"
+      @standardclaimmsg = ""
+    elsif prize.prizetype == "File"
+      @standardclaimmsg = "Login to the Player Dashboard to claim the File."
+    elsif prize.prizetype == "Gold"
+      @standardclaimmsg = "Login to the Player Dashboard and track your Gold."
+    else 
+      @standardclaimmsg = ""
+    end 
+
 	  else
 	    
 	    #Are there hints? - Done by searching area
 	    #Is there broadcast news? 
 	    #What about cheat code processing?
-	    
+	    @headline = "Sorry"
 	    @playermsg = "Not even close"
+	    @standardclaimmsg = "move around and try again."
 	    
 	  end #prize check
   
