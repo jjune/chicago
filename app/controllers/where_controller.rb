@@ -189,7 +189,7 @@ class WhereController < ApplicationController
 	    
 	    #Are there hints? - Done by searching area
 	    #Is there broadcast news? 
-	    #What about cheat code processing?
+	  
 	    @headline = "Sorry"
 	    @playermsg = "Not even close"
 	    @standardclaimmsg = "move around and try again."

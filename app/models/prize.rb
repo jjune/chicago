@@ -32,6 +32,12 @@ class Prize < ActiveRecord::Base
 		end
 	end
 	
+	#1. return count of active prizes within a specified radius from users' point
+	#2. nearest neighbor to users point
+	#3. return count of CLAIMED prizes within a specified radius from users' point
+	
+	#4. limit to 1 cheatcode
+	
 	protected
 	
 	def self.base_query(lng,lat)
