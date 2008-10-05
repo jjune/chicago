@@ -124,7 +124,7 @@ end #pr
 end #pop
 
 xml.pr do
-xml.text("&br;", :align=>"center", :valign=>"center") 
+xml.text(:"&br;", :align=>"center", :valign=>"center") 
 end #pr
 
 
