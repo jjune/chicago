@@ -157,6 +157,9 @@ xml.pr do
 xml.img(:src=>@googleimageurl, :align=>"center", :valign=>"center", :bg=>"0xFFFFFF")	
 end #pr
 
+xml.pr do
+xml.text(:"&br;", :align=>"center", :valign=>"center") 
+end #pr
 
 xml.pr do
 xml.text("Are you near the money?", :align=>"center", :valign=>"center") 
@@ -165,6 +168,11 @@ end #pr
 xml.pr do
 xml.input(:type=>"button", :value=>"Snoop for Loot", :onSelect=>"doSnoop();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0x009900")
 end #pr
+
+xml.pr do
+xml.text(:"&br;", :align=>"center", :valign=>"center") 
+end #pr
+
 
 xml.pr do
 xml.text("Or do you know the code word?", :align=>"center", :valign=>"center") 

@@ -2,7 +2,7 @@ class Prize < ActiveRecord::Base
 	has_many :query_transactions
 	belongs_to :sponsor
 	
-	validates_presence_of :name, :prizetype, :prizearea, :center, :winnermsg, :quantity, :sponsor_id
+	validates_presence_of :name, :prizetype, :prizearea, :center, :winnermsg, :quantity   #, :sponsor_id This evidently is not populated
 	
 	#validates_uniqueness_of :cheatcode #need to supress error message here or allow non-unique via query
 	
