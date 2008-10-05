@@ -159,7 +159,7 @@ end #pr
 
 xml.pr do
 xml.text(:align=>"center", :valign=>"center") do
-xml.text! "&br;"
+xml.text! :"&br;"
 end #text 
 end #pr
 
@@ -173,7 +173,7 @@ end #pr
 
 xml.pr do
 xml.text(:align=>"center", :valign=>"center") do
-xml.text! "&br;"
+xml.text! :"&br;"
 end #text 
 end #pr
 
