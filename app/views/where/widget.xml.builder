@@ -158,7 +158,9 @@ xml.img(:src=>@googleimageurl, :align=>"center", :valign=>"center", :bg=>"0xFFFF
 end #pr
 
 xml.pr do
-xml.text(:"&br;", :align=>"center", :valign=>"center") 
+xml.text(:align=>"center", :valign=>"center") do
+xml.text! "&br;"
+end #text 
 end #pr
 
 xml.pr do
@@ -170,7 +172,9 @@ xml.input(:type=>"button", :value=>"Snoop for Loot", :onSelect=>"doSnoop();", :a
 end #pr
 
 xml.pr do
-xml.text(:"&br;", :align=>"center", :valign=>"center") 
+xml.text(:align=>"center", :valign=>"center") do
+xml.text! "&br;"
+end #text 
 end #pr
 
 
