@@ -144,7 +144,8 @@ end
         format.xml  { render :xml => @prize.errors, :status => :unprocessable_entity }
       end
     end
-  end
+    
+  end 
 
   # DELETE /prizes/1
   # DELETE /prizes/1.xml
@@ -157,4 +158,124 @@ end
       format.xml  { head :ok }
     end
   end
-end
+
+  
+  #Added BG ActiveMerchant
+  
+  PRODUCTS = { 
+  
+  'Message' => { 
+    :price => 2.00, :description => 'SuperSecret Labs Message Item' 
+    }, 
+  
+  'Money' => { 
+    :price => 5.00, :description => 'SuperSecret Labs Money Item' 
+    }, 
+
+  'Coupon' => { 
+    :price => 1.00, :description => 'SuperSecret Labs Coupon Item' 
+    }, 
+
+  'Picture' => { 
+    :price => 4.00, :description => 'SuperSecret Labs Picture Item' 
+    }, 
+
+  'File' => { 
+    :price => 10.00, :description => 'SuperSecret Labs File Item' 
+    }, 
+
+  'Gold' => { 
+    :price => 1.00, :description => 'SuperSecret Labs Gold Item' 
+    }, 
+    
+  } 
+  
+  
+  def express_checkout 
+    product = params[:order][:product] 
+    
+    #like to add token confirmation so we know they use web page to create (no hacking!)
+    
+    #This needs to change
+    #We want to enforce Status Change on successful completion
+    order = Order.create( 
+      :state => 'open', 
+      :product => product, 
+      :amount => PRODUCTS[product][:price] 
+      ) 
+  
+      @response = gateway.setup_purchase( 
+        amount_in_cents(order.amount), 
+        :ip => request.remote_ip, 
+        :description => PRODUCTS[order.product][:description], 
+        :return_url => url_for(:action => :express_checkout_complete), 
+        :cancel_return_url => url_for(:action => :cancel_checkout) 
+        ) 
+  
+  if !@response.success? 
+    paypal_error(@response) 
+  else
+    paypal_token = @response.params['token'] 
+    order.update_attributes( 
+      :paypal_token => paypal_token, 
+      :state => 'purchase_setup' 
+      ) 
+    paypal_url = gateway.redirect_url_for(paypal_token) 
+    redirect_to "#{paypal_url}&useraction=commit" 
+  end #!@response.success?
+  
+  end #express_checkout 
+  
+  #called on return from PayPal
+  def express_checkout_complete 
+    paypal_token = params[:token] 
+    @order = Order.find_by_paypal_token(paypal_token) 
+    @details = gateway.details_for(paypal_token) 
+  
+    if !@details.success?
+      paypal_error(@details) 
+    else 
+      logger.info "Customer name: #{@details.params['name']}" 
+      logger.info "Customer e-mail: #{@details.params['payer']}" 
+      @response = gateway.purchase( 
+        amount_in_cents(@order.amount), 
+        :token => @details.params['token'], 
+        :payer_id => @details.params['payer_id'] 
+        )
+         
+      if !@response.success? 
+        paypal_error(@response) 
+      else 
+        @order.update_attribute(:state, 'closed') 
+        @purchase = Purchase.create( 
+          :amount => @response.params['gross_amount'], 
+          :order => @order 
+          ) 
+      end #!@response.success? 
+    end #!@details.success?
+  end #express_checkout_complete
+    
+  def cancel_checkout 
+    @order= Order.find_by_paypal_token(params[:token]) 
+    @order.update_attribute(:state,'cancelled') 
+  end 
+  
+  
+  private 
+
+    def gateway 
+      @gateway ||= ActiveMerchant::Billing::PaypalExpressGateway.new(PAYPAL_API_CREDENTIALS) 
+    end 
+   
+    def paypal_error(response) 
+      render :text => response.message 
+    end 
+
+    def amount_in_cents(amount) 
+      (amount.round(2) 
+      * 100).to_i 
+    end 
+  #end #private IS THIS NECESSARY?
+
+
+end #controller
