@@ -116,8 +116,21 @@ end
 					  :prizetype => params[:prize][:prizetype],
           	:prizeamt => params[:prize][:prizeamt],
           	:cheatcode => params[:prize][:cheatcode],
-          	:winnermsg => params[:prize][:winnermsg]
+          	:winnermsg => params[:prize][:winnermsg],
+          	:quantity => params[:prize][:quantity]
 					  )
+					  
+	#
+	#if !(params[:prize][:quantity].to_i >0)
+	#	quantity=1
+	#else
+	#	quantity = params[:prize][:quantity].to_i
+	#end
+	
+	#for num in (1..quantity)
+	#	@prize.prize_items << PrizeItem.new(:status=>"active")
+	#end
+	
     respond_to do |format|
       if @prize.save
         flash[:notice] = 'Prize was successfully created.'
@@ -127,6 +140,7 @@ end
         format.html { render :action => "new" }
         format.xml  { render :xml => @prize.errors, :status => :unprocessable_entity }
       end
+      
     end
   end
 
