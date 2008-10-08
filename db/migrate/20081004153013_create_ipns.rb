@@ -6,9 +6,9 @@ class CreateIpns < ActiveRecord::Migration
 
       t.column :payment_gross, :float
       t.column :mc_currency, :string
-      t.column :mc_gross, :number
-      t.column :mc_fee, :number
-      t.column :payment_fee, :number
+      t.column :mc_gross, :float
+      t.column :mc_fee, :float
+      t.column :payment_fee, :float
       t.column :receiver_email, :string
       t.column :receiver_id, :string
       t.column :payer_email, :string
@@ -30,9 +30,9 @@ class CreateIpns < ActiveRecord::Migration
       t.column :business, :string
       t.column :controller, :string
       t.column :payment_date, :datetime
-      t.column :test_ipn, :number
+      t.column :test_ipn, :float
       t.column :payment_type, :string
-      t.column :notify_version, :number
+      t.column :notify_version, :float
       t.column :charset, :string
       t.column :txn_id, :string
       t.column :txn_type, :string
