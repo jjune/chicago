@@ -1,6 +1,7 @@
 class SponsorController < ApplicationController
  
-   before_filter :login_required
+   #before_filter :login_required
+   layout 'dashboard'
   def index
      @header_above_partial_path = "global/hdr_above"
       @header_partial_path = "prizes/hdr_prizelab"

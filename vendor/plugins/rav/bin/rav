@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+# TODO:
+# * Add proper argument handling
+# * Don't duplicate the error handling from rav.rake
+
+$LOAD_PATH << "#{File.dirname(__FILE__)}/../lib"
+
+if ARGV.size == 2
+  RAILS_ROOT, output_filename = ARGV
+  
+  require "rav"
+  
+  rav = RailsApplicationVisualizer.new
+  
+  if rav.output(output_filename)
+    puts "Generated #{output_filename}."
+  else
+    rav.output "rav-debug.dot"
+    puts "Error! Please file a bug report with 'rav-debug.dot' attached."
+  end
+else
+  puts "Usage: #{$0} rails_root output_filename"
+end
