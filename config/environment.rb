@@ -56,4 +56,19 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
+  
+  # Initiating user observer for registration activation
+  config.active_record.observers = :user_observer 
 end
+
+# SMTP Settings for Action Mailer - Used for delivering activation and confirmation emails
+ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.smtp_settings = {
+  :address => "mail.supersecretlabs.com",
+  :port => 25,
+  :domain => "mail.supersecretlabs.com",
+  :user_name => "mailer@supersecretlabs.com",
+  :password => "secret",
+  :authentication => :login
+}
+

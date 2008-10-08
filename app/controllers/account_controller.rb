@@ -40,6 +40,7 @@ class AccountController < ApplicationController
     
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
+      @user.activate
       redirect_to(:action => 'login')
     else
       @action_class = 'register'

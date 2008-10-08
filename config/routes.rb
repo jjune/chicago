@@ -12,7 +12,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'register', :controller => 'account', :action => 'player_registration'
   map.connect 'register/contact', :controller => 'account', :action => 'register_contact'
   map.connect 'login', :controller => 'account', :action => 'login'
+  map.connect '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.root :controller => 'account', :action => 'register_device'
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
 
