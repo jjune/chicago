@@ -40,6 +40,75 @@ class WhereController < ApplicationController
   
   end
   
+  def sniff
+  
+  #This exclusively checks cheat codes
+  @xml = Builder::XmlMarkup.new
+
+   #Emulator Guard
+   if params[:lng].nil? then
+   @lng = "-84.49008"
+   else
+   @lng = params[:lng]
+   end
+
+   if params[:lat].nil? then
+   @lat = "33.84275"
+   else
+   @lat = params[:lat]
+   end 
+  
+   #Device Checks
+     @device = Device.find_by_deviceid(params[:deviceid])
+    	if @device.nil? then
+    		@device = Device.new()
+    		@device.deviceid = params[:deviceid]
+    		@device.device = params[:device]
+    		@device.carrier = params[:carrier]
+    		@device.screenwidth = params[:screenwidth] 
+    		@device.save!
+
+    		#need to retrieve device short code and present to user - whether they win or not
+
+    	else
+    		@player = @device.player
+
+    		#Also need shortcode here possibly
+
+    	end
+
+    #test for Emulator
+    if @device.screenwidth.nil? then
+      @device.screenwidth = "240"
+    end
+
+    if @device.carrier.nil? then
+    @device.carrier = "Emulator"
+    end
+
+    #WHERE required to get the correct generic graphics
+    if @device.screenwidth = "176" then
+      @textsize = "small"
+    else
+      @textsize = "medium"
+    end
+  
+  #Cheat code validation check
+  if params[:cheatcode].nil? then
+    #Friendly error msg
+    @cheathint = "You cannot cheat with this code."
+  else
+    prizewithcheat = Prize.find(params[:cheatcode])
+    @cheathint = prizewithcheat.cheathint
+  end
+    
+      #Builder code formats cheat code response
+      respond_to do |format|
+        format.xml  {render :xml => @cheathint, :action => "sniff.xml.builder", :layout => false }
+      end #respond to
+  
+  end
+  
   def snoop
   @xml = Builder::XmlMarkup.new
   
@@ -55,8 +124,6 @@ class WhereController < ApplicationController
   else
   @lat = params[:lat]
   end
-  
-  prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
   
   #Device Checks
     @device = Device.find_by_deviceid(params[:deviceid])
@@ -92,26 +159,40 @@ class WhereController < ApplicationController
    else
      @textsize = "medium"
    end
+
+   #Prize Checks 
+   prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
  
-   #Prize Checks
-   if not prize.nil? then
-	  
-	  #We have a winner
-	  
-	  @playermsg = "Congrats"
-	  
-	  #tell them what they won
-	  #Tell them how to claim it
-	  
-	  
-	  
+   if not prize.nil? then #We have a winner
+	  @headline = "You found " + prize.name #tell them they won
+	  @playermsg = prize.winnermsg #tell them what they won
+
+    #Tell them how to claim it
+    if prize.prizetype == "Message" 
+      @standardclaimmsg = ""
+    elsif prize.prizetype == "Money"
+      @standardclaimmsg = "Login to the Player Dashboard and give us your PayPal email to claim."
+      #register too
+    elsif prize.prizetype == "Coupon"
+      @standardclaimmsg = "Show this coupon from your phone. If you close this screen, your coupon disappears."
+    elsif prize.prizetype == "Picture"
+      @standardclaimmsg = ""
+    elsif prize.prizetype == "File"
+      @standardclaimmsg = "Login to the Player Dashboard to claim the File."
+    elsif prize.prizetype == "Gold"
+      @standardclaimmsg = "Login to the Player Dashboard and track your Gold."
+    else 
+      @standardclaimmsg = ""
+    end 
+
 	  else
 	    
 	    #Are there hints? - Done by searching area
 	    #Is there broadcast news? 
-	    #What about cheat code processing?
-	    
+	  
+	    @headline = "Sorry"
 	    @playermsg = "Not even close"
+	    @standardclaimmsg = "move around and try again."
 	    
 	  end #prize check
   
@@ -220,8 +301,10 @@ class WhereController < ApplicationController
       @googlebaseurl = "http://maps.google.com/staticmap?"
       @googlecoord = @lat + "," + @lng
       @googlemapsize = @device.screenwidth + "x128"
-      @googleimageurl = @googlebaseurl + "center=" + @googlecenter + "&zoom=14&size=" + @googlemapsize + "&maptype=mobile&markers=" + @googlecenter + ",blue&format=png&key=" + @googleapikey
-      
+      @googleimageurl = @googlebaseurl + "center=" + @googlecoord + "&zoom=14&size=" + @googlemapsize + "&maptype=mobile&markers=" + @googlecoord + ",blue&format=png&key=" + @googleapikey
+      @googleimageurl = @googleimageurl.to_sym
+      #"http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14&size=176x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q
+      #@googleimageurl = @googlebaseurl & "center=" + @googlecenter 
       
       
       

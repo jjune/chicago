@@ -16,3 +16,15 @@ config.action_view.cache_template_extensions         = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+#added by BG for ActiveMerchant
+config.after_initialize do 
+  ActiveMerchant::Billing::Base.mode = :test #need to change for prod env
+  ActiveMerchant::Billing::Base.gateway_mode = :test #need to change for prod env
+end 
+
+PAYPAL_API_CREDENTIALS = { 
+:login => 'Your PayPal API login.', 
+:password => 'Your PayPal API password.', 
+:signature => 'Your PayPal API signature.' 
+} 

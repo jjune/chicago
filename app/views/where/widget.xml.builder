@@ -26,6 +26,12 @@ xml.text! "              var formObj = document.snoop;"
 xml.text! "              formObj.submit();"
 xml.text! "}"
 
+xml.text! "function doSniff(cheatcode) {"
+xml.text! "              var formObj = document.sniff;"
+xml.text! "              formObj.cheatcode.value = cheatcode;"
+xml.text! "              formObj.submit();"
+xml.text! "}"
+
 xml.text! "function doAbout() {"
 xml.text! "              var formObj = document.aboutssl;"
 xml.text! "              formObj.submit();"
@@ -52,6 +58,10 @@ xml.text! "}"
 end #script
 
 xml.form(:id=>"snoop", :action=>"http://chicago.supersecretlabs.com/where/snoop", :method=>"GET")
+xml.form(:id=>"sniff", :action=>"http://chicago.supersecretlabs.com/where/sniff", :method=>"GET") do
+xml.input(:type=>"hidden", :id=>"cheatcode", :value=>"")
+end
+
 xml.form(:id=>"aboutssl", :action=>"http://chicago.supersecretlabs.com/where/aboutus", :method=>"GET")
 
 xml.body(:bg=>"0xFFFFFF", :fontSize=>@textsize, :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
@@ -85,6 +95,22 @@ xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
 end #listitem
 end #selected
 end #listitem 
+
+xml.listitem(:onSelect=>"doSniff(document.cheatcode.value);doHidePopup();") do
+xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
+xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
+xml.text "Sniff for Hints"
+xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
+
+xml.selected do
+xml.listitem do
+xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
+xml.img(:src=>"http://www.where.com/images/dd/mobile/sm_widget.png")
+xml.text "Sniff for Hints"
+xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
+end #listitem
+end #selected
+end #listitem
 
 xml.listitem(:onSelect=>"doAbout();doHidePopup();") do
 xml.img(:src=>"http://www.where.com/images/dd/mobile/spacer.png")
@@ -128,9 +154,14 @@ xml.text("Our satellites see you here:", :align=>"center", :valign=>"center")
 end #pr
 
 xml.pr do
-xml.img(:src=>: @googleimageurl, :align=>"center", :valign=>"center", :bg=>"0xFFFFFF")	
+xml.img(:src=>@googleimageurl, :align=>"center", :valign=>"center", :bg=>"0xFFFFFF")	
 end #pr
 
+xml.pr do
+xml.text(:align=>"center", :valign=>"center") do
+xml.text! :"&br;"
+end #text 
+end #pr
 
 xml.pr do
 xml.text("Are you near the money?", :align=>"center", :valign=>"center") 
@@ -139,6 +170,27 @@ end #pr
 xml.pr do
 xml.input(:type=>"button", :value=>"Snoop for Loot", :onSelect=>"doSnoop();", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0x009900")
 end #pr
+
+xml.pr do
+xml.text(:align=>"center", :valign=>"center") do
+xml.text! :"&br;"
+end #text 
+end #pr
+
+
+xml.pr do
+xml.text("Or do you know the code word?", :align=>"center", :valign=>"center") 
+end #pr
+
+xml.pr do
+xml.input(:type=>"text", :id=>"cheatcode", :bgfocus=>"0xFFFF00")
+end #pr
+
+xml.pr do
+xml.input(:type=>"button", :value=>"Sniff for Hints", :onSelect=>"doSniff(document.cheatcode.value);", :align=>"center", :valign=>"center", :fgfocus=>"0xFFFFFF", :bgfocus=>"0x009900")
+end #pr
+
+
 
 if @device.carrier.include? "Blackberry" then
 

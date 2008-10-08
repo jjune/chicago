@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '300b2091d4a6076d28b0273f3282a6c7'
+  
+  #added by BG - ActiveMerchant
+  filter_parameter_logging :creditcard 
+  
 end
