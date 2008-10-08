@@ -3,7 +3,7 @@ class CreateIpns < ActiveRecord::Migration
     create_table :ipns do |t|
 
       #check number or dat_time data types and integer
-
+      t.column :brad, :string
       t.column :payment_gross, :float
       t.column :mc_currency, :string
       t.column :mc_gross, :float
