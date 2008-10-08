@@ -1,5 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :users
+
+  map.resource :session
+
+  map.resources :users
+  map.resource :session
   map.resources :prizes
   map.connect '/', :controller => 'account', :action => 'login'
   map.connect 'register/sponsor', :controller => 'account', :action => 'sponsor_registration'
