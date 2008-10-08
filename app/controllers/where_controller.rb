@@ -274,12 +274,6 @@ class WhereController < ApplicationController
     #prizes.each do |prize|
   	#@polygon = GPolygon.from_georuby(prize.prizearea,'#0000FF','5','1','#0000FF','0.2')
     
-    @qt = QueryTransaction.new()
-    @qt.coordinate = current_point
-    @qt.player = @player unless @player.nil?
-    @qt.device = @device
-    #Todo add prize here if they win
-    @qt.save!
     
     
   		 

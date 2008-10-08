@@ -17,8 +17,23 @@
     }
  function MarkerMoved()
  {
+  var querytype;
+  for (i=0;i<document.querytype.queryoption.length;i++)
+  {
+	if (document.querytype.queryoption[i].checked==true)
+	{
+		querytype = document.querytype.queryoption[i].value;
+	}
+  }
   
- <%=remote_function(:url => {:action => 'find', :controller => 'query_prize'}, :with => "'lat='+marker.getLatLng().lat()+'&'+'lng='+marker.getLatLng().lng()") %>
+  if (querytype =='find')
+  {
+ 	<%=remote_function(:url => {:action => 'find', :controller => 'query_prize'}, :with => "'lat='+marker.getLatLng().lat()+'&'+'lng='+marker.getLatLng().lng()") %>
+  }
+  else if (querytype =='nearest')
+  {
+  	<%=remote_function(:url => {:action => 'nearest', :controller => 'query_prize'}, :with => "'lat='+marker.getLatLng().lat()+'&'+'lng='+marker.getLatLng().lng()") %>
+  }	
 
  }
  </script>
@@ -32,6 +47,10 @@
     <div id="map_div" ></div>
     <div id="notice" style="display:none;color:red;text-align:center;font-weight:bold;"></div>
   </div>
+  <form name="querytype">
+  <input type="radio" name="queryoption" value="find">Query Prize
+	<input type="radio" name="queryoption" value="nearest" checked>Query Nearest Neighbor
+  </form>
   </body>
 
 </html>
