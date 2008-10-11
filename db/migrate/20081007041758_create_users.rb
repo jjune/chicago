@@ -13,9 +13,6 @@ class CreateUsers < ActiveRecord::Migration
       t.column :activated_at, :datetime
       t.column :type, :string
 
-      # attributes for type=sponsor        
-      t.column :company_name,       :string
-
       t.column :first_name, :string
       t.column :last_name, :string
       t.column :address1, :string
