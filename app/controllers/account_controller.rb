@@ -34,6 +34,12 @@ class AccountController < ApplicationController
     end
   end
   
+  def registration_confirmation
+    @action_class = 'register'
+    @title = "Registration Complete"
+  end
+  
+  
   def process_player_registration
     @user = User.new(params[:user])
     @user.type = 'Player'
@@ -41,7 +47,13 @@ class AccountController < ApplicationController
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
       @user.activate
-      redirect_to(:action => 'login')
+      
+      @action_class = 'register'
+      @title = "Registration Complete"
+      @confirmation_message = "player_confirmation"
+      render :controller => 'account', :action => 'registration_confirmation', :collection => @user
+
+      
     else
       @action_class = 'register'
       @title = "New Player Registration"
@@ -56,7 +68,12 @@ class AccountController < ApplicationController
 
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
-      redirect_to(:action => 'login')
+      
+      @action_class = 'register'
+      @title = "Registration Complete"
+      @confirmation_message = "sponsor_confirmation"
+      render :controller => 'account', :action => 'registration_confirmation', :collection => @user
+        
     else
       @action_class = 'register'
       @title = "New Sponsor Registration"
