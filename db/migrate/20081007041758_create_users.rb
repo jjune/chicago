@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration
   def self.up
-    create_table "users", :force => true do |t|
+    create_table :users do |t|
       t.column :login,                     :string
       t.column :email,                     :string
       t.column :crypted_password,          :string, :limit => 40
@@ -14,22 +14,21 @@ class CreateUsers < ActiveRecord::Migration
       t.column :type, :string
 
       # attributes for type=sponsor        
-      t.column :company_name,       :string
-
-      t.column :first_name, :string
-      t.column :last_name, :string
-      t.column :address1, :string
-      t.column :address2, :string
-      t.column :city,     :string
+      t.column :first_name, :string, :limit => 20
+      t.column :last_name, :string, :limit => 20
+      t.column :address1, :string, :limit => 50
+      t.column :address2, :string, :limit => 50
+      t.column :city,     :string,  :limit => 20
       t.column :state,    :string
       t.column :zipcode,  :string
       t.column :country, :string
       t.column :phone_number, :string
+      t.column :terms_agreement, :string
 
     end
   end
 
   def self.down
-    drop_table "users"
+    drop_table :users
   end
 end

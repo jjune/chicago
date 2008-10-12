@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-
-  
-
+  # Be sure to include AuthenticationSystem in Application Controller instead
+  include AuthenticatedSystem
+  layout 'account'
   # render new.rhtml
   def new
   end
@@ -27,9 +27,12 @@ class UsersController < ApplicationController
     self.current_user = params[:activation_code].blank? ? false : User.find_by_activation_code(params[:activation_code])
     if logged_in? && !current_user.active?
       current_user.activate
+      @user = current_user
+      @action_class = 'register'
+      @title = "Sponsor Account Activation Complete"
       flash[:notice] = "Signup complete!"
     end
-    redirect_back_or_default('/')
+    #redirect_back_or_default('/')
   end
 
 end
