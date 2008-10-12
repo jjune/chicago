@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
   
   def activation(user)
     setup_email(user)
-    @from        = "Supersecret Administrator"
+    @from        =  %("SuperSecret Administrator" <mailer@supersecretabs.com>)
     @subject     = 'Supersecret Account Registration - Your account has been activated!'
     @body[:url]  = "http://chicago.supersecretlabs.com/"
   end

@@ -21,7 +21,7 @@ class AccountController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       #redirect_back_or_default(:controller => '/account', :action => 'index')
-      if self.current_user.user_type == 'Player'
+      if self.current_user.account_type == 'Player'
         redirect_to(:controller => 'player')
       else
         redirect_to(:controller => 'prizes')
@@ -42,7 +42,7 @@ class AccountController < ApplicationController
   
   def process_player_registration
     @user = User.new(params[:user])
-    @user.type = 'Player'
+    @user.account_type = 'Player'
     
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
@@ -64,7 +64,7 @@ class AccountController < ApplicationController
   
   def process_sponsor_registration
     @user = User.new(params[:user])
-    @user.type = 'Sponsor'
+    @user.account_type = 'Sponsor'
 
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
