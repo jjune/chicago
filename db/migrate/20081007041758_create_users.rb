@@ -24,7 +24,6 @@ class CreateUsers < ActiveRecord::Migration
       t.column :country, :string
       t.column :phone_number, :string
       t.column :terms_agreement, :string
-
     end
   end
 
