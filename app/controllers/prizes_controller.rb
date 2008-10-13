@@ -287,9 +287,8 @@ end
     end 
 
     def amount_in_cents(amount) 
-      (amount.round(2) 
-      * 100).to_i 
-    end 
+      (amount.round(2) * 100).to_i 
+    end
   #end #private IS THIS NECESSARY?
 
 
