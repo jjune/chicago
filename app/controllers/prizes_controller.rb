@@ -274,9 +274,7 @@ end
         paypal_error(@response) 
       else 
         @order.update_attribute(:paypal_state, 'closed') 
-        @purchase = Purchase.create( 
-          :paypal_amount => @response.params['gross_amount'], 
-          ) 
+        @purchase = Purchase.create(:paypal_amount => @response.params['gross_amount']) 
       end #!@response.success? 
     end #!@details.success?
   end #express_checkout_complete
