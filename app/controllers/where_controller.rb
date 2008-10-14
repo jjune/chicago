@@ -161,7 +161,8 @@ class WhereController < ApplicationController
    end
 
    #Prize Checks 
-   prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
+   prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat,@device)
+   #prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
  
    if not prize.nil? then #We have a winner
 	  @headline = "You found " + prize.name #tell them they won
@@ -190,10 +191,20 @@ class WhereController < ApplicationController
 	    #Are there hints? - Done by searching area
 	    #Is there broadcast news? 
 	  
-	    @headline = "Sorry"
-	    @playermsg = "Not even close"
-	    @standardclaimmsg = "move around and try again."
-	    
+	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,1000,@device)
+
+      	if not nearest_prizes.nil? then
+    	    @headline = "You are getting warm"
+    	    @playermsg = "There are " + "1" + " unclaimed prizes around."
+    	    @standardclaimmsg = "move around and try again."
+        
+    	  else
+    	    @headline = "Sorry"
+    	    @playermsg = "Not even close"
+    	    @standardclaimmsg = "move around and try again."
+          
+    	  end
+      	  
 	  end #prize check
   
     
