@@ -2,7 +2,8 @@ class PrizesController < ApplicationController
   # GET /prizes
   # GET /prizes.xml
 
-  layout 'dashboard'
+  #layout 'dashboard'
+  
   def index
     @header_above_partial_path = "global/hdr_above"
     @header_partial_path = "prizes/hdr_prizelab"
@@ -176,6 +177,7 @@ end
 
   
   #Added BG ActiveMerchant
+  #Obviously should be dropped into a table - but for release 1 - NO!
   
   PRODUCTS = { 
   
@@ -207,22 +209,27 @@ end
   
   
   def express_checkout 
+    
     product = params[:order][:product] 
     
     #like to add token confirmation so we know they use web page to create (no hacking!)
     
     #This needs to change
     #We want to enforce Status Change on successful completion
-    order = Order.create( 
-      :state => 'open', 
-      :product => product, 
-      :amount => PRODUCTS[product][:price] 
-      ) 
+    #order = Order.create( 
+     # :state => 'open', 
+      #:product => product, 
+      #:amount => PRODUCTS[product][:price] 
+      #) 
+  
+  prize = Prize.find(params[:id])
+  
+  prizecost = PRODUCTS[prize.prizetype][:price]
   
       @response = gateway.setup_purchase( 
-        amount_in_cents(order.amount), 
+        amount_in_cents(prizecost), 
         :ip => request.remote_ip, 
-        :description => PRODUCTS[order.product][:description], 
+        :description => PRODUCTS[prize.prizetype][:description], 
         :return_url => url_for(:action => :express_checkout_complete), 
         :cancel_return_url => url_for(:action => :cancel_checkout) 
         ) 
