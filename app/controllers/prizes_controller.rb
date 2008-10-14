@@ -226,37 +226,42 @@ end
   
   prizecost = PRODUCTS[prize.prizetype][:price]
   
-      @response = gateway.setup_purchase( 
-        amount_in_cents(prizecost), 
-        :ip => request.remote_ip, 
-        :description => PRODUCTS[prize.prizetype][:description], 
-        :return_url => url_for(:action => :express_checkout_complete), 
-        :cancel_return_url => url_for(:action => :cancel_checkout) 
-        ) 
+        @response = gateway.setup_purchase( 
+          amount_in_cents(prizecost), 
+          :ip => request.remote_ip, 
+          :description => PRODUCTS[prize.prizetype][:description], 
+          :return_url => url_for(:action => :express_checkout_complete), 
+          :cancel_return_url => url_for(:action => :cancel_checkout) 
+          ) 
   
-  if !@response.success? 
-    paypal_error(@response) 
-  else
-    paypal_token = @response.params['token'] 
-    order.update_attributes( 
-      :paypal_token => paypal_token, 
-      :state => 'purchase_setup' 
-      ) 
-    paypal_url = gateway.redirect_url_for(paypal_token) 
-    redirect_to "#{paypal_url}&useraction=commit" 
-  end #!@response.success?
+        if !@response.success? 
+          paypal_error(@response) 
+        else
+          paypal_token = @response.params['token'] 
+          #Is this custom below?
+          order.update_attributes( 
+            :paypal_token => paypal_token, 
+            :paypal_state => 'purchase_setup' 
+            ) 
+      
+          paypal_url = gateway.redirect_url_for(paypal_token) 
+          redirect_to "#{paypal_url}&useraction=commit" 
   
+        end #!@response.success?
   end #express_checkout 
+  
   
   #called on return from PayPal
   def express_checkout_complete 
+    
     paypal_token = params[:token] 
-    @order = Order.find_by_paypal_token(paypal_token) 
+    @order = Prize.find_by_paypal_token(paypal_token) 
     @details = gateway.details_for(paypal_token) 
   
     if !@details.success?
       paypal_error(@details) 
     else 
+      
       logger.info "Customer name: #{@details.params['name']}" 
       logger.info "Customer e-mail: #{@details.params['payer']}" 
       @response = gateway.purchase( 
@@ -268,10 +273,9 @@ end
       if !@response.success? 
         paypal_error(@response) 
       else 
-        @order.update_attribute(:state, 'closed') 
+        @order.update_attribute(:paypal_state, 'closed') 
         @purchase = Purchase.create( 
-          :amount => @response.params['gross_amount'], 
-          :order => @order 
+          :paypal_amount => @response.params['gross_amount'], 
           ) 
       end #!@response.success? 
     end #!@details.success?
@@ -279,7 +283,7 @@ end
     
   def cancel_checkout 
     @order= Order.find_by_paypal_token(params[:token]) 
-    @order.update_attribute(:state,'cancelled') 
+    @order.update_attribute(:paypal_state,'cancelled') 
   end 
   
   
