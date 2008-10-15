@@ -69,13 +69,13 @@ class WhereController < ApplicationController
     #Cheat code validation check
     if params[:cheatcode].nil? then
       #Friendly error msg
-      @cheathint = "You cannot cheat with this code."
+      @cheathint = "You cannot spoof the system. Please backup and provide a valid code. Your phone may self destruct if you attempt this again."
     else
       prizewithcheat = Prize.find_by_cheatcode(params[:cheatcode])
       if not prizewithcheat.nil? then
         @cheathint = prizewithcheat.cheathint
       else
-        @cheathint = "No cheating"
+        @cheathint = "Your source for the code cannot be trusted. Your cover may be compromised. Please return to the beginning and forget this ever happened."
         end
     end
     
