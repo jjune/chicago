@@ -127,7 +127,7 @@ class Prize < ActiveRecord::Base
 	def self.log_query(prize,device,lng,lat)
 		qt = QueryTransaction.new()
     	qt.coordinate = Point.from_lon_lat(lng,lat,4326)
-    	qt.player = device.player unless device.player.nil?
+    	qt.player = device.player if device.player
     	qt.device = device
     	qt.prize = prize unless prize.nil?
     	qt.save!

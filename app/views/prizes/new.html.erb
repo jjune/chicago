@@ -6,7 +6,7 @@
 	-->
 		<!--supersecretlabs-->
 	
-	<%= GMap.header(:host => ENV["HOST"]) %>
+	<%=GMap.header(:host=>request.host)%>
 	<script>
 	    var map = null;
 	 	var geocoder = null;
