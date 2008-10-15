@@ -63,7 +63,8 @@ class Prize < ActiveRecord::Base
 	end
 	
 	def self.find_nearest_prizes(lng,lat,distance)
-		query=base_nearest_query(lng,lat,distance)		
+		query=base_nearest_query(lng,lat,distance)
+		query<< "AND quantity>0 "		
 		nearest_prizes = Prize.find_by_sql(query)
 		
 		if nearest_prizes.length>0
@@ -76,6 +77,7 @@ class Prize < ActiveRecord::Base
 	def self.find_nearest_prizes_by_device_not_won(lng,lat,distance,device)
 		query=base_nearest_query(lng,lat,distance)
 		query<<one_prize_per_device(device)
+		query<< "AND quantity>0 "
 		nearest_prizes = Prize.find_by_sql(query)
 		
 		if nearest_prizes.length>0
