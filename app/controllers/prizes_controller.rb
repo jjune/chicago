@@ -1,18 +1,18 @@
 class PrizesController < ApplicationController
   # GET /prizes
   # GET /prizes.xml
-
-  #layout 'dashboard'
-  
+  layout 'application'
+  layout 'dashboard', :only => :new
   def index
-    @header_above_partial_path = "global/hdr_above"
-    @header_partial_path = "prizes/hdr_prizelab"
-    @header_below_partial_path = "global/hdr_below"
-    @hdr_below_title = "Dashboard"
     
-    @footer_above_partial_path = "global/ftr_above"
+    #@header_above_partial_path = "global/hdr_above"
+    #@header_partial_path = "prizes/hdr_prizelab"
+    #@header_below_partial_path = "global/hdr_below"
+    #@hdr_below_title = "Dashboard"
+    
+    #@footer_above_partial_path = "global/ftr_above"
     #@footer_partial_path = "prizes/hdr_prizelab"
-    @footer_below_partial_path = "global/ftr_below"
+    #@footer_below_partial_path = "global/ftr_below"
     #@ftr_below_title = "Dashboard"
     
     
@@ -52,16 +52,7 @@ end
   # GET /prizes/new
   # GET /prizes/new.xml
   def new
-    @header_above_partial_path = "global/hdr_above"
-    @header_partial_path = "prizes/hdr_prizelab"
-    @header_below_partial_path = "global/hdr_below"
-    @hdr_below_title = "Create a Prize"
-    
-    @footer_above_partial_path = "global/ftr_above"
-    #@footer_partial_path = "prizes/hdr_prizelab"
-    @footer_below_partial_path = "global/ftr_below"
-    #@ftr_below_title = "Dashboard"
-    
+    @bodyscript = '<body onload="initialize()" onunload="GUnload()">'
     @prize = Prize.new
 
     respond_to do |format|

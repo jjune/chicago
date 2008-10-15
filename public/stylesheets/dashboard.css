@@ -174,23 +174,12 @@ div#nav ul ul ul li:hover ul
 	text-decoration:none;
 }
 
-#container #container2 #MainRight
-{
-	float: left;
-	min-height: 400px;
-	width: 395px;
-	padding-bottom: 5px;
-	vertical-align:top;
-	margin: 0px;
-	padding: 0px 0px 0px 60px;
-
-}
 
 #container #container2 #MainRight
 {
 	float: right;
-	width: 290px;
-	margin: 10px 25px 0px 0px;
+	width: 300px;
+	margin: 10px 10px 0px 0px;
 	padding:0px;
 }
 #container #container2 #MainLeft
@@ -228,25 +217,56 @@ div#nav ul ul ul li:hover ul
 	background-position:top;
 	background-repeat:repeat-x;
 	border:#2d2d2d solid 1px;
-	width: 230px;
+	width: 250px;
 	float:right;
 	margin-bottom:20px;
 	padding: 40px 10px 30px 20px;
+	margin-right: -7px;
 }
 .webform_label 
 {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
 	font-size: 0.8em;
-	margin-left: 2px;
+	padding-left: 3px;
+	line-height: 0.5em;
 }
 
 .webform_field
 {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
 	font-size: 0.9em;
-	margin-bottom: 13px;
+	margin-bottom: 15px;
 }
 #map_canvas 
 {
-	display:block; float:left; width: 100%; height: 800px;
+	display:block; 
+	float:left; 
+	width: 100%; 
+	height: 800px;
 	margin-top: 25px;
 	margin-left: 3px;
+	border:#2d2d2d solid 1px;
 }
+
+/*-------------------------------Forms ----------------------------------*/
+
+
+
+fieldset {
+	margin-bottom: 10px;
+}
+label {
+	font-size: 110%;
+	line-height: 1.75em;
+	color: #000;
+	padding: 0;
+	margin: 0;
+}
+
+.search_form {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 1.0em;
+	line-height: 1.3em;
+	
+}
+

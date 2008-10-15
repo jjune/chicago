@@ -4,7 +4,7 @@
    <h1 id="pagetitle">Create New Prize</h1>
       <div id="MainLeft">
          <form action="#" onsubmit="showAddress(this.address.value); return false">
-         <input type="text" size="50" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />
+         <input class="search_form" type="text" size="45" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />
          <input type="submit" value="Go!" />
 		 <div id="map_canvas" style="width: 585px; height: 400px"></div>
          </form>
@@ -18,13 +18,12 @@
 			<%= hidden_field_tag 'center_lng' %>
 			<table>
 			<tbody>
-
 			<tr><td class="webform_label">Prize Name</td></tr>
-			<tr><td><%= f.text_field :name, :class=>'webform_field', :size => 20 %></td></tr>
+			<tr><td><%= f.text_field :name, :class=>'webform_field', :size => 25 %></td></tr>
 
 			<tr><td class="webform_label">Prize Type</td></tr>
 			<tr><td class="webform_label">
-			<%= f.select(:prizetype, %w{Message Money}, :class =>'webform_field') %>
+			<%= f.select(:prizetype, %w{Message Money}, {:class =>'webform_field'}) %>
 			</td></tr>
 			
 			<tr><td class="webform_label">Prize Value</td></tr>
@@ -37,7 +36,7 @@
 			<tr><td><%= f.text_field :cheatcode, :class=>'webform_field', :size => 20 %></td></tr>
 			
 			<tr><td class="webform_label">Winner's Message</td></tr>
-			<tr><td><%= f.text_area :winnermsg, :cols => 27, :rows => 3 %></td></tr>
+			<tr><td><%= f.text_area :winnermsg, :cols => 17, :rows => 3 %></td></tr>
 			</tbody>
 			</table>
 		  <p>    
