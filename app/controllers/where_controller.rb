@@ -23,10 +23,10 @@ class WhereController < ApplicationController
      end
   end
   
+  #--------------------------------------Cheat Hint Lookup------------------------------------
   def sniff
   
-  #This exclusively checks cheat codes
-  @xml = Builder::XmlMarkup.new
+    @xml = Builder::XmlMarkup.new
 
    #Emulator Guard
    if params[:lng].nil? then
@@ -42,17 +42,17 @@ class WhereController < ApplicationController
    end 
   
    #Device Checks
-     @device = Device.find_by_deviceid(params[:deviceid])
-    	if @device.nil? then
-    		@device = Device.new()
-    		@device.deviceid = params[:deviceid]
-    		@device.device = params[:device]
-    		@device.carrier = params[:carrier]
-    		@device.screenwidth = params[:screenwidth] 
-    		@device.save!
+    @device = Device.find_by_deviceid(params[:deviceid])
+    if @device.nil? then
+    	@device = Device.new()
+    	@device.deviceid = params[:deviceid]
+    	@device.device = params[:device]
+    	@device.carrier = params[:carrier]
+    	@device.screenwidth = params[:screenwidth] 
+    	@device.save!
 
     		#need to retrieve device short code and present to user - whether they win or not
-    	end
+    end
 
     #test for Emulator
     if @device.screenwidth.nil? then
@@ -70,22 +70,23 @@ class WhereController < ApplicationController
       @textsize = "medium"
     end
   
-  #Cheat code validation check
-  if params[:cheatcode].nil? then
-    #Friendly error msg
-    @cheathint = "You cannot cheat with this code."
-  else
-    prizewithcheat = Prize.find(params[:cheatcode])
-    @cheathint = prizewithcheat.cheathint
-  end
+    #Cheat code validation check
+    if params[:cheatcode].nil? then
+      #Friendly error msg
+      @cheathint = "You cannot cheat with this code."
+    else
+      prizewithcheat = Prize.find(params[:cheatcode])
+      @cheathint = prizewithcheat.cheathint
+    end
     
-      #Builder code formats cheat code response
-      respond_to do |format|
-        format.xml  {render :xml => @cheathint, :action => "sniff.xml.builder", :layout => false }
-      end #respond to
+    respond_to do |format|
+      format.xml  {render :xml => @cheathint, :action => "sniff.xml.builder", :layout => false }
+    end #respond to
   
   end
   
+  
+  #-----------------------Look for a Prize-----------------------------
   def snoop
     @xml = Builder::XmlMarkup.new
   
@@ -133,7 +134,6 @@ class WhereController < ApplicationController
 
    #Prize Checks 
    prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat,@device)
-   #prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
  
    if not prize.nil? then #We have a winner
      
@@ -191,7 +191,7 @@ class WhereController < ApplicationController
   end
   
   
-  
+  #--------------------------------Static About Page--------------------------------
   def aboutus
    @xml = Builder::XmlMarkup.new
    
@@ -306,16 +306,12 @@ class WhereController < ApplicationController
         end
 
   end
-  
-  
-  def debugwhere
-    #intentionally left blank
-  end
+
   
   def query
   
   	#@device = Device.find(:all, :conditions => ["deviceid = ?", params[:deviceid]])
-	@device = Device.find_by_deviceid(params[:deviceid])
+	  @device = Device.find_by_deviceid(params[:deviceid])
   	  	
   	if @device.nil?
   		@device = Device.new()

@@ -27,9 +27,9 @@ xml.text! "              formObj.submit();"
 xml.text! "}"
 
 xml.text! "function doSniff(cheatcode) {"
-xml.text! "              var formObj = document.sniff;"
-xml.text! "              formObj.cheatcode.value = cheatcode;"
-xml.text! "              formObj.submit();"
+#xml.text! "              var formObj = document.sniff;"
+xml.text! "              document.sniff.cheatcode.value = cheatcode;"
+xml.text! "              document.sniff.submit();"
 xml.text! "}"
 
 xml.text! "function doAbout() {"
@@ -59,7 +59,7 @@ end #script
 
 xml.form(:id=>"snoop", :action=>"http://chicago.supersecretlabs.com/where/snoop", :method=>"GET")
 xml.form(:id=>"sniff", :action=>"http://chicago.supersecretlabs.com/where/sniff", :method=>"GET") do
-xml.input(:type=>"hidden", :id=>"cheatcode", :value=>"")
+xml.input(:type=>"hidden", :value=>"", :id=>"cheatcode")
 end
 
 xml.form(:id=>"aboutssl", :action=>"http://chicago.supersecretlabs.com/where/aboutus", :method=>"GET")
