@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" <%= GMap::VML_NAMESPACE %> >
 <head>
   <title>Query Prizes</title>
-  <%= GMap.header %>
+  <%= GMap.header(:host=>request.host) %>
 <script>
  var map=null;
  var marker=null;
@@ -43,7 +43,7 @@
 </head>
 	
 <body onload="initialize()" onunload="GUnload()">
-  <div id="main">
+	<div id="main">
     <div id="map_div" ></div>
     <div id="notice" style="display:none;color:red;text-align:center;font-weight:bold;"></div>
   </div>

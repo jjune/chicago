@@ -1,43 +1,26 @@
 class WhereController < ApplicationController  
-  def show
-    
-    #validate query strings
+ 
+   #validate query strings
     #Need to make sure Emulators can't win
     #visibility based on carrier or phone type as well
-    
-     @prize = Prize.find(params[:id])
+    #This is the first form the device will see
+    # Need to determine if current player or not
+    #need to be a query start form
+    #Might want to show a map here with user's current position
+    #Big ass button that says - QUERY AWAY
+ 
+  @wherebr = "&br;"
+  @wherebr = @wherebr.to_sym
 
-      respond_to do |format|
-          #format.xml  { render :xml => @prize }    
-        format.jin  { render :jin => @prize }
-          #format.bwg  { render :xml => @prize }
-      end
-  
-    
-  end
-  
-  def welcomewidget
-  
-  #This is the first form the device will see
-  # Need to determine if current player or not
-  #need to be a query start form
-  #Might want to show a map here with user's current position
-  #Big ass button that says - QUERY AWAY
-  
-  respond_to do |format|
-    #format.xml  { render :xml => @prizes, :action => "gen_xml.xml.builder", :layout => false }
-  end
-  
-  end
-  
+  @wherenbsp = "&nbsp;"
+  @wherenbsp = @wherenbsp.to_sym
+ 
   def claims
      @xml = Builder::XmlMarkup.new
     
     respond_to do |format|
        format.xml  {render :action => "claims.rss.builder", :layout => false }
      end
-  
-  
   end
   
   def sniff
@@ -69,12 +52,6 @@ class WhereController < ApplicationController
     		@device.save!
 
     		#need to retrieve device short code and present to user - whether they win or not
-
-    	else
-    		@player = @device.player
-
-    		#Also need shortcode here possibly
-
     	end
 
     #test for Emulator
@@ -110,22 +87,22 @@ class WhereController < ApplicationController
   end
   
   def snoop
-  @xml = Builder::XmlMarkup.new
+    @xml = Builder::XmlMarkup.new
   
-  #Emulator Guard
-  if params[:lng].nil? then
-  @lng = "-84.49008"
-  else
-  @lng = params[:lng]
-  end
+    #Emulator Guard
+    if params[:lng].nil? then
+      @lng = "-84.49008"
+    else
+      @lng = params[:lng]
+    end
   
-  if params[:lat].nil? then
-  @lat = "33.84275"
-  else
-  @lat = params[:lat]
-  end
+    if params[:lat].nil? then
+      @lat = "33.84275"
+    else
+      @lat = params[:lat]
+    end
   
-  #Device Checks
+    #Device Checks
     @device = Device.find_by_deviceid(params[:deviceid])
    	if @device.nil? then
    		@device = Device.new()
@@ -135,13 +112,7 @@ class WhereController < ApplicationController
    		@device.screenwidth = params[:screenwidth] 
    		@device.save!
    		
-   		#need to retrieve device short code and present to user - whether they win or not
-   		
-   	else
-   		@player = @device.player
-   		
-   		#Also need shortcode here possibly
-   			
+   		#need to retrieve device short code and present to user - whether they win or not		
    	end
    
    #test for Emulator
@@ -161,9 +132,11 @@ class WhereController < ApplicationController
    end
 
    #Prize Checks 
-   prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
+   prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat,@device)
+   #prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
  
    if not prize.nil? then #We have a winner
+     
 	  @headline = "You found " + prize.name #tell them they won
 	  @playermsg = prize.winnermsg #tell them what they won
 
@@ -190,10 +163,23 @@ class WhereController < ApplicationController
 	    #Are there hints? - Done by searching area
 	    #Is there broadcast news? 
 	  
-	    @headline = "Sorry"
-	    @playermsg = "Not even close"
-	    @standardclaimmsg = "move around and try again."
-	    
+	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,1000,@device)
+
+      	if not nearest_prizes.nil? then
+      	  
+      	  npcount = nearest_prizes.length
+      	  
+    	    @headline = "You are getting warm"
+    	    @playermsg = "There are " + npcount.to_s + " unclaimed prizes around."
+    	    @standardclaimmsg = "move around and try again."
+        
+    	  else
+    	    @headline = "Sorry"
+    	    @playermsg = "Not even close"
+    	    @standardclaimmsg = "move around and try again."
+          
+    	  end
+      	  
 	  end #prize check
   
     
@@ -220,8 +206,6 @@ class WhereController < ApplicationController
      		@device.carrier = params[:carrier]
      		@device.screenwidth = params[:screenwidth] 
      		@device.save!
-     	else
-     		@player = @device.player	
      	end
      
      #test for Emulator
@@ -274,8 +258,6 @@ class WhereController < ApplicationController
       		@device.carrier = params[:carrier]
       		@device.screenwidth = params[:screenwidth] 
       		@device.save!
-      	else
-      		@player = @device.player	
       	end
       
       #test for Emulator
@@ -342,8 +324,6 @@ class WhereController < ApplicationController
   		@device.carrier = params[:carrier]
   		@device.screenwidth = params[:screenwidth] 
   		@device.save!
-  	else
-  		@player = @device.player	
   	end
   		
   	current_point = Point.from_lon_lat(params[:lng],params[:lat],4326)
