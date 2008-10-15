@@ -1,14 +1,10 @@
 class WhereController < ApplicationController  
  
-   #validate query strings
+    #validate query strings
     #Need to make sure Emulators can't win
     #visibility based on carrier or phone type as well
-    #This is the first form the device will see
-    # Need to determine if current player or not
-    #need to be a query start form
-    #Might want to show a map here with user's current position
-    #Big ass button that says - QUERY AWAY
- 
+    #Need to determine if current player or not
+    
   @wherebr = "&br;"
   @wherebr = @wherebr.to_sym
 
@@ -75,7 +71,7 @@ class WhereController < ApplicationController
       #Friendly error msg
       @cheathint = "You cannot cheat with this code."
     else
-      prizewithcheat = Prize.find(params[:cheatcode])
+      prizewithcheat = Prize.find_by_cheatcode(params[:cheatcode])
       if not prizewithcheat.nil? then
         @cheathint = prizewithcheat.cheathint
       else
@@ -173,9 +169,9 @@ class WhereController < ApplicationController
       	  
       	  npcount = nearest_prizes.length
       	  
-    	    @headline = "You are getting warm"
-    	    @playermsg = "There are " + npcount.to_s + " unclaimed prizes around."
-    	    @standardclaimmsg = "move around and try again."
+    	    @headline = "You are getting warm."
+    	    @playermsg = "In the area " + npcount.to_s + " prizes are unclaimed."
+    	    @standardclaimmsg = "Move around a bit and try again."
         
     	  else
     	    @headline = "Sorry"
