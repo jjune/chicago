@@ -163,20 +163,24 @@ class WhereController < ApplicationController
 	    #Are there hints? - Done by searching area
 	    #Is there broadcast news? 
 	  
-	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,1000,@device)
+	      #Randomize distance used in NN
+	      @querydistance = rand(1500)
+	  
+	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,@querydistance,@device)
 
       	if not nearest_prizes.nil? then
       	  
       	  npcount = nearest_prizes.length
       	  
-    	    @headline = "You are getting warm."
-    	    @playermsg = "In the area " + npcount.to_s + " prizes are unclaimed."
+    	    @headline = "You are near a secret object. Make sure there are only trusted people around you."
+    	    @playermsg = "In the area " + npcount.to_s + " objects are unclaimed."
     	    @standardclaimmsg = "Move around a bit and try again."
         
     	  else
-    	    @headline = "Sorry"
-    	    @playermsg = "Not even close"
-    	    @standardclaimmsg = "move around and try again."
+    	    
+    	    @headline = "Where are you?"
+    	    @playermsg = "We cannot discern clearly that you are near a secret object"
+    	    @standardclaimmsg = "Move around significantly and try again."
           
     	  end
       	  
