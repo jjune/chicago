@@ -1,50 +1,26 @@
 class WhereController < ApplicationController  
  
+   #validate query strings
+    #Need to make sure Emulators can't win
+    #visibility based on carrier or phone type as well
+    #This is the first form the device will see
+    # Need to determine if current player or not
+    #need to be a query start form
+    #Might want to show a map here with user's current position
+    #Big ass button that says - QUERY AWAY
+ 
   @wherebr = "&br;"
   @wherebr = @wherebr.to_sym
 
   @wherenbsp = "&nbsp;"
   @wherenbsp = @wherenbsp.to_sym
  
-  def show
-    
-    #validate query strings
-    #Need to make sure Emulators can't win
-    #visibility based on carrier or phone type as well
-    
-     @prize = Prize.find(params[:id])
-
-      respond_to do |format|
-          #format.xml  { render :xml => @prize }    
-        format.jin  { render :jin => @prize }
-          #format.bwg  { render :xml => @prize }
-      end
-  
-    
-  end
-  
-  def welcomewidget
-  
-  #This is the first form the device will see
-  # Need to determine if current player or not
-  #need to be a query start form
-  #Might want to show a map here with user's current position
-  #Big ass button that says - QUERY AWAY
-  
-  respond_to do |format|
-    #format.xml  { render :xml => @prizes, :action => "gen_xml.xml.builder", :layout => false }
-  end
-  
-  end
-  
   def claims
      @xml = Builder::XmlMarkup.new
     
     respond_to do |format|
        format.xml  {render :action => "claims.rss.builder", :layout => false }
      end
-  
-  
   end
   
   def sniff
@@ -76,12 +52,6 @@ class WhereController < ApplicationController
     		@device.save!
 
     		#need to retrieve device short code and present to user - whether they win or not
-
-    	else
-    		@player = @device.player
-
-    		#Also need shortcode here possibly
-
     	end
 
     #test for Emulator
@@ -117,22 +87,22 @@ class WhereController < ApplicationController
   end
   
   def snoop
-  @xml = Builder::XmlMarkup.new
+    @xml = Builder::XmlMarkup.new
   
-  #Emulator Guard
-  if params[:lng].nil? then
-  @lng = "-84.49008"
-  else
-  @lng = params[:lng]
-  end
+    #Emulator Guard
+    if params[:lng].nil? then
+      @lng = "-84.49008"
+    else
+      @lng = params[:lng]
+    end
   
-  if params[:lat].nil? then
-  @lat = "33.84275"
-  else
-  @lat = params[:lat]
-  end
+    if params[:lat].nil? then
+      @lat = "33.84275"
+    else
+      @lat = params[:lat]
+    end
   
-  #Device Checks
+    #Device Checks
     @device = Device.find_by_deviceid(params[:deviceid])
    	if @device.nil? then
    		@device = Device.new()
@@ -142,13 +112,7 @@ class WhereController < ApplicationController
    		@device.screenwidth = params[:screenwidth] 
    		@device.save!
    		
-   		#need to retrieve device short code and present to user - whether they win or not
-   		
-   	#else
-   		#@player = @device.player
-   		
-   		#Also need shortcode here possibly
-   			
+   		#need to retrieve device short code and present to user - whether they win or not		
    	end
    
    #test for Emulator
@@ -203,7 +167,7 @@ class WhereController < ApplicationController
 
       	if not nearest_prizes.nil? then
       	  
-      	  npcount = nearest_prizes.count
+      	  npcount = nearest_prizes.length
       	  
     	    @headline = "You are getting warm"
     	    @playermsg = "There are " + npcount.to_s + " unclaimed prizes around."
@@ -242,8 +206,6 @@ class WhereController < ApplicationController
      		@device.carrier = params[:carrier]
      		@device.screenwidth = params[:screenwidth] 
      		@device.save!
-     	else
-     		@player = @device.player	
      	end
      
      #test for Emulator
@@ -296,8 +258,6 @@ class WhereController < ApplicationController
       		@device.carrier = params[:carrier]
       		@device.screenwidth = params[:screenwidth] 
       		@device.save!
-      	else
-      		@player = @device.player	
       	end
       
       #test for Emulator
@@ -364,8 +324,6 @@ class WhereController < ApplicationController
   		@device.carrier = params[:carrier]
   		@device.screenwidth = params[:screenwidth] 
   		@device.save!
-  	else
-  		@player = @device.player	
   	end
   		
   	current_point = Point.from_lon_lat(params[:lng],params[:lat],4326)
