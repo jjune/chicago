@@ -5,8 +5,8 @@
 	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q" type="text/javascript"></script>
 	-->
 		<!--supersecretlabs-->
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhQMb9-AYg1-1wU8hN8xUDUGXNmNExRhmRt0bizUJvUB9RsfW6A55NZlzg" type="text/javascript"></script>
-
+	
+	<%= GMap.header(:host => ENV["HOST"]) %>
 	<script>
 	    var map = null;
 	 	var geocoder = null;
