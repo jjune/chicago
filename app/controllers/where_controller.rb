@@ -76,7 +76,11 @@ class WhereController < ApplicationController
       @cheathint = "You cannot cheat with this code."
     else
       prizewithcheat = Prize.find(params[:cheatcode])
-      @cheathint = prizewithcheat.cheathint
+      if not prizewithcheat.nil? then
+        @cheathint = prizewithcheat.cheathint
+      else
+        @cheathint = "No cheating"
+        end
     end
     
     respond_to do |format|
