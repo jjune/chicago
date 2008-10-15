@@ -202,8 +202,11 @@ class WhereController < ApplicationController
 	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,1000,@device)
 
       	if not nearest_prizes.nil? then
+      	  
+      	  npcount = nearest_prizes.count
+      	  
     	    @headline = "You are getting warm"
-    	    @playermsg = "There are " + nearest_prizes.count.to_s + " unclaimed prizes around."
+    	    @playermsg = "There are " + npcount.to_s + " unclaimed prizes around."
     	    @standardclaimmsg = "move around and try again."
         
     	  else
