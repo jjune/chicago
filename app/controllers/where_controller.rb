@@ -1,4 +1,11 @@
 class WhereController < ApplicationController  
+ 
+  @wherebr = "&br;"
+  @wherebr = @wherebr.to_sym
+
+  @wherenbsp = "&nbsp;"
+  @wherenbsp = @wherenbsp.to_sym
+ 
   def show
     
     #validate query strings
@@ -137,8 +144,8 @@ class WhereController < ApplicationController
    		
    		#need to retrieve device short code and present to user - whether they win or not
    		
-   	else
-   		@player = @device.player
+   	#else
+   		#@player = @device.player
    		
    		#Also need shortcode here possibly
    			
@@ -165,6 +172,7 @@ class WhereController < ApplicationController
    #prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
  
    if not prize.nil? then #We have a winner
+     
 	  @headline = "You found " + prize.name #tell them they won
 	  @playermsg = prize.winnermsg #tell them what they won
 
@@ -194,8 +202,11 @@ class WhereController < ApplicationController
 	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,1000,@device)
 
       	if not nearest_prizes.nil? then
+      	  
+      	  npcount = nearest_prizes.count
+      	  
     	    @headline = "You are getting warm"
-    	    @playermsg = "There are " + "1" + " unclaimed prizes around."
+    	    @playermsg = "There are " + npcount.to_s + " unclaimed prizes around."
     	    @standardclaimmsg = "move around and try again."
         
     	  else
