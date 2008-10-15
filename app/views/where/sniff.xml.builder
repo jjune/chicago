@@ -128,9 +128,7 @@ xml.text("You Sniffed and Received the following report:", :align=>"center", :va
 end #pr
 
 xml.pr do
-xml.text(:align=>"center", :valign=>"center") do
-@cheathint
-end #text
+xml.text(@cheathint, :align=>"center", :valign=>"center")
 end #pr
 
 
