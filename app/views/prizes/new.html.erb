@@ -1,141 +1,49 @@
-<% content_for :head do %>
-	<%= stylesheet_link_tag 'prizes' %>
-	<!--localhost-->
-	<!--
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q" type="text/javascript"></script>
-	-->
-		<!--supersecretlabs-->
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhQMb9-AYg1-1wU8hN8xUDUGXNmNExRhmRt0bizUJvUB9RsfW6A55NZlzg" type="text/javascript"></script>
-
-	<script>
-	    var map = null;
-	 	var geocoder = null;
-	 	var prizearea = null;
-
-		function whereami()
-	   {   
-	    alert(map.getBounds());
-	    alert(map.getCenter());  
-	   }
-
-	   function doStuffBeforeSubmit()
-	   {
-	   var arrTempPrizeArea=new Array();
-	   for (var x=0;x<prizearea.getVertexCount();x++){
-	   	var latlng = prizearea.getVertex(x);
-	 		arrTempPrizeArea.push(latlng.lat()+","+latlng.lng());
-			}
-
-			strTempGeo = arrTempPrizeArea.join(":")
-		 	document.getElementById("prize_prizearea").value = strTempGeo;
-		 	document.getElementById("center_lat").value = map.getCenter().lat();
-		 	document.getElementById("center_lng").value = map.getCenter().lng();
-	}
-	 function whereistheprizearea()
-	 {
-	 	//alert(prizearea.getBounds())
-	 	//alert(prizearea.getArea())
-	 	alert("vertex count:"+prizearea.getVertexCount())
-
-			prizearea.enableEditing()
 
 
-		}
+<div id="container2">
+   <h1 id="pagetitle">Create New Prize</h1>
+      <div id="MainLeft">
+         <form action="#" onsubmit="showAddress(this.address.value); return false">
+         <input type="text" size="50" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />
+         <input type="submit" value="Go!" />
+		 <div id="map_canvas" style="width: 585px; height: 400px"></div>
+         </form>
+      </div>
 
-	 function initialize() {
-	   if (GBrowserIsCompatible()) {
-	    map = new GMap2(document.getElementById("map_canvas"));
-	    map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-		map.addControl(new GLargeMapControl());
-		var mapControl = new GMapTypeControl();
-		map.addControl(mapControl);
+      <div id="MainRight">
+	   <div id="featureBOX">
+		<% form_for(@prize) do |f| %>
+			<%= f.hidden_field 'prizearea' %>
+			<%= hidden_field_tag 'center_lat' %>
+			<%= hidden_field_tag 'center_lng' %>
+			<table>
+			<tbody>
 
-		//map.enableContinuousZoom();
-	    //map.disableDragging();
-		//map.addControl(GSmallZoomControl());
-		//map.GMenuMapTypeControl(true);
-	    prizearea = new GPolygon(map.getCenter(),'#0000FF','5','1','#0000FF','0.2');
-	    map.addOverlay(prizearea);
-	    prizearea.enableDrawing();
-	    //GEvent.addListener(map, "moveend", function(){whereami(map);});
-	    geocoder = new GClientGeocoder();
+			<tr><td class="webform_label">Prize Name</td></tr>
+			<tr><td><%= f.text_field :name, :class=>'webform_field', :size => 20 %></td></tr>
 
-	   }
-	 }
+			<tr><td class="webform_label">Prize Type</td></tr>
+			<tr><td class="webform_label">
+			<%= f.select(:prizetype, %w{Message Money}, :class =>'webform_field') %>
+			</td></tr>
+			
+			<tr><td class="webform_label">Prize Value</td></tr>
+			<tr><td><%= f.text_field :prizeamt, :class=>'webform_field', :size => 7 %></td></tr>
 
-	 function showAddress(address) {
-	   if (geocoder) {
-	     geocoder.getLatLng(
-	       address,
-	       function(point) {
-	         if (!point) {
-	           alert(address + " not found");
-	         } else {
-	           map.setCenter(point, 13);
-	           var marker = new GMarker(point);
-	           map.addOverlay(marker);
-	           marker.openInfoWindowHtml(address);
-	            prizearea = new GPolygon(map.getCenter(),'#0000FF','5','1','#0000FF','0.2');
-	     map.addOverlay(prizearea);
-	     prizearea.enableDrawing(); 
-	         }
-	       }
-	     )
-	   }
-	 }
+			<tr><td class="webform_label">Prize Quantity</td></tr>
+			<tr><td><%= f.text_field :quantity, :class=>'webform_field', :size => 3 %></td></tr>
 
-	 </script>
-
-
-<% end %>
-
-<% content_for :body do %>
-	 <%=@bodyscript %> class="prizes"onload="initialize()" onunload="GUnload()"
-<% end %>
-
-
-<div id="panel1">
-
-<% form_for(@prize) do |f| %>
-	
-	<%= f.hidden_field 'prizearea' %>
-	<%= hidden_field_tag 'center_lat' %>
-	<%= hidden_field_tag 'center_lng' %>
-	<table>
-	<tbody>
-	<tr><td>Prize Label: </td><td><%= f.text_field :name %></td></tr>
-	<tr><td>Prize Type: </td><td>
-<%= f.radio_button "prizetype", "Message" %>Message
-<%= f.radio_button "prizetype", "Money" %>Money<br/>
-<%= f.radio_button "prizetype", "Coupon" %>Coupon
-<%= f.radio_button "prizetype", "Picture" %>Picture<br/>
-<%= f.radio_button "prizetype", "File" %>File
-<%= f.radio_button "prizetype", "Gold" %>Gold<br/>
-	</td></tr>
-	
-
-	<tr><td>Prize Value: </td><td><%= f.text_field :prizeamt %></td></tr>
-	<tr><td>Prize Quantity: </td><td><%= f.text_field :quantity %></td></tr>
-	<tr><td>Cheat Code: </td><td><%= f.text_field :cheatcode %></td></tr>
-	<tr><td>Winner's Message: </td><td><%= f.text_area :winnermsg, :cols => 30, :rows => 5 %></td></tr>
-	</tbody>
-	</table>
-
-  <p>    
-  		 <%= submit_tag "Commit to Award Prize", :onclick=> 'doStuffBeforeSubmit();' %>
-  </p>
-<% end %>
-
-</div>
-  
-  
-<div id="panel2">
-    <form action="#" onsubmit="showAddress(this.address.value); return false">
-      <p>
-        <input type="text" size="50" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />
-        <input type="submit" value="Go!" />
-      </p>
-      <div id="map_canvas" style="width: 400px; height: 300px"></div>
-    </form>
-<br/>
+			<tr><td class="webform_label">Cheat Code</td></tr>
+			<tr><td><%= f.text_field :cheatcode, :class=>'webform_field', :size => 20 %></td></tr>
+			
+			<tr><td class="webform_label">Winner's Message</td></tr>
+			<tr><td><%= f.text_area :winnermsg, :cols => 27, :rows => 3 %></td></tr>
+			</tbody>
+			</table>
+		  <p>    
+		  		 <%= submit_tag "Commit to Award Prize", :onclick=> 'doStuffBeforeSubmit();' %>
+		  </p>
+		<% end %>
+		</div>
+      </div>
 </div>
