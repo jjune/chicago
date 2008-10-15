@@ -124,11 +124,11 @@ end #pr
 end #pop
 
 xml.pr do
-xml.text("You Sniffed and Received the following:", :align=>"center", :valign=>"center") 
+xml.text("You Sniffed and Received the following report:", :align=>"center", :valign=>"center")
 end #pr
 
 xml.pr do
-xml.text(@cheathint, :align=>"center", :valign=>"center") 
+xml.text(@cheathint, :align=>"center", :valign=>"center")
 end #pr
 
 

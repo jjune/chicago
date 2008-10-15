@@ -1,14 +1,11 @@
 class WhereController < ApplicationController  
  
-   #validate query strings
+    #validate query strings
+    #WHERE UserAgent = [device]/[carrier]/[version]/Profile/MIDP-2.0 Configuration/CLDC-1.0
     #Need to make sure Emulators can't win
     #visibility based on carrier or phone type as well
-    #This is the first form the device will see
-    # Need to determine if current player or not
-    #need to be a query start form
-    #Might want to show a map here with user's current position
-    #Big ass button that says - QUERY AWAY
- 
+    #Need to determine if current player or not
+    
   @wherebr = "&br;"
   @wherebr = @wherebr.to_sym
 
@@ -23,10 +20,10 @@ class WhereController < ApplicationController
      end
   end
   
+  #--------------------------------------Cheat Hint Lookup------------------------------------
   def sniff
   
-  #This exclusively checks cheat codes
-  @xml = Builder::XmlMarkup.new
+    @xml = Builder::XmlMarkup.new
 
    #Emulator Guard
    if params[:lng].nil? then
@@ -42,17 +39,17 @@ class WhereController < ApplicationController
    end 
   
    #Device Checks
-     @device = Device.find_by_deviceid(params[:deviceid])
-    	if @device.nil? then
-    		@device = Device.new()
-    		@device.deviceid = params[:deviceid]
-    		@device.device = params[:device]
-    		@device.carrier = params[:carrier]
-    		@device.screenwidth = params[:screenwidth] 
-    		@device.save!
+    @device = Device.find_by_deviceid(params[:deviceid])
+    if @device.nil? then
+    	@device = Device.new()
+    	@device.deviceid = params[:deviceid]
+    	@device.device = params[:device]
+    	@device.carrier = params[:carrier]
+    	@device.screenwidth = params[:screenwidth] 
+    	@device.save!
 
     		#need to retrieve device short code and present to user - whether they win or not
-    	end
+    end
 
     #test for Emulator
     if @device.screenwidth.nil? then
@@ -70,22 +67,27 @@ class WhereController < ApplicationController
       @textsize = "medium"
     end
   
-  #Cheat code validation check
-  if params[:cheatcode].nil? then
-    #Friendly error msg
-    @cheathint = "You cannot cheat with this code."
-  else
-    prizewithcheat = Prize.find(params[:cheatcode])
-    @cheathint = prizewithcheat.cheathint
-  end
+    #Cheat code validation check
+    if params[:cheatcode].nil? then
+      #Friendly error msg
+      @cheathint = "You cannot spoof the system. Please backup and provide a valid code. Your phone may self destruct if you attempt this again."
+    else
+      prizewithcheat = Prize.find_by_cheatcode(params[:cheatcode])
+      if not prizewithcheat.nil? then
+        @cheathint = prizewithcheat.cheathint
+      else
+        @cheathint = "Your source for the code cannot be trusted. Your cover may be compromised. Please return to the beginning and forget this ever happened."
+        end
+    end
     
-      #Builder code formats cheat code response
-      respond_to do |format|
-        format.xml  {render :xml => @cheathint, :action => "sniff.xml.builder", :layout => false }
-      end #respond to
+    respond_to do |format|
+      format.xml  {render :xml => @cheathint, :action => "sniff.xml.builder", :layout => false }
+    end #respond to
   
   end
   
+  
+  #-----------------------Look for a Prize-----------------------------
   def snoop
     @xml = Builder::XmlMarkup.new
   
@@ -133,7 +135,6 @@ class WhereController < ApplicationController
 
    #Prize Checks 
    prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat,@device)
-   #prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat)
  
    if not prize.nil? then #We have a winner
      
@@ -163,20 +164,25 @@ class WhereController < ApplicationController
 	    #Are there hints? - Done by searching area
 	    #Is there broadcast news? 
 	  
-	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,1000,@device)
+	      #Randomize distance used in NN
+	      @querydistance = rand(1500)
+	  
+	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,@querydistance,@device)
 
       	if not nearest_prizes.nil? then
       	  
       	  npcount = nearest_prizes.length
       	  
-    	    @headline = "You are getting warm"
-    	    @playermsg = "There are " + npcount.to_s + " unclaimed prizes around."
-    	    @standardclaimmsg = "move around and try again."
+    	    @headline = "You are near a secret object. Make sure there are only trusted people around you."
+    	    @playermsg = "In the area " + npcount.to_s + " objects are unclaimed."
+    	    @standardclaimmsg = "Move around a bit and try again."
         
     	  else
-    	    @headline = "Sorry"
-    	    @playermsg = "Not even close"
-    	    @standardclaimmsg = "move around and try again."
+    	    
+    	    
+    	    @headline = "Where are you?"
+    	    @playermsg = "We cannot discern clearly that you are near a secret object."
+    	    @standardclaimmsg = "Move around significantly and try again."
           
     	  end
       	  
@@ -191,7 +197,7 @@ class WhereController < ApplicationController
   end
   
   
-  
+  #--------------------------------Static About Page--------------------------------
   def aboutus
    @xml = Builder::XmlMarkup.new
    
@@ -306,16 +312,12 @@ class WhereController < ApplicationController
         end
 
   end
-  
-  
-  def debugwhere
-    #intentionally left blank
-  end
+
   
   def query
   
   	#@device = Device.find(:all, :conditions => ["deviceid = ?", params[:deviceid]])
-	@device = Device.find_by_deviceid(params[:deviceid])
+	  @device = Device.find_by_deviceid(params[:deviceid])
   	  	
   	if @device.nil?
   		@device = Device.new()
