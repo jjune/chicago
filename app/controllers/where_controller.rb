@@ -1,6 +1,7 @@
 class WhereController < ApplicationController  
  
     #validate query strings
+    #WHERE UserAgent = [device]/[carrier]/[version]/Profile/MIDP-2.0 Configuration/CLDC-1.0
     #Need to make sure Emulators can't win
     #visibility based on carrier or phone type as well
     #Need to determine if current player or not
@@ -178,8 +179,9 @@ class WhereController < ApplicationController
         
     	  else
     	    
+    	    
     	    @headline = "Where are you?"
-    	    @playermsg = "We cannot discern clearly that you are near a secret object"
+    	    @playermsg = "We cannot discern clearly that you are near a secret object."
     	    @standardclaimmsg = "Move around significantly and try again."
           
     	  end

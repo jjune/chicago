@@ -5,3 +5,27 @@
 #
 # two:
 #   column: value
+
+
+#name:
+#    type:
+#    created_at:
+#    updated_at:
+#    prizearea:
+#    center:
+#    prizetype:
+#    prizeamt:
+#    shapeparent:
+#    winnermsg:
+#    cheatcode:
+#    cheathint:
+#    status:
+#    quantity:
+#    sponsor_id:
+#    surfacearea:
+#    paypal_token:
+#    paypal_state:
+#    paypal_prizecost:
+#    paypal_payer_id:
+#    paypal_amount:
+#    paypal_error:
