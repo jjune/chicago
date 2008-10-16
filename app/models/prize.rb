@@ -131,7 +131,10 @@ class Prize < ActiveRecord::Base
     	qt.coordinate = Point.from_lon_lat(lng,lat,4326)
     	qt.player ||=device.player 
     	qt.device = device
-    	qt.prize = prize unless prize.nil?
+    	qt.prize ||=prize
+    	qt.carrier = device.carrier if device.respond_to?("carrier")
+    	qt.device = device.device if device.respond_to?("device")
+    	qt.screenwidth = device.screenwidth if device.respond_to?("screenwidth")
     	qt.save!
 	end
 end

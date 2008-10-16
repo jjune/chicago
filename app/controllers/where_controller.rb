@@ -24,41 +24,41 @@ class WhereController < ApplicationController
   def sniff
   
     @xml = Builder::XmlMarkup.new
-
+	@device = DeviceFactory.find_or_create_device(request)
    #Emulator Guard
-   if params[:lng].nil? then
-   @lng = "-84.49008"
-   else
-   @lng = params[:lng]
-   end
+   #if params[:lng].nil? then
+   #@lng = "-84.49008"
+   #else
+   #@lng = params[:lng]
+   #end
 
-   if params[:lat].nil? then
-   @lat = "33.84275"
-   else
-   @lat = params[:lat]
-   end 
+   #if params[:lat].nil? then
+   #@lat = "33.84275"
+   #else
+   #@lat = params[:lat]
+   #end 
   
    #Device Checks
-    @device = Device.find_by_deviceid(params[:deviceid])
-    if @device.nil? then
-    	@device = Device.new()
-    	@device.deviceid = params[:deviceid]
-    	@device.device = params[:device]
-    	@device.carrier = params[:carrier]
-    	@device.screenwidth = params[:screenwidth] 
-    	@device.save!
+    #@device = Device.find_by_deviceid(params[:deviceid])
+    #if @device.nil? then
+    #	@device = Device.new()
+    #	@device.deviceid = params[:deviceid]
+    #	@device.device = params[:device]
+    #	@device.carrier = params[:carrier]
+    #	@device.screenwidth = params[:screenwidth] 
+    #	@device.save!
 
     		#need to retrieve device short code and present to user - whether they win or not
-    end
+    #end
 
     #test for Emulator
-    if @device.screenwidth.nil? then
-      @device.screenwidth = "240"
-    end
+    #if @device.screenwidth.nil? then
+    #  @device.screenwidth = "240"
+    #end
 
-    if @device.carrier.nil? then
-    @device.carrier = "Emulator"
-    end
+    #if @device.carrier.nil? then
+    #@device.carrier = "Emulator"
+    #end
 
     #WHERE required to get the correct generic graphics
     if @device.screenwidth = "176" then
@@ -90,51 +90,52 @@ class WhereController < ApplicationController
   #-----------------------Look for a Prize-----------------------------
   def snoop
     @xml = Builder::XmlMarkup.new
-  
+  	@device = DeviceFactory.find_or_create_device(request)
+  	
     #Emulator Guard
-    if params[:lng].nil? then
-      @lng = "-84.49008"
-    else
-      @lng = params[:lng]
-    end
+    #if params[:lng].nil? then
+    #  @lng = "-84.49008"
+    #else
+    #  @lng = params[:lng]
+    #end
   
-    if params[:lat].nil? then
-      @lat = "33.84275"
-    else
-      @lat = params[:lat]
-    end
+    #if params[:lat].nil? then
+    #  @lat = "33.84275"
+    #else
+    #  @lat = params[:lat]
+    #end
   
     #Device Checks
-    @device = Device.find_by_deviceid(params[:deviceid])
-   	if @device.nil? then
-   		@device = Device.new()
-   		@device.deviceid = params[:deviceid]
-   		@device.device = params[:device]
-   		@device.carrier = params[:carrier]
-   		@device.screenwidth = params[:screenwidth] 
-   		@device.save!
+    #@device = Device.find_by_deviceid(params[:deviceid])
+   	#if @device.nil? then
+   	#	@device = Device.new()
+   	#	@device.deviceid = params[:deviceid]
+   	#	@device.device = params[:device]
+   	#	@device.carrier = params[:carrier]
+   	#	@device.screenwidth = params[:screenwidth] 
+   	#	@device.save!
    		
    		#need to retrieve device short code and present to user - whether they win or not		
-   	end
+   	#end
    
    #test for Emulator
-   if @device.screenwidth.nil? then
-     @device.screenwidth = "240"
-   end
+   #if @device.screenwidth.nil? then
+   #     @device.screenwidth = "240"
+   #end
    
-   if @device.carrier.nil? then
-   @device.carrier = "Emulator"
-   end
+   #if @device.carrier.nil? then
+   #@device.carrier = "Emulator"
+   #end
    
    #WHERE required to get the correct generic graphics
-   if @device.screenwidth = "176" then
-     @textsize = "small"
-   else
-     @textsize = "medium"
-   end
+   #if @device.screenwidth = "176" then
+    # @textsize = "small"
+   #else
+    # @textsize = "medium"
+   #end
 
    #Prize Checks 
-   prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat,@device)
+   prize = Prize.find_winning_prize_by_lng_lat(@device.lng,@device.lat,@device)
  
    if not prize.nil? then #We have a winner
      
