@@ -1,5 +1,5 @@
 class DeviceFactory
-	def find_or_create_device(request)
+	def self.find_or_create_device(request)
 		#We only code for Where right now, but this will get built out
 		device = Device.find_by_deviceid(request.parameters[:deviceid])
 	    if device.nil? then
