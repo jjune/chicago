@@ -14,5 +14,6 @@ class DeviceFactory
 	    #Add the request object in, so the parameters can be extracted
 	    device.current_request=request
 	    
+	    return device
 	end
 end
