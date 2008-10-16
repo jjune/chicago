@@ -157,7 +157,7 @@ div#nav ul ul ul li:hover ul
 	background-position:top;
 	background-repeat:no-repeat;
 	width:960px;
-	margin:20px auto;
+	margin: 0 auto 20px;
 	height:87px;
 	clear:both;
 }
@@ -226,16 +226,10 @@ div#nav ul ul ul li:hover ul
 .webform_label 
 {
 	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
-	font-size: 0.8em;
+	font-size: 0.75em;
 	padding-left: 3px;
-	line-height: 0.5em;
-}
-
-.webform_field
-{
-	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
-	font-size: 0.9em;
-	margin-bottom: 15px;
+	line-height: 0.8em;
+	padding-bottom: 4px;
 }
 #map_canvas 
 {
@@ -261,9 +255,73 @@ label {
 }
 
 .search_form {
-	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-family: "Lucida Grande";
 	font-size: 1.0em;
 	line-height: 1.3em;
+	width:400px;
 	
+}
+.prize-name-field
+{
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 0.8em;
+	line-height: 1.0em;
+	width: 225px;	
+	margin-bottom: 12px;
+
+}
+.prize-type-field
+{
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 0.9em;
+	line-height: 1.0em;
+	width: 175px;	
+	margin-bottom: 12px;
+}
+.prize-value-field
+{
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 0.8em;
+	line-height: 1.0em;
+	width: 75px;	
+	margin-bottom: 12px;
+}
+.prize-quantity-field
+{
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 0.8em;
+	line-height: 1.0em;
+	width: 30px;	
+	margin-bottom: 12px;
+}
+.cheat-code-field
+{
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 0.8em;
+	line-height: 1.0em;
+	width: 225px;	
+	margin-bottom: 12px;
+}
+.winner-message-field
+{
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 0.7em;
+	line-height: 1.2em;
+	width: 225px;
+	height: 80px;	
+	margin-bottom: 12px;
+}
+.form-button
+{
+	background:#51301B;
+	color:#F5DBA1 !important;
+	padding: 3px 8px;
+	font-weight:bold;
+	font-size:0.7em;
+	cursor: pointer;
+	border: 1px solid #4C3A14;
+	font-family: "Lucida Grande", sans-serif;
+	margin-left: 5px;
+	margin-bottom: 2px;
 }
 
