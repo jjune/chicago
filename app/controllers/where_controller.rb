@@ -61,12 +61,12 @@ class WhereController < ApplicationController
     #end
 
     #WHERE required to get the correct generic graphics
-    if @device.screenwidth = "176" then
+    if @device.screenwidth== "176" then
       @textsize = "small"
     else
       @textsize = "medium"
     end
-  
+
     #Cheat code validation check
     if params[:cheatcode].nil? then
       #Friendly error msg
@@ -224,7 +224,7 @@ class WhereController < ApplicationController
      @device.carrier = "Emulator"
      end
      
-     if @device.screenwidth = "176" then
+     if @device.screenwidth=="176" then
        @textsize = "small"
      else
        @textsize = "medium"
@@ -277,7 +277,7 @@ class WhereController < ApplicationController
       #@device.carrier = "Emulator"
       #end
       
-      if @device.screenwidth = "176" then
+      if @device.screenwidth=="176" then
         @textsize = "small"
       else
         @textsize = "medium"
