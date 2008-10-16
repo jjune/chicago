@@ -4,8 +4,8 @@
    <h1 id="pagetitle">Create New Prize</h1>
       <div id="MainLeft">
          <form action="#" onsubmit="showAddress(this.address.value); return false">
-         <input class="search_form" type="text" size="45" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />
-         <input type="submit" value="Go!" />
+         <input class="search_form" type="text" name="address" value="1600 Amphitheatre Pky, Mountain View, CA" />&nbsp;
+         <input type="submit" value="Go!" class="form-button"  />
 		 <div id="map_canvas" style="width: 585px; height: 400px"></div>
          </form>
       </div>
@@ -19,28 +19,31 @@
 			<table>
 			<tbody>
 			<tr><td class="webform_label">Prize Name</td></tr>
-			<tr><td><%= f.text_field :name, :class=>'webform_field', :size => 25 %></td></tr>
+			<tr><td><%= f.text_field :name, :class=>'prize-name-field' %></td></tr>
 
 			<tr><td class="webform_label">Prize Type</td></tr>
 			<tr><td class="webform_label">
-			<%= f.select(:prizetype, %w{Message Money}, {:class =>'webform_field'}) %>
+				<select id="prize_prizetype" name="prize[prizetype]" class="prize-type-field">
+					<option value="Message">Message</option>
+				    <option value="Money">Money</option>
+				</select>
 			</td></tr>
 			
 			<tr><td class="webform_label">Prize Value</td></tr>
-			<tr><td><%= f.text_field :prizeamt, :class=>'webform_field', :size => 7 %></td></tr>
+			<tr><td><%= f.text_field :prizeamt, :class=>'prize-value-field' %></td></tr>
 
 			<tr><td class="webform_label">Prize Quantity</td></tr>
-			<tr><td><%= f.text_field :quantity, :class=>'webform_field', :size => 3 %></td></tr>
+			<tr><td><%= f.text_field :quantity, :class=>'prize-quantity-field' %></td></tr>
 
 			<tr><td class="webform_label">Cheat Code</td></tr>
-			<tr><td><%= f.text_field :cheatcode, :class=>'webform_field', :size => 20 %></td></tr>
+			<tr><td><%= f.text_field :cheatcode, :class=>'cheat-code-field', :size => 20 %></td></tr>
 			
 			<tr><td class="webform_label">Winner's Message</td></tr>
-			<tr><td><%= f.text_area :winnermsg, :cols => 17, :rows => 3 %></td></tr>
+			<tr><td><%= f.text_area :winnermsg, :cols => 17, :rows => 3, :class=> 'winner-message-field' %></td></tr>
 			</tbody>
 			</table>
 		  <p>    
-		  		 <%= submit_tag "Commit to Award Prize", :onclick=> 'doStuffBeforeSubmit();' %>
+		  		 <%= submit_tag "Commit to Award Prize", :onclick=> 'doStuffBeforeSubmit();', :class=> 'form-button' %>
 		  </p>
 		<% end %>
 		</div>
