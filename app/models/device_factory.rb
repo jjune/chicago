@@ -1,7 +1,7 @@
 class DeviceFactory
 	def self.find_or_create_device(request)
 		#We only code for Where right now, but this will get built out
-		device = Device.find_by_deviceid(request.parameters[:deviceid])
+		device = Device.find_by_uniqueid(request.parameters[:deviceid])
 	    if device.nil? then
 	    	device = Device.new
 	    	device.uniqueid=request.parameters[:deviceid]
