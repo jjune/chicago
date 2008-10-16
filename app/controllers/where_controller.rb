@@ -243,38 +243,39 @@ class WhereController < ApplicationController
       
       @xml = Builder::XmlMarkup.new
       #@prizes=Prize.find(:all)
-      @device = Device.find_by_deviceid(params[:deviceid])
+      #@device = Device.find_by_deviceid(params[:deviceid])
+      @device = DeviceFactory.find_or_create_device(request)
       
       #Emulator Guard
-      if params[:lng].nil? then
-      @lng = "-84.49008"
-      else
-      @lng = params[:lng]
-      end
+      #if params[:lng].nil? then
+      #@lng = "-84.49008"
+      #else
+      #@lng = params[:lng]
+      #end
 
-      if params[:lat].nil? then
-      @lat = "33.84275"
-      else
-      @lat = params[:lat]
-      end
+      #if params[:lat].nil? then
+      #@lat = "33.84275"
+      #else
+      #@lat = params[:lat]
+      #end
       
-      	if @device.nil? then
-      		@device = Device.new()
-      		@device.deviceid = params[:deviceid]
-      		@device.device = params[:device]
-      		@device.carrier = params[:carrier]
-      		@device.screenwidth = params[:screenwidth] 
-      		@device.save!
-      	end
+      #	if @device.nil? then
+      #		@device = Device.new()
+      #		@device.deviceid = params[:deviceid]
+      #		@device.device = params[:device]
+      #		@device.carrier = params[:carrier]
+      #		@device.screenwidth = params[:screenwidth] 
+      #		@device.save!
+      #	end
       
       #test for Emulator
-      if @device.screenwidth.nil? then
-        @device.screenwidth = "240"
-      end
+      #if @device.screenwidth.nil? then
+      #  @device.screenwidth = "240"
+      #end
       
-      if @device.carrier.nil? then
-      @device.carrier = "Emulator"
-      end
+      #if @device.carrier.nil? then
+      #@device.carrier = "Emulator"
+      #end
       
       if @device.screenwidth = "176" then
         @textsize = "small"
@@ -288,7 +289,7 @@ class WhereController < ApplicationController
       #Google static map info
       @googleapikey = "ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q"
       @googlebaseurl = "http://maps.google.com/staticmap?"
-      @googlecoord = @lat + "," + @lng
+      @googlecoord = @device.lat + "," + @device.lng
       @googlemapsize = @device.screenwidth + "x128"
       @googleimageurl = @googlebaseurl + "center=" + @googlecoord + "&zoom=14&size=" + @googlemapsize + "&maptype=mobile&markers=" + @googlecoord + ",blue&format=png&key=" + @googleapikey
       @googleimageurl = @googleimageurl.to_sym
@@ -318,18 +319,18 @@ class WhereController < ApplicationController
   def query
   
   	#@device = Device.find(:all, :conditions => ["deviceid = ?", params[:deviceid]])
-	  @device = Device.find_by_deviceid(params[:deviceid])
-  	  	
-  	if @device.nil?
-  		@device = Device.new()
-  		@device.deviceid = params[:deviceid]
-  		@device.device = params[:device]
-  		@device.carrier = params[:carrier]
-  		@device.screenwidth = params[:screenwidth] 
-  		@device.save!
-  	end
+	 # @device = Device.find_by_deviceid(params[:deviceid])
+  @device = DeviceFactory.find_or_create_device(request)	  	
+  	#if @device.nil?
+  	#	@device = Device.new()
+  	#	@device.deviceid = params[:deviceid]
+  	#	@device.device = params[:device]
+  	#	@device.carrier = params[:carrier]
+  	#	@device.screenwidth = params[:screenwidth] 
+  	#	@device.save!
+  	#end
   		
-  	current_point = Point.from_lon_lat(params[:lng],params[:lat],4326)
+  	current_point = Point.from_lon_lat(device.lng,device.lat,4326)
   	prizes = Prize.find_all_by_prizearea(current_point)
   	
   	
