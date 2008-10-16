@@ -17,16 +17,12 @@ class Prize < ActiveRecord::Base
 		return prizes
 	end
 	
-	def self.find_winning_prize_by_georuby_point(point,device)
-		return find_winning_prize_by_lng_lat(point.lng,point.lat,device)
-	end
-	
-	def self.find_winning_prize_by_lng_lat(lng,lat,device)
+	def self.find_winning_prize_for_device(device)
 		#Get an array of the prize id's already won
 		already_won_prize_ids=already_won_prize_ids(device)
 		
 		#Ok here is the query, it is built in chunks to possibly support gameplay options
-		query = base_prize_query(lng,lat)
+		query = base_prize_query(device.lng,device.lat)
 		query<< "AND quantity>0"
 		query<< one_prize_per_device(device)
 		query<<	"ORDER BY ST_Area(prizearea) ASC "
@@ -53,11 +49,11 @@ class Prize < ActiveRecord::Base
 				winning_prize.save!
 				winning_prize_item.save!
 			end
-			log_query(winning_prize,device,lng,lat)
+			log_query(winning_prize,device)
 			return winning_prize
 		else
 			#Loser!  Just log it and send back nil
-			log_query(nil,device,lng,lat)
+			log_query(nil,device)
 			return nil
 		end
 	end
@@ -74,8 +70,8 @@ class Prize < ActiveRecord::Base
 		end
 	end
 	
-	def self.find_nearest_prizes_by_device_not_won(lng,lat,distance,device)
-		query=base_nearest_query(lng,lat,distance)
+	def self.find_nearest_prizes_by_device_not_won(distance,device)
+		query=base_nearest_query(device.lng,device.lat,distance)
 		query<<one_prize_per_device(device)
 		query<< "AND quantity>0 "
 		nearest_prizes = Prize.find_by_sql(query)
@@ -126,14 +122,14 @@ class Prize < ActiveRecord::Base
 		query<<	"AND NOT _ST_Contains(transform(prizearea,2163),transform(GeomFromText('POINT("+lng+" "+lat+")',4326),2163)) "
 	end
 	
-	def self.log_query(prize,device,lng,lat)
+	def self.log_query(prize,device)
 		qt = QueryTransaction.new()
-    	qt.coordinate = Point.from_lon_lat(lng,lat,4326)
+    	qt.coordinate = device.georuby_point
     	qt.player ||=device.player 
     	qt.device = device
     	qt.prize ||=prize
     	qt.carrier = device.carrier if device.respond_to?("carrier")
-    	qt.device = device.device if device.respond_to?("device")
+    	qt.user_agent = device.user_agent if device.respond_to?("user_agent")
     	qt.screenwidth = device.screenwidth if device.respond_to?("screenwidth")
     	qt.save!
 	end

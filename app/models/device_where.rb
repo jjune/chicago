@@ -1,7 +1,7 @@
+#lng, lat, and georuby_point should be defined in every device module at a minimum
 module DeviceWhere
 	
 	def lng
-		#Emulator Guard
 	    if @current_request.parameters[:lng].nil?
 	      "-84.49008"
 	    else
@@ -15,6 +15,10 @@ module DeviceWhere
     	else
       		@current_request.parameters[:lat]
     	end
+	end
+	
+	def georuby_point
+		Point.from_lon_lat(lng,lat,4326)
 	end
 
 	def device_type
@@ -39,6 +43,14 @@ module DeviceWhere
 		else
 			@current_request.parameters[:screenwidth]
 		end
+	end
+	
+	def textsize
+		if screenwidth=="176"
+        	"small"
+      else
+        	"medium"
+      end
 	end
 	
 	def user_agent

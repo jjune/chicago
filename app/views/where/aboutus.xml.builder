@@ -41,7 +41,7 @@ xml.text! "}"
 
 end #script
 
-xml.body(:bg=>"0xFFFFFF", :fontSize=>@textsize, :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
+xml.body(:bg=>"0xFFFFFF", :fontSize=>@device.textsize, :fontstyle=>"plain", :fullScreen=>"true", :onLoad=>"doTriggerSetup();") do
 
 xml.header do
 xml.img(:src=>"http://chicago.supersecretlabs.com/images/logo_small.png", :align=>"center", :valign=>"center", :bg=>"0xFFFFFF")	
