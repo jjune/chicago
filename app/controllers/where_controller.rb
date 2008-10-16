@@ -168,7 +168,7 @@ class WhereController < ApplicationController
 	      #Randomize distance used in NN
 	      @querydistance = rand(1500)
 	  
-	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,@querydistance,@device)
+	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@device.lng,@device.lat,@querydistance,@device)
 
       	if not nearest_prizes.nil? then
       	  
