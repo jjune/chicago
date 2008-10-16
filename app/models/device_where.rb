@@ -39,7 +39,8 @@ module DeviceWhere
 		else
 			@current_request.parameters[:screenwidth]
 		end
-
+	end
+	
 	def user_agent
 		@current_request.user_agent
 	end
