@@ -32,6 +32,7 @@ class PrizesController < ApplicationController
   # GET /prizes/1
   # GET /prizes/1.xml
   def show
+  	@bodyscript = '<body onload="initialize()" onunload="GUnload()">'
     @header_above_partial_path = "global/hdr_above"
     @header_partial_path = "prizes/hdr_prizelab"
     @header_below_partial_path = "global/hdr_below"
@@ -54,7 +55,7 @@ end
   # GET /prizes/new
   # GET /prizes/new.xml
   def new
-    @bodyscript = '<body onload="initialize()" onunload="GUnload()">'
+    #@bodyscript = 'onload="initialize()" onunload="GUnload()"'
     @prize = Prize.new
 
     respond_to do |format|

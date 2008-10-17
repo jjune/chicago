@@ -1,0 +1,18 @@
+<%@bodyscript = 'onload="initialize()" onunload="GUnload()"'%>
+
+<script>
+var map=null;
+function initialize() 
+{
+	if (GBrowserIsCompatible()) 
+	{
+		map = new GMap2(document.getElementById("map_div"));
+		map.setCenter(<%=GLatLng.from_georuby(@prize.center).to_javascript%>, 13);
+        map.disableDragging();
+        prizearea = <%=GPolygon.from_georuby(@prize.prizearea,'#0000FF','5','1','#0000FF','0.2').to_javascript%>
+        map.addOverlay(prizearea);
+	}
+}
+</script>
+
+<div id="map_canvas" style="width: 500px; height: 300px"></div>
