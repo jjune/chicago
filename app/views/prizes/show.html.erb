@@ -1,31 +1,21 @@
 
 
 <div id="container2">
-   <h1 id="pagetitle">Create New Prize</h1>
 	  <div id="prize_confirmation">
 	  <h2>Your prize has been successfully created</h2>
 	  </div>
+	
       <div id="MainLeft">  
-		 <div id="map_canvas" style="width: 585px; height: 400px"></div>
+		<table width="400px" class="info-table" cellpadding="10" cellspacing="5">
+		<tr class="info-table"><td>Prize Label: </td><td><%=@prize.name %></td></tr>
+		<tr><td>Prize Type: </td><td><%=@prize.prizetype %></td></tr>
+		<tr><td>Prize Value: </td><td><%=@prize.prizeamt %></td></tr>
+		<tr><td>Cheat Code: </td><td><%=@prize.cheatcode %></td></tr>
+		<tr><td>Winner's Message: </td><td><%=@prize.winnermsg %></td></tr>
+		<%= render :partial => 'map_with_overlay', :object => @prize %>
+		</table>
+		 
       </div>
 
-      <div id="MainRight">
-	   <div id="featureBOX">
-
-		</div>
-      </div>
+      
 </div>
-
-
-
-  
-
-	<table>
-	<tbody>
-	<tr><td>Prize Label: </td><td><%=@prize.name %></td></tr>
-	<tr><td>Prize Type: </td><td><%=@prize.prizetype %></td></tr>
-	<tr><td>Prize Value: </td><td><%=@prize.prizeamt %></td></tr>
-	<tr><td>Cheat Code: </td><td><%=@prize.cheatcode %></td></tr>
-	<tr><td>Winner's Message: </td><td><%=@prize.winnermsg %></td></tr>
-	</tbody>
-	</table>
