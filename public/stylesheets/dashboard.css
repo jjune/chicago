@@ -250,6 +250,15 @@ div#prize_confirmation
 	margin-bottom:25px;
 }
 
+div#prize_confirmation h2
+{
+	text-align:left;
+	color:#dab25d;
+	font-size: 1.3em;
+	font-weight:normal;
+	line-height: 35px;;
+}
+
 /*-------------------------------Forms ----------------------------------*/
 .search_form {
 	font-family: "Lucida Grande";
@@ -304,3 +313,4 @@ div#featureBOX fieldset
 	border: 1px solid #494949;
 	font-size: 1.2em;
 }
+
