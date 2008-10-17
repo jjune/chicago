@@ -24,7 +24,7 @@ class WhereController < ApplicationController
   def sniff
   
     @xml = Builder::XmlMarkup.new
-	@device = DeviceFactory.find_or_create_device(request)
+	@device = Device.find_or_create_device(request)
 
     #Cheat code validation check
     if params[:cheatcode].nil? then
@@ -49,7 +49,7 @@ class WhereController < ApplicationController
   #-----------------------Look for a Prize-----------------------------
   def snoop
     @xml = Builder::XmlMarkup.new
-  	@device = DeviceFactory.find_or_create_device(request)
+  	@device = Device.find_or_create_device(request)
 
    #Prize Checks 
    prize = Prize.find_winning_prize_for_device(@device)
@@ -111,7 +111,7 @@ class WhereController < ApplicationController
   #--------------------------------Static About Page--------------------------------
   def aboutus
   	@xml = Builder::XmlMarkup.new
-	@device = DeviceFactory.find_or_create_device(request)
+	@device = Device.find_or_create_device(request)
    
 	#Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
    
@@ -127,7 +127,7 @@ class WhereController < ApplicationController
       #Need to pass a single prize and hints
       
       @xml = Builder::XmlMarkup.new
-      @device = DeviceFactory.find_or_create_device(request)
+      @device = Device.find_or_create_device(request)
       
      
       #http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14
@@ -165,7 +165,7 @@ class WhereController < ApplicationController
   
   def query
   
-  	@device = DeviceFactory.find_or_create_device(request)	  		
+  	@device = Device.find_or_create_device(request)	  		
   	current_point = Point.from_lon_lat(device.lng,device.lat,4326)
   	prizes = Prize.find_all_by_prizearea(current_point)
   	

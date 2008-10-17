@@ -26,7 +26,7 @@ class QueryPrizeController < ApplicationController
   		#We need the device to find out what was already won
   		#device = Device.find_by_deviceid('35')
   		request.parameters[:deviceid]="35"
-  		device = DeviceFactory.find_or_create_device(request)
+  		device = Device.find_or_create_device(request)
   		prize = Prize.find_winning_prize_for_device(device)
   	
   	#if prizes.length>0
@@ -64,9 +64,10 @@ class QueryPrizeController < ApplicationController
   	
   	#Nearby prizes this device has not won
   	#device = Device.find_by_deviceid('35')
-  	request.parameters[:deviceid]="35"
-  	device = DeviceFactory.find_or_create_device(request)
-  	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(1000,device)
+  	request.parameters[:deviceid]="391"
+  	device = Device.find_or_create_device(request)
+  	
+  	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(10000,device)
   	
   	if not nearest_prizes.nil?
   		
