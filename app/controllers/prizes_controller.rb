@@ -168,7 +168,20 @@ end
     end
   end
 
-  
+  def prize_type_select
+    @prize_type = params[:prize_prizetype]
+    
+    if @prize_type == 'money'
+      render :update do |page|
+        page[:prize_type_menu].show
+      end
+    else
+      
+      render :update do |page|
+        page[:prize_type_menu].hide
+      end      
+    end
+  end
   #Added BG ActiveMerchant
   #Obviously should be dropped into a table - but for release 1 - NO!
   

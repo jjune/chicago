@@ -16,31 +16,38 @@
 			<%= f.hidden_field 'prizearea' %>
 			<%= hidden_field_tag 'center_lat' %>
 			<%= hidden_field_tag 'center_lng' %>
-			<%= hidden_field_tag 'quantity', '0' %>
+			<%= f.hidden_field 'quantity', :value=>'0' %>
 			
 			<label for="prize_name">Prize Name</label>
 			<fieldset><%= f.text_field :name, :size => 32 %></fieldset>
 			
 			<label for="prize_name">Prize Type</label>
-			<fieldset>		
-				<select id="prize_prizetype" name="prize[prizetype]" style="width:175px" onchange="javascript:prize_type_selection(this.value)">
-					<option value="--">Select Prize Type:</option>
-					<option value="Message">Message</option>
-					<option value="Money">Money</option>
-				</select>
+			<fieldset>
+				<%= f.select(:prizetype, [ ['Select Prize Type', '--'],
+										   ['Message', 'message'],
+										   ['Money', 'money']], {:style => 'width:175px'} )%>
 			</fieldset>
 			
-			<label for="prizeamt">Prize Value (USD)</label>
-			<fieldset><%= f.text_field :prizeamt, :size => 10 %></fieldset>
+			<%= observe_field 'prize_prizetype',
+							  :update => 'prize-type-menu', 
+							  :url    => 'prize_type_select',
+							  :with   => 'prize_prizetype'	
+  							%>
+			
+			<div id='prize_type_menu' style="display:none">
+				<label for="prizeamt">Prize Value (USD)</label>
+				<fieldset><%= f.text_field :prizeamt, :size => 10 %></fieldset>
+			</div>	
+		
 			
 			<label for="cheatcode">Cheat Code</label>
 			<fieldset><%= f.text_field :cheatcode, :size => 32 %></fieldset>			
 				
 			<label for="winnermsg">Winner's Message</label>
-			<fieldset><%= f.text_field :cheatcode, :style=>'font-size: 0.7em;line-height: 1.2em;width: 225px;height: 80px;', :size => 20 %></fieldset>
+			<fieldset><%= f.text_area :winnermsg, :style=>'font-size: 0.8em;line-height: 1.2em;width: 225px;height: 80px;' %></fieldset>
 		
 		  <p>    
-		  		 <%= submit_tag "Commit to Award Prize", :onclick=> 'doStuffBeforeSubmit();', :class=> 'form-button' %>
+		  		 <%= submit_tag "Commit to Award Prize", :style => 'width: 170px', :onclick=> 'doStuffBeforeSubmit();', :class=> 'form-button' %>
 		  </p>
 		<% end %>
 		</div>
