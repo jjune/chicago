@@ -1,10 +1,11 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
-
+  layout 'account'
   # render new.rhtml
   def new
+    @title = 'SupersecretLabs Login'
+    @action_class = 'login'
   end
 
   def create
@@ -14,10 +15,14 @@ class SessionsController < ApplicationController
         current_user.remember_me unless current_user.remember_token?
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
-      redirect_back_or_default('/')
-      flash[:notice] = "Logged in successfully"
+       if self.current_user.account_type == 'Player'
+          redirect_to(:controller => 'player')
+        else
+          redirect_to(:controller => 'prizes')
+        end
     else
-      render :action => 'new'
+      flash[:error] = "ERROR: Authentication Failed."
+      redirect_to :action => 'new'
     end
   end
 
@@ -28,4 +33,5 @@ class SessionsController < ApplicationController
     flash[:notice] = "You have been logged out."
     redirect_back_or_default('/')
   end
+  
 end

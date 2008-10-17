@@ -1,6 +1,8 @@
 class PrizesController < ApplicationController
   # GET /prizes
   # GET /prizes.xml
+
+  before_filter :login_required
   layout 'application'
   layout 'dashboard', :only => :new
   def index

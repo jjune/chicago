@@ -1,14 +1,35 @@
-<% form_tag do -%>
-<p><label for="login">Login</label><br/>
-<%= text_field_tag 'login' %></p>
+<div id="login">
+		<div id="cap-top"></div>
+		<div id="cap-body">
+				<% if flash[:error] %><div class="error_message"><%= flash[:error] %></div><% end %>
+				<% if flash[:notice] %><div class="notification_message"><%= flash[:notice] %></div><% end %>
+		<div id="branding"><img id="imgLogo" src="/images/super.jpg" /></div>		
+        <div id="panelLogin">
+        
+				<div>
+				 <% form_tag do -%>
+					<label>Login</label>
+					<%= text_field_tag 'login', '', :class => "textbox340" %>
+				</div>
+				<div>
+					<label>Password</label>
+					<%= password_field_tag 'password', '', :class => "textbox340" %>
+				</div>							
+				<div class="submit clearfix">
+					<%= image_submit_tag "/images/login-button.png",  :style => "border-width:0px", :class => "button-right" %>
+				</div>
+				<% end -%>
+			
+				<div class="loginpanel_text">
+				I want to <a href="/register">signup</a> as a new Player<br>	
+				I want to sponsor a prize and want to <a href="/register/sponsor">register</a> as Sponsor.
+			    </div>		
+</div>
 
-<p><label for="password">Password</label><br/>
-<%= password_field_tag 'password' %></p>
-
-<!-- Uncomment this if you want this functionality
-<p><label for="remember_me">Remember me:</label>
-<%= check_box_tag 'remember_me' %></p>
--->
-
-<p><%= submit_tag 'Log in' %></p>
-<% end -%>
+<div class="warning_box">
+<h2>Authorized Users Only</h2>
+This is a game. The game is for use by GPS mobile phone operators and Federal, state, and local government officials only. Unauthorized access is a violation of U.S. Law and Super Secret Labs policy and may result in criminal or administrative penalties. Users shall not access other user's or system files without proper authority. Absence of access controls IS NOT authorization for access. All data contained in this application intercepted, recorded, read, copied, or captured in any manner and disclosed in any manner by authorized personnel. There is no right of privacy in this application. System personnel may give to law enforcement officials any potential evidence of crime found on this application. Use of this application by any user, authorized or unauthorized, constitutes consent to this monitoring, interception, recording, reading, copying, or capturing.
+</div>
+	</div>
+	<div id="cap-bottom"><img src="/images/login-bottom.png" alt="" /></div>
+</div><!-- END #login -->

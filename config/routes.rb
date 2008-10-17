@@ -1,17 +1,13 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :users
-
-  map.resource :session
-
-  map.resources :users
   map.resource :session
   map.resources :prizes
-  map.connect '/', :controller => 'account', :action => 'login'
+  map.connect '/', :controller => 'sessions', :action => 'new'
   map.connect 'register/sponsor', :controller => 'account', :action => 'sponsor_registration'
   map.connect 'register/player', :controller => 'account', :action => 'player_registration'
   map.connect 'register', :controller => 'account', :action => 'player_registration'
   map.connect 'register/contact', :controller => 'account', :action => 'register_contact'
-  map.connect 'login', :controller => 'account', :action => 'login'
+  map.connect 'login', :controller => 'sessions', :action => 'new'
   map.connect '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.root :controller => 'account', :action => 'register_device'
   
