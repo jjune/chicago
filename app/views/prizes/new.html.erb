@@ -18,36 +18,27 @@
 			<%= hidden_field_tag 'center_lng' %>
 			<%= hidden_field_tag 'quantity', '0' %>
 			
-			<label for="prize_name">Prize Name</lablel>
-			<fieldset><%= f.text_field :name, :class=>'prize-name-field' %></fieldset>
+			<label for="prize_name">Prize Name</label>
+			<fieldset><%= f.text_field :name, :size => 32 %></fieldset>
 			
-				
-			<table>
-			<tbody>
-			<tr><td class="webform_label">Prize Name</td></tr>
-			<tr><td><%= f.text_field :name, :class=>'prize-name-field' %></td></tr>
-
-			<tr><td class="webform_label">Prize Type</td></tr>
-			<tr><td class="webform_label">
-				<select id="prize_prizetype" name="prize[prizetype]" class="prize-type-field" onchange="javascript:prize_type_selection(this.value)">
+			<label for="prize_name">Prize Type</label>
+			<fieldset>		
+				<select id="prize_prizetype" name="prize[prizetype]" style="width:175px" onchange="javascript:prize_type_selection(this.value)">
 					<option value="--">Select Prize Type:</option>
 					<option value="Message">Message</option>
-				    <option value="Money">Money</option>
+					<option value="Money">Money</option>
 				</select>
-			</td></tr>
+			</fieldset>
 			
-			<div id="prize-value" style="visibility: hidden"></div>
-			<tr><td class="webform_label">Prize Value</td></tr>
-			<tr><td><%= f.text_field :prizeamt, :class=>'prize-value-field' %></td></tr>
-			</div>
-
-			<tr><td class="webform_label">Cheat Code</td></tr>
-			<tr><td><%= f.text_field :cheatcode, :class=>'cheat-code-field', :size => 20 %></td></tr>
+			<label for="prizeamt">Prize Value (USD)</label>
+			<fieldset><%= f.text_field :prizeamt, :size => 10 %></fieldset>
 			
-			<tr><td class="webform_label">Winner's Message</td></tr>
-			<tr><td><%= f.text_area :winnermsg, :cols => 17, :rows => 3, :class=> 'winner-message-field' %></td></tr>
-			</tbody>
-			</table>
+			<label for="cheatcode">Cheat Code</label>
+			<fieldset><%= f.text_field :cheatcode, :size => 32 %></fieldset>			
+				
+			<label for="winnermsg">Winner's Message</label>
+			<fieldset><%= f.text_field :cheatcode, :style=>'font-size: 0.7em;line-height: 1.2em;width: 225px;height: 80px;', :size => 20 %></fieldset>
+		
 		  <p>    
 		  		 <%= submit_tag "Commit to Award Prize", :onclick=> 'doStuffBeforeSubmit();', :class=> 'form-button' %>
 		  </p>

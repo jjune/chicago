@@ -1,4 +1,7 @@
-/* @override http://localhost:3000/stylesheets/dashboard.css?1223361671 */
+/* @override 
+	http://localhost:3000/stylesheets/dashboard.css?1223361671
+	http://localhost:3000/stylesheets/dashboard.css?1224173519
+*/
 
 body 
 {
@@ -243,17 +246,6 @@ div#nav ul ul ul li:hover ul
 }
 
 /*-------------------------------Forms ----------------------------------*/
-fieldset {
-	margin-bottom: 10px;
-}
-label {
-	font-size: 110%;
-	line-height: 1.75em;
-	color: #000;
-	padding: 0;
-	margin: 0;
-}
-
 .search_form {
 	font-family: "Lucida Grande";
 	font-size: 1.0em;
@@ -261,23 +253,7 @@ label {
 	width:400px;
 	
 }
-.prize-name-field
-{
-	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
-	font-size: 0.8em;
-	line-height: 1.0em;
-	width: 225px;	
-	margin-bottom: 12px;
 
-}
-.prize-type-field
-{
-	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
-	font-size: 0.9em;
-	line-height: 1.0em;
-	width: 175px;	
-	margin-bottom: 12px;
-}
 .prize-value-field
 {
 	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
@@ -323,5 +299,21 @@ label {
 	font-family: "Lucida Grande", sans-serif;
 	margin-left: 5px;
 	margin-bottom: 2px;
+}
+div#featureBOX label
+{
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 0.75em;
+	padding-left: 1px;
+	line-height: 0.8em;
+}
+
+div#featureBOX fieldset
+{
+	padding: 0px;
+	border: 0px;
+	margin-bottom: 5px;
+	font-size: 0.8em;
+	line-height: 1.2em;
 }
 
