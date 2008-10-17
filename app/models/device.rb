@@ -11,7 +11,9 @@ class Device < ActiveRecord::Base
 	has_many :query_transactions
 	
 	def self.find_or_create_device(request)
-		#We only code for Where right now, but this will get built out
+		#Lookup the device unique id found in the application controller and see if we have
+		#seen if we already have it in the database
+		#otherwise, we built it
 		device = find_by_uniqueid(request.parameters[:device_uniqueid])
 	    if device.nil? then
 	    	device = new
@@ -20,11 +22,12 @@ class Device < ActiveRecord::Base
 	    	device.save!
 	    end
 	    
-	    #Extend for the device specific module that was calculated in the application controller
+	    #Ok, we have either found or created the device
+	    #Now, extend for the device specific module that was calculated in the application controller
 	    device_module="Device#{request.parameters[:device_type].capitalize}"
 	    device.extend(eval(device_module))
 	    
-	    #Add the request object in, so the parameters can be extracted
+	    #Add the request object in, so the parameters can be extracted by the device specific module
 	    device.current_request=request
 	    
 	    return device
