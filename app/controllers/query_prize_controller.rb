@@ -24,8 +24,10 @@ class QueryPrizeController < ApplicationController
   	#prizes= Prize.find_all_exact_by_georuby_point(current_marker)
   	#prizes =Prize.find_all_exact_by_lng_lat(params[:lng],params[:lat])
   		#We need the device to find out what was already won
-		device = Device.find_by_deviceid('35')
-  	prize = Prize.find_winning_prize_by_lng_lat(params[:lng],params[:lat],device)
+  		#device = Device.find_by_deviceid('35')
+  		request.parameters[:deviceid]="35"
+  		device = Device.find_or_create_device(request)
+  		prize = Prize.find_winning_prize_for_device(device)
   	
   	#if prizes.length>0
   	if not prize.nil?
@@ -61,8 +63,11 @@ class QueryPrizeController < ApplicationController
   	#nearest_prizes = Prize.find_nearest_prizes(params[:lng],params[:lat],1000)
   	
   	#Nearby prizes this device has not won
-  	device = Device.find_by_deviceid('35')
-  	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(params[:lng],params[:lat],1000,device)
+  	#device = Device.find_by_deviceid('35')
+  	request.parameters[:deviceid]="391"
+  	device = Device.find_or_create_device(request)
+  	
+  	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(10000,device)
   	
   	if not nearest_prizes.nil?
   		

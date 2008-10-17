@@ -24,49 +24,8 @@ class WhereController < ApplicationController
   def sniff
   
     @xml = Builder::XmlMarkup.new
+	@device = Device.find_or_create_device(request)
 
-   #Emulator Guard
-   if params[:lng].nil? then
-   @lng = "-84.49008"
-   else
-   @lng = params[:lng]
-   end
-
-   if params[:lat].nil? then
-   @lat = "33.84275"
-   else
-   @lat = params[:lat]
-   end 
-  
-   #Device Checks
-    @device = Device.find_by_deviceid(params[:deviceid])
-    if @device.nil? then
-    	@device = Device.new()
-    	@device.deviceid = params[:deviceid]
-    	@device.device = params[:device]
-    	@device.carrier = params[:carrier]
-    	@device.screenwidth = params[:screenwidth] 
-    	@device.save!
-
-    		#need to retrieve device short code and present to user - whether they win or not
-    end
-
-    #test for Emulator
-    if @device.screenwidth.nil? then
-      @device.screenwidth = "240"
-    end
-
-    if @device.carrier.nil? then
-    @device.carrier = "Emulator"
-    end
-
-    #WHERE required to get the correct generic graphics
-    if @device.screenwidth = "176" then
-      @textsize = "small"
-    else
-      @textsize = "medium"
-    end
-  
     #Cheat code validation check
     if params[:cheatcode].nil? then
       #Friendly error msg
@@ -90,51 +49,10 @@ class WhereController < ApplicationController
   #-----------------------Look for a Prize-----------------------------
   def snoop
     @xml = Builder::XmlMarkup.new
-  
-    #Emulator Guard
-    if params[:lng].nil? then
-      @lng = "-84.49008"
-    else
-      @lng = params[:lng]
-    end
-  
-    if params[:lat].nil? then
-      @lat = "33.84275"
-    else
-      @lat = params[:lat]
-    end
-  
-    #Device Checks
-    @device = Device.find_by_deviceid(params[:deviceid])
-   	if @device.nil? then
-   		@device = Device.new()
-   		@device.deviceid = params[:deviceid]
-   		@device.device = params[:device]
-   		@device.carrier = params[:carrier]
-   		@device.screenwidth = params[:screenwidth] 
-   		@device.save!
-   		
-   		#need to retrieve device short code and present to user - whether they win or not		
-   	end
-   
-   #test for Emulator
-   if @device.screenwidth.nil? then
-     @device.screenwidth = "240"
-   end
-   
-   if @device.carrier.nil? then
-   @device.carrier = "Emulator"
-   end
-   
-   #WHERE required to get the correct generic graphics
-   if @device.screenwidth = "176" then
-     @textsize = "small"
-   else
-     @textsize = "medium"
-   end
+  	@device = Device.find_or_create_device(request)
 
    #Prize Checks 
-   prize = Prize.find_winning_prize_by_lng_lat(@lng,@lat,@device)
+   prize = Prize.find_winning_prize_for_device(@device)
  
    if not prize.nil? then #We have a winner
      
@@ -164,26 +82,19 @@ class WhereController < ApplicationController
 	    #Are there hints? - Done by searching area
 	    #Is there broadcast news? 
 	  
-	      #Randomize distance used in NN
-	      @querydistance = rand(1500)
-	  
-	    	nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(@lng,@lat,@querydistance,@device)
+	    #Randomize distance used in NN
+	    querydistance = rand(1500)
+	    nearest_prizes = Prize.find_nearest_prizes_by_device_not_won(querydistance,@device)
 
       	if not nearest_prizes.nil? then
-      	  
       	  npcount = nearest_prizes.length
-      	  
     	    @headline = "You are near a secret object. Make sure there are only trusted people around you."
     	    @playermsg = "In the area " + npcount.to_s + " objects are unclaimed."
     	    @standardclaimmsg = "Move around a bit and try again."
-        
     	  else
-    	    
-    	    
     	    @headline = "Where are you?"
     	    @playermsg = "We cannot discern clearly that you are near a secret object."
     	    @standardclaimmsg = "Move around significantly and try again."
-          
     	  end
       	  
 	  end #prize check
@@ -199,35 +110,10 @@ class WhereController < ApplicationController
   
   #--------------------------------Static About Page--------------------------------
   def aboutus
-   @xml = Builder::XmlMarkup.new
+  	@xml = Builder::XmlMarkup.new
+	@device = Device.find_or_create_device(request)
    
-   #Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
-   
-     @device = Device.find_by_deviceid(params[:deviceid])
-
-     	if @device.nil? then
-     		@device = Device.new()
-     		@device.deviceid = params[:deviceid]
-     		@device.device = params[:device]
-     		@device.carrier = params[:carrier]
-     		@device.screenwidth = params[:screenwidth] 
-     		@device.save!
-     	end
-     
-     #test for Emulator
-     if @device.screenwidth.nil? then
-       @device.screenwidth = "240"
-     end
-     
-     if @device.carrier.nil? then
-     @device.carrier = "Emulator"
-     end
-     
-     if @device.screenwidth = "176" then
-       @textsize = "small"
-     else
-       @textsize = "medium"
-     end
+	#Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
    
      respond_to do |format|
        format.xml  {render :xml => @device, :action => "aboutus.xml.builder", :layout => false }
@@ -241,53 +127,16 @@ class WhereController < ApplicationController
       #Need to pass a single prize and hints
       
       @xml = Builder::XmlMarkup.new
-      #@prizes=Prize.find(:all)
-      @device = Device.find_by_deviceid(params[:deviceid])
+      @device = Device.find_or_create_device(request)
       
-      #Emulator Guard
-      if params[:lng].nil? then
-      @lng = "-84.49008"
-      else
-      @lng = params[:lng]
-      end
-
-      if params[:lat].nil? then
-      @lat = "33.84275"
-      else
-      @lat = params[:lat]
-      end
-      
-      	if @device.nil? then
-      		@device = Device.new()
-      		@device.deviceid = params[:deviceid]
-      		@device.device = params[:device]
-      		@device.carrier = params[:carrier]
-      		@device.screenwidth = params[:screenwidth] 
-      		@device.save!
-      	end
-      
-      #test for Emulator
-      if @device.screenwidth.nil? then
-        @device.screenwidth = "240"
-      end
-      
-      if @device.carrier.nil? then
-      @device.carrier = "Emulator"
-      end
-      
-      if @device.screenwidth = "176" then
-        @textsize = "small"
-      else
-        @textsize = "medium"
-      end
-      
+     
       #http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14
       #&size=240x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png
       #&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q
       #Google static map info
       @googleapikey = "ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q"
       @googlebaseurl = "http://maps.google.com/staticmap?"
-      @googlecoord = @lat + "," + @lng
+      @googlecoord = @device.lat + "," + @device.lng
       @googlemapsize = @device.screenwidth + "x128"
       @googleimageurl = @googlebaseurl + "center=" + @googlecoord + "&zoom=14&size=" + @googlemapsize + "&maptype=mobile&markers=" + @googlecoord + ",blue&format=png&key=" + @googleapikey
       @googleimageurl = @googleimageurl.to_sym
@@ -316,19 +165,8 @@ class WhereController < ApplicationController
   
   def query
   
-  	#@device = Device.find(:all, :conditions => ["deviceid = ?", params[:deviceid]])
-	  @device = Device.find_by_deviceid(params[:deviceid])
-  	  	
-  	if @device.nil?
-  		@device = Device.new()
-  		@device.deviceid = params[:deviceid]
-  		@device.device = params[:device]
-  		@device.carrier = params[:carrier]
-  		@device.screenwidth = params[:screenwidth] 
-  		@device.save!
-  	end
-  		
-  	current_point = Point.from_lon_lat(params[:lng],params[:lat],4326)
+  	@device = Device.find_or_create_device(request)	  		
+  	current_point = Point.from_lon_lat(device.lng,device.lat,4326)
   	prizes = Prize.find_all_by_prizearea(current_point)
   	
   	
