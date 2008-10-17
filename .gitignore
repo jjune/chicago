@@ -7,3 +7,4 @@ db/schema.rb
 public/dispatch.cgi
 public/dispatch.fcgi
 public/dispatch.rb
+Capfile

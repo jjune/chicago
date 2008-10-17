@@ -12,16 +12,17 @@ class Device < ActiveRecord::Base
 	
 	def self.find_or_create_device(request)
 		#We only code for Where right now, but this will get built out
-		device = find_by_uniqueid(request.parameters[:deviceid])
+		device = find_by_uniqueid(request.parameters[:device_uniqueid])
 	    if device.nil? then
 	    	device = new
-	    	device.uniqueid=request.parameters[:deviceid]
+	    	device.uniqueid=request.parameters[:device_uniqueid]
 	    	device.short_code=generate_unique_short_code
 	    	device.save!
 	    end
 	    
-	    #Extend for the device specific module
-	    device.extend(DeviceWhere)
+	    #Extend for the device specific module that was calculated in the application controller
+	    device_module="Device#{request.parameters[:device_type].capitalize}"
+	    device.extend(eval(device_module))
 	    
 	    #Add the request object in, so the parameters can be extracted
 	    device.current_request=request
