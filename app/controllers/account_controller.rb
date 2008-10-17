@@ -21,7 +21,7 @@ class AccountController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
       #redirect_back_or_default(:controller => '/account', :action => 'index')
-      if self.current_user.account_type == 'Player'
+      if self.current_user.type == 'Player'
         redirect_to(:controller => 'player')
       else
         redirect_to(:controller => 'prizes')
@@ -41,8 +41,8 @@ class AccountController < ApplicationController
   
   
   def process_player_registration
-    @user = User.new(params[:user])
-    @user.account_type = 'Player'
+    @user = Player.new(params[:user])
+    #@user.type = 'Player'
     
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
@@ -51,20 +51,19 @@ class AccountController < ApplicationController
       @action_class = 'register'
       @title = "Registration Complete"
       @confirmation_message = "player_confirmation"
-      render :controller => 'account', :action => 'registration_confirmation', :collection => @user
-
-      
+      render :controller => 'account', :action => 'registration_confirmation', :collection => @user    
     else
       @action_class = 'register'
       @title = "New Player Registration"
+      flash[:error] = 'An error occurred during registration.  Please try again.'
       render :action => 'player_registration'
     end
      
   end
   
   def process_sponsor_registration
-    @user = User.new(params[:user])
-    @user.account_type = 'Sponsor'
+    @user = Sponsor.new(params[:user])
+    #@user.type = 'Sponsor'
 
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."

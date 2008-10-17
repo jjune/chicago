@@ -4,7 +4,7 @@ class PrizesController < ApplicationController
 
   before_filter :login_required
   layout 'application'
-  layout 'dashboard', :only => :new
+  layout 'dashboard', :except => :index
   def index
     
     #@header_above_partial_path = "global/hdr_above"
@@ -78,8 +78,6 @@ end
     @prize = Prize.find(params[:id])
   end
 
-  # POST /prizes
-  # POST /prizes.xml
   def create  
     #@prize = Prize.new(params[:prize])
     RAILS_DEFAULT_LOGGER.error("post:"+params[:prize][:prizearea])
@@ -91,39 +89,11 @@ end
    		RAILS_DEFAULT_LOGGER.error("\n" + j[0].to_s + "," + j[1].to_s + "\n")
    		[j[1].to_f, j[0].to_f]
    	end
-   	
-   	#points.collect! { |x| x.split(/,/)}
-   	#@points.collect! {|x| x.split(/,/)}
-    #points = Array.new()
-    #str_point.each {|p| 
-    #j=p.split(/,/)
-    #points.push(j)
-    
 
-    
-    
-    
-	@prize = Prize.new(	:name => params[:prize][:name],
-						:prizearea => Polygon.from_coordinates([points],4326), 
-						:center => Point.from_x_y(params[:center_lng],params[:center_lat],4326),
-						:type => "prize",
-					  :prizetype => params[:prize][:prizetype],
-          	:prizeamt => params[:prize][:prizeamt],
-          	:cheatcode => params[:prize][:cheatcode],
-          	:winnermsg => params[:prize][:winnermsg],
-          	:quantity => params[:prize][:quantity]
-					  )
-					  
-	#
-	#if !(params[:prize][:quantity].to_i >0)
-	#	quantity=1
-	#else
-	#	quantity = params[:prize][:quantity].to_i
-	#end
-	
-	#for num in (1..quantity)
-	#	@prize.prize_items << PrizeItem.new(:status=>"active")
-	#end
+  @prize = Prize.new(params[:prize])
+	@prize.prizearea = Polygon.from_coordinates([points],4326)
+	@prize.center = Point.from_x_y(params[:center_lng],params[:center_lat],4326)
+	@prize.sponsor_id = current_user.id
 	
     respond_to do |format|
       if @prize.save
@@ -138,8 +108,6 @@ end
     end
   end
 
-  # PUT /prizes/1
-  # PUT /prizes/1.xml
   def update
     @prize = Prize.find(params[:id])
 

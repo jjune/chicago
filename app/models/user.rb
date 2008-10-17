@@ -11,10 +11,9 @@ class User < ActiveRecord::Base
   validates_length_of       :login,    :within => 3..40
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :case_sensitive => false
-  validates_acceptance_of :terms_of_service
+  #validates_acceptance_of :terms_of_service
   
-  #Validates against contact information only for sponsor registration
-  validates_presence_of      :first_name, :last_name, :address1, :city, :state, :zipcode, :country, :phone_number,  :if => :sponsor_registration?
+
   
   before_save :encrypt_password
   before_create :make_activation_code 
@@ -101,10 +100,6 @@ class User < ActiveRecord::Base
     def make_activation_code
 
       self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
-    end
-    
-    def sponsor_registration?
-      true
     end
     
 end
