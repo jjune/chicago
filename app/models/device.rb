@@ -34,7 +34,7 @@ class Device < ActiveRecord::Base
 	
 	def self.generate_unique_short_code
 		short_code=generate_short_code
-		while Device.find_by_short_code(short_code)!=nil
+		while find_by_short_code(short_code)!=nil
 			short_code=generate_short_code
 		end
 		short_code
