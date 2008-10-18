@@ -70,18 +70,19 @@ end
 	@prize.center = Point.from_x_y(params[:center_lng],params[:center_lat],4326)
 	@prize.sponsor_id = current_user.id
 	
-    respond_to do |format|
+
       if @prize.save
         flash[:notice] = 'Prize was successfully created.'
-        format.html { redirect_to(@prize) }
-        format.xml  { render :xml => @prize, :status => :created, :location => @prize }
-        #redirect_to :controller => 'prizes', :action => 'confirmation', :id => @prize
+        #format.html { redirect_to(@prize) }
+        #format.xml  { render :xml => @prize, :status => :created, :location => @prize }
+        redirect_to :controller => 'prizes', :action => 'confirmation', :id => @prize.id
+        
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @prize.errors, :status => :unprocessable_entity }
+        redirect_to :controller => :prizes, :action => :new
+        #format.html { render :action => "new" }
+        #format.xml  { render :xml => @prize.errors, :status => :unprocessable_entity }
       end
-      
-    end
+
   end
 
   def update
@@ -112,6 +113,13 @@ end
     end
   end
 
+def confirmation
+    @bodyscript = 'onload="initialize()" onunload="GUnload()"'    
+    @prize = Prize.find(params[:id])
+
+
+end
+  
   def prize_type_select
     @prize_type = params[:prize_prizetype]
     
