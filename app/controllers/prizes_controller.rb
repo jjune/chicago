@@ -4,7 +4,7 @@ class PrizesController < ApplicationController
 
   before_filter :login_required
   layout 'application'
-  layout 'dashboard', :except => :index
+  layout 'dashboard'
   def index
     
     #@header_above_partial_path = "global/hdr_above"
