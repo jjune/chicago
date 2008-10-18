@@ -1,7 +1,4 @@
-/* @override 
-	http://localhost:3000/stylesheets/dashboard.css?1223361671
-	http://localhost:3000/stylesheets/dashboard.css?1224173519
-*/
+/* @override http://localhost:3000/stylesheets/dashboard.css?1224283742 */
 
 body 
 {
@@ -311,6 +308,33 @@ div#featureBOX fieldset
 {
 	font-family: Arial, Helvetica, sans-serif;
 	border: 1px solid #494949;
-	font-size: 1.2em;
+	font-size: 1.3em;
 }
 
+#info-table {
+	width:822px;
+	border-top:1px solid #444;
+	border-right:1px solid #444;
+	margin:1em auto;
+	border-collapse:collapse;
+	font-family: Arial, Helvetica, sans-serif;
+	}
+#info-table tr.title-row td	{
+	font-size: 1.3em;
+	background-color: #222;
+	text-align: left;
+	padding-left: 20px;
+}
+#info-table tr.info-row td	{
+	font-size: 0.8em;
+	text-align: left;
+	padding-left: 20px;
+}
+#info-table td {
+	color:#fff;
+	border-bottom:1px solid #444;
+	border-left:1px solid #444;
+	padding:7px;
+	text-align:center;
+	font-size: 11px;
+	}											
