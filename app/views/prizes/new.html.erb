@@ -30,7 +30,7 @@
 			
 			<%= observe_field 'prize_prizetype',
 							  :update => 'prize-type-menu', 
-							  :url    => 'prize_type_select',
+							  :url    => {:controller => :prizes, :action => :prize_type_select},
 							  :with   => 'prize_prizetype'	
   							%>
 			
@@ -39,9 +39,20 @@
 				<fieldset><%= f.text_field :prizeamt, :size => 10 %></fieldset>
 			</div>	
 		
-			
 			<label for="cheatcode">Cheat Code</label>
-			<fieldset><%= f.text_field :cheatcode, :size => 32 %></fieldset>			
+			<fieldset><%= f.text_field :cheatcode, :size => 32 %></fieldset>
+			
+			<%= observe_field :prize_cheatcode,
+							  :frequency => 0.25,
+							  :update => 'cheat-hint', 
+							  :url    => {:controller => :prizes, :action => :show_cheathint},
+							  :with   => 'prize_cheatcode'
+  							%>
+
+			<div id='cheat_hint' style="display:none">
+				<label for="cheathint">Cheat Hint</label>
+				<fieldset><%= f.text_field :cheathint, :size => 32 %></fieldset>
+			</div>		
 				
 			<label for="winnermsg">Winner's Message</label>
 			<fieldset><%= f.text_area :winnermsg, :style=>'font-size: 0.8em;line-height: 1.2em;width: 225px;height: 80px;' %></fieldset>

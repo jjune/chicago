@@ -126,9 +126,23 @@ end
       end      
     end
   end
+  
+  def show_cheathint
+    @cheatcode = params[:prize_cheatcode]
+    
+    if @cheatcode.nil? || @cheatcode == ""
+      render :update do |page|
+        page[:cheat_hint].hide
+      end
+    else
+      render :update do |page|
+        page[:cheat_hint].show
+      end
+    end
+  end
+  
   #Added BG ActiveMerchant
   #Obviously should be dropped into a table - but for release 1 - NO!
-  
   PRODUCTS = { 
   
   'Message' => { 

@@ -88,6 +88,7 @@ class AccountController < ApplicationController
   def check_shortcode
     
     @device = Device.find_by_short_code(params[:shortcode])
+    
         
     if params[:shortcode] == "123"
        @shortcode_device = "yes"
