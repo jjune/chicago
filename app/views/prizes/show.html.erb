@@ -1,7 +1,7 @@
 
 
 
-	  <div id="instruction-text">
+	  <div id="page-description">
 	  <h2>Your prize has been successfully submitted</h2>
 	  I figured we probably need some information here after a prize has been submitted.  Perhaps some instructions on what they should expect from here... perhaps some more disclaimer, etc etc. 
 <p class="info-text">
@@ -9,7 +9,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse eleifend v
 </p>
 	  </div>
 	
-
+<p>
 		<table width="100%" id="info-table">
 		<tbody>
 			<tr class="title-row">
@@ -38,7 +38,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse eleifend v
 			
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Prize Location</td>
-				<td></td>
+				<td><%= render :partial => 'map_with_overlay', :object => @map_config %></td>
 			</tr>
 			
 

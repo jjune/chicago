@@ -19,7 +19,7 @@ class PrizesController < ApplicationController
   end
 
   def show
-  	@bodyscript = '<body onload="initialize()" onunload="GUnload()">'    
+  	@bodyscript = 'onload="initialize()" onunload="GUnload()"'    
     @prize = Prize.find(params[:id])
 
     respond_to do |format|
