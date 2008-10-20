@@ -9,7 +9,8 @@ function initialize()
 		map = new GMap2(document.getElementById("map_canvas"));
 		map.setCenter(<%=GLatLng.from_georuby(@prize.center).to_javascript%>, 13);
         map.disableDragging();
-        prizearea = <%=GPolygon.from_georuby(@prize.prizearea,'#0000FF','5','1','#0000FF','0.2').to_javascript%>
+        <%@color=@prize.quantity>0 ? "#0000FF" : "#FF0000"%>
+        prizearea = <%=GPolygon.from_georuby(@prize.prizearea,@color,'5','1',@color,'0.2').to_javascript%>
         map.addOverlay(prizearea);
 	}
 }
