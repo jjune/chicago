@@ -1,13 +1,8 @@
-<% if @shortcode_device == 'yes' %>
+<% if @device %>
 <div id="shortcode-device">
 <span class="notification-message">Shortcode identified</span><br>
-Carrier: AT&T<br>
-Device ID: 00:0E:07:42:ED:B2<br>
-Last Snoop Date: September 20, 2008<br>
-Last Snoop Location: (37.795135, -122.401214)<br>
+Unique ID: <%= @device.uniqueid %><br>
 </div>
-<% elsif @shortcode_device == 'empty' %>
-<div id="register-error-message"></div>
 <% else %>
 <div id="register-error-message">Shortcode not recognized</span>
 <% end %>

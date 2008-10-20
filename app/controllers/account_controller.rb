@@ -1,6 +1,5 @@
 class AccountController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
-  include AuthenticatedSystem
+
   # If you want "remember me" functionality, add this before_filter to Application Controller
   #before_filter :login_from_cookie
 
@@ -87,6 +86,9 @@ class AccountController < ApplicationController
   end
   
   def check_shortcode
+    
+    @device = Device.find_by_short_code(params[:shortcode])
+        
     if params[:shortcode] == "123"
        @shortcode_device = "yes"
     elsif params[:shortcode] == ""
