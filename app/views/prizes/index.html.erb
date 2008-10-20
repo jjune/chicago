@@ -1,36 +1,18 @@
 
+<div id="page-description">
+<h2>Prizes submitted by <%= current_user.first_name%> <%= current_user.last_name %>
+</div>
 
 
-
-
-<% content_for :body do %>
-	 <%=@bodyscript %> class="prizes"onload="initialize()" onunload="GUnload()"
-<% end %>
-
-
-
-
-<% content_for :head do %>
-	<%= stylesheet_link_tag 'prizes' %>
-<% end %>
-
-<table class="prizes_list">
-<tbody>
-  <tr><th colspan=4>Your Sponsored Prizes</th></tr>
- <tr><th>Title</th><th>Status</th><th colspan=2>Menu</th></tr>
-<% for prize in @prizes %>
-<tr><td class="name"><%=prize.name%></td>
- 	<td class="status">Status: Active</td>
-	<td class="command"><%= link_to 'Show', prize %></td>
-    <td class="command"><%= link_to 'Edit', edit_prize_path(prize) %></td>
-    <td class="command"><%= link_to 'Destroy', prize, :confirm => 'Are you sure?', :method => :delete %></td>
-</tr>
-<% end %>
-
-</tbody>
-</table>
-<br />
-
-
-
-<%= link_to (image_tag("createaprize.gif", :border => 0)), new_prize_path %>
+	<table width="100%" id="info-table">
+		<tr class="header-row">
+			<td scope="row" width="225px">Name</td>
+			<td scope="row" width="100px">Status</td>
+			<td scope="row" width="110px">Total Claimed</td>
+			<td scope="row"></td>
+			<td scope="row"></td>
+		</tr>
+	<tbody>
+	<%= render :partial => @prizes %>
+	</tbody>
+	</table>

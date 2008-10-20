@@ -13,6 +13,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.root :controller => 'account', :action => 'register_device'
   
+  
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end

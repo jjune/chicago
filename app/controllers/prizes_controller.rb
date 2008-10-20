@@ -7,21 +7,10 @@ class PrizesController < ApplicationController
   layout 'dashboard'
   def index
     
-    #@header_above_partial_path = "global/hdr_above"
-    #@header_partial_path = "prizes/hdr_prizelab"
-    #@header_below_partial_path = "global/hdr_below"
-    #@hdr_below_title = "Dashboard"
-    
-    #@footer_above_partial_path = "global/ftr_above"
-    #@footer_partial_path = "prizes/hdr_prizelab"
-    #@footer_below_partial_path = "global/ftr_below"
-    #@ftr_below_title = "Dashboard"
-    
-    
-    
     #This is the problem because I used old technique for pagination
     #@prize_pages, @prizes = paginate :prizes, :per_page => 3
-    @prizes = Prize.find(:all)
+    @prizes = Prize.find_all_by_sponsor_id(current_user.id)
+    #@prizes = Prize.find(:all)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,20 +18,8 @@ class PrizesController < ApplicationController
     end
   end
 
-  # GET /prizes/1
-  # GET /prizes/1.xml
   def show
-  	@bodyscript = '<body onload="initialize()" onunload="GUnload()">'
-    @header_above_partial_path = "global/hdr_above"
-    @header_partial_path = "prizes/hdr_prizelab"
-    @header_below_partial_path = "global/hdr_below"
-    @hdr_below_title = "Prize Viewer"
-    
-    @footer_above_partial_path = "global/ftr_above"
-    #@footer_partial_path = "prizes/hdr_prizelab"
-    @footer_below_partial_path = "global/ftr_below"
-    #@ftr_below_title = "Dashboard"
-    
+  	@bodyscript = '<body onload="initialize()" onunload="GUnload()">'    
     @prize = Prize.find(params[:id])
 
     respond_to do |format|
@@ -50,10 +27,7 @@ class PrizesController < ApplicationController
       format.xml  { render :xml => @prize }
     end
 end
-  
 
-  # GET /prizes/new
-  # GET /prizes/new.xml
   def new
     #@bodyscript = 'onload="initialize()" onunload="GUnload()"'
     @prize = Prize.new
@@ -101,6 +75,7 @@ end
         flash[:notice] = 'Prize was successfully created.'
         format.html { redirect_to(@prize) }
         format.xml  { render :xml => @prize, :status => :created, :location => @prize }
+        #redirect_to :controller => 'prizes', :action => 'confirmation', :id => @prize
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @prize.errors, :status => :unprocessable_entity }
