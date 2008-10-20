@@ -1,4 +1,7 @@
-/* @override http://localhost:3000/stylesheets/dashboard.css?1224283742 */
+/* @override 
+	http://localhost:3000/stylesheets/dashboard.css?1224283742
+	http://localhost:3000/stylesheets/dashboard.css?1224430377
+*/
 
 body 
 {
@@ -241,13 +244,13 @@ div#nav ul ul ul li:hover ul
 	margin-left: 3px;
 	border:#2d2d2d solid 1px;
 }
-div#prize_confirmation
+div#page-description
 {
 	font-size:.75em;
 	margin-bottom:25px;
 }
 
-div#prize_confirmation h2
+div#page-description h2
 {
 	text-align:left;
 	color:#dab25d;
@@ -325,11 +328,38 @@ div#featureBOX fieldset
 	text-align: left;
 	padding-left: 20px;
 }
+#info-table tr.header-row td	{
+	font-size: 0.9em;
+	background-color: #333;
+	text-align: left;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	color: #999;
+}
+#info-table tr.list-row td	{
+	font-size: 0.9em;
+	text-align: left;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
 #info-table tr.info-row td	{
 	font-size: 0.8em;
 	text-align: left;
 	padding-left: 20px;
 }
+.info-prize-header {
+	color:#fff;
+	border-bottom:1px solid #444;
+	border-left:1px solid #444;
+	padding:7px;
+	text-align:center;
+	font-size: 1.0em;
+	}											
+
 #info-table td {
 	color:#fff;
 	border-bottom:1px solid #444;
