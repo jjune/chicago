@@ -1,6 +1,7 @@
 /* @override 
 	http://localhost:3000/stylesheets/dashboard.css?1224283742
 	http://localhost:3000/stylesheets/dashboard.css?1224430377
+	http://localhost:3000/stylesheets/dashboard.css?1224485527
 */
 
 body 
@@ -339,7 +340,15 @@ div#featureBOX fieldset
 	padding-bottom: 5px;
 	color: #999;
 }
-#info-table tr.list-row td	{
+#info-table tr.list-row td {
+	font-size: 0.9em;
+	text-align: left;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+#info-table tr.list-row td.a {
 	font-size: 0.9em;
 	text-align: left;
 	padding-left: 8px;
@@ -368,4 +377,10 @@ div#featureBOX fieldset
 	padding:7px;
 	text-align:center;
 	font-size: 11px;
-	}											
+	}
+#info-table td a {
+	color:#fff;
+}											
+#info-table td a.hover {
+	color:#dab25d;
+}											

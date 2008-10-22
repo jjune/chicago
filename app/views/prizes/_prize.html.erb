@@ -1,6 +1,6 @@
 <tr class="list-row">
-	<td scope="row"><%= prize.name %></td>
-	<td scope="row"><%= prize.prizetype %></td>
-	<td scope="row"></td>
+	<td scope="row"><%= link_to h(prize.name), prize %></td>
+	<td scope="row"><%= prize.prizetype.camelize %></td>
+	<td scope="row"><%= prize.status %></td>
 	<td scope="row"></td>
 </tr>
