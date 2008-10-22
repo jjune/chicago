@@ -1,0 +1,46 @@
+
+
+
+	  <div id="page-description">
+	  <h2>Your prize has been successfully submitted</h2>
+	  I figured we probably need some information here after a prize has been submitted.  Perhaps some instructions on what they should expect from here... perhaps some more disclaimer, etc etc. 
+<p class="info-text">
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse eleifend vestibulum ipsum. Curabitur quis mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ullamcorper. Maecenas at orci. Cras nisi. Curabitur quis turpis. Fusce odio. Donec enim velit, mattis eget, porttitor nec, eleifend tincidunt, orci. Etiam sit amet arcu ac eros semper dictum. Sed ac urna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla facilisi. Aenean urna turpis, ullamcorper nec, congue sit amet, feugiat et, metus. 	
+</p>
+	  </div>
+	
+<p>
+		<table width="100%" id="info-table">
+		<tbody>
+			<tr class="title-row">
+				<td scope="row" class="info-prize-name" colspan=2><%= @prize.name %></td>
+			</tr>
+			<tr class="info-row">
+				<td scope="row" class="info-prize-name" width="175px">Prize Type</td>
+				<td><%= @prize.prizetype %></td>
+			</tr>
+			<tr class="info-row">
+				<td scope="row" class="info-prize-name" width="175px">Prize Value</td>
+				<td>$ <%= @prize.prizeamt %></td>
+			</tr>
+			<tr class="info-row">
+				<td scope="row" class="info-prize-name" width="175px">Winner's Message</td>
+				<td><%= @prize.winnermsg %></td>
+			</tr>
+			<tr class="info-row">
+				<td scope="row" class="info-prize-name" width="175px">Cheat Code</td>
+				<td><%= @prize.cheatcode %></td>
+			</tr>
+			<tr class="info-row">
+				<td scope="row" class="info-prize-name" width="175px">Cheat Hint</td>
+				<td><%= @prize.cheathint %></td>
+			</tr>
+			
+			<tr class="info-row">
+				<td scope="row" class="info-prize-name" width="175px">Prize Location</td>
+				<td><%= render :partial => 'map_with_overlay', :object => @map_config %></td>
+			</tr>
+			
+
+		</tbody>
+		</table>
