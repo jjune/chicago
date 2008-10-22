@@ -1,0 +1,31 @@
+<%@bodyscript = 'onload="initialize()" onunload="GUnload()"'%>
+
+<script>
+var map=null;
+function initialize() 
+{
+	if (GBrowserIsCompatible()) 
+	{
+		
+		map = new GMap2(document.getElementById("map_canvas"));
+		map.setCenter(<%=GLatLng.from_georuby(@query_transactions[0].coordinate).to_javascript%>, 13);
+		map.addControl(new GLargeMapControl());
+    
+    	<%@query_transactions.each do |q| %>
+       		//Create the custom icon depending if a prize was won on that transaction or not
+        	var markerIcon = new GIcon(G_DEFAULT_ICON);
+        	<%unless q.prize.nil?%>
+        	//This one's a winner, so make it blue
+        	markerIcon.image = "/images/blue_marker.png";
+        	<%end%>
+        	markerOptions = { icon:markerIcon };
+        	
+        	//Add the overlay
+    		var point = <%=GLatLng.from_georuby(q.coordinate).to_javascript%>;
+        	map.addOverlay(new GMarker(point,markerOptions));
+        <%end%>
+	}
+}
+</script>
+
+<div id="map_canvas" style="width: 500px; height: 300px"></div>
