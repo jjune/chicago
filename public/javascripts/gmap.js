@@ -1,4 +1,4 @@
-
+document.write("<script language='Javascript' src='http://gd.geobytes.com/gd?after=-1&variables=GeobytesCountry,GeobytesCity,GeobytesRegion,GeobytesLatitude,GeobytesLongitude' ></script>");
     var map = null;
  	var geocoder = null;
  	var prizearea = null;
@@ -34,8 +34,9 @@
  function initialize() {
    if (GBrowserIsCompatible()) {
     map = new GMap2(document.getElementById("map_canvas"));
-    map.setCenter(new GLatLng(37.4419, -122.1419), 13);
-	map.addControl(new GLargeMapControl());
+    //map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+	map.setCenter(new GLatLng(sGeobytesLatitude,sGeobytesLongitude), 13);
+    map.addControl(new GLargeMapControl());
 	var mapControl = new GMapTypeControl();
 	map.addControl(mapControl);
 
