@@ -135,6 +135,11 @@ end
     end
   end
   
+  def query_transactions
+  	@query_transactions=QueryTransaction.find(:all)
+  end
+  	
+  
   def show_cheathint
     @cheatcode = params[:prize_cheatcode]
     
