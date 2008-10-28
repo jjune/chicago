@@ -12,10 +12,10 @@ class Device < ActiveRecord::Base
 	
 	def self.find_or_create_device(request)
 		#Lookup the device unique id found in the application controller and see if we have
-		#seen if we already have it in the database
+		#it in the database
 		#otherwise, we built it
 		device = find_by_uniqueid(request.parameters[:device_uniqueid])
-	    if device.nil? then
+	    if device.nil?
 	    	device = new
 	    	device.uniqueid=request.parameters[:device_uniqueid]
 	    	device.short_code=generate_unique_short_code
