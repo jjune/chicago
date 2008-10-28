@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
         cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
       end
        if self.current_user.type == 'Player'
-          redirect_to(:controller => 'player')
+          redirect_to('/dashboard')
         else
           redirect_to(:controller => 'prizes')
         end

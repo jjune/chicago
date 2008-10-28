@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'register', :controller => 'account', :action => 'player_registration'
   map.connect 'register/contact', :controller => 'account', :action => 'register_contact'
   map.connect 'login', :controller => 'sessions', :action => 'new'
+  map.connect 'dashboard', :controller => 'player', :action => 'index'
   map.logout 'logout', :controller => 'sessions', :action => 'destroy'
   map.connect '/activate/:activation_code', :controller => 'users', :action => 'activate'
   map.root :controller => 'account', :action => 'register_device'
