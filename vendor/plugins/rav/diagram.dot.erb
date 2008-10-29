@@ -42,8 +42,10 @@ digraph G {
           <% end %>
         <% end %>
 
+		<%if model.respond_to? :superclass%>
         <% unless [ Object, ActiveRecord::Base, ActionMailer::Base ].include?(model.superclass) %>
           "<%= model %>" -> "<%= model.superclass %>" [ label = "is a" ];
+        <% end %>
         <% end %>
       <% end %>
     }
