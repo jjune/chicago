@@ -1,8 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" <%= GMap::VML_NAMESPACE %> >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Query Prizes</title>
-  <%= GMap.header(:host=>request.host) %>
+	<title></title>
+	 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	 <%= stylesheet_link_tag 'dashboard' %>
+	 <%= javascript_include_tag :defaults %>
+	 <%= GMap.header(:host=>request.host) %>
+	 <%= javascript_include_tag 'gmap', 'ym4r-gm' %> 
+</head>
+
+
 <script>
  var map=null;
  var marker=null;
@@ -36,6 +43,9 @@
   }	
 
  }
+ 
+ 
+ 
  </script>
   <style>
   #map_div {width: 500px; height: 300px; }
@@ -43,10 +53,14 @@
 </head>
 	
 <body onload="initialize()" onunload="GUnload()">
+	<form action="#" onsubmit="showAddress(this.address.value); return false">
+         <input class="search_form" type="text" name="address" value="" />&nbsp;
+         <input type="submit" value="Go!" class="form-button"  />
 	<div id="main">
     <div id="map_div" ></div>
     <div id="notice" style="display:none;color:red;text-align:center;font-weight:bold;"></div>
   </div>
+  </form>
   <form name="querytype">
   <input type="radio" name="queryoption" value="find">Query Prize
 	<input type="radio" name="queryoption" value="nearest" checked>Query Nearest Neighbor

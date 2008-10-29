@@ -69,7 +69,8 @@ end
 	@prize.prizearea = Polygon.from_coordinates([points],4326)
 	@prize.center = Point.from_x_y(params[:center_lng],params[:center_lat],4326)
 	@prize.sponsor_id = current_user.id
-	
+	@prize.quantity=1
+	@prize.status=Prize::Status::Active
 
       if @prize.save
         flash[:notice] = 'Prize was successfully created.'

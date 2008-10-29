@@ -5,6 +5,25 @@ class Prize < ActiveRecord::Base
 	
 	validates_presence_of :name, :prizetype, :prizearea, :center, :winnermsg, :quantity   #, :sponsor_id This evidently is not populated
 	
+	#This module is used to manage and document statuses of a prize item
+	module Status
+		Active="active"
+		Inactive="inactive"
+		Complete="complete"
+		
+		def self.find_all
+			return self.local_constants
+		end
+		
+		def self.find_all_as_hash
+			all_status={}
+			self.local_constants.each do |status|
+				all_status.merge! :"#{status}" =>eval("self::#{status}")
+			end
+			all_status
+		end
+	end
+	
 	#validates_uniqueness_of :cheatcode #need to supress error message here or allow non-unique via query
 		
 	def self.find_all_exact_by_georuby_point(point)
@@ -39,11 +58,15 @@ class Prize < ActiveRecord::Base
 			#since we just won and now the quantity is zero
 			winning_prize = prize[0]
 			winning_prize.quantity = winning_prize.quantity-1
+			if winning_prize.quantity==0
+				winning_prize.status=Prize::Status::Complete
+			end
 			#Now create the item instance
 			winning_prize_item=PrizeItem.new
 			winning_prize_item.prize=winning_prize
 			winning_prize_item.device=device
-			winning_prize_item.status="win"
+			winning_prize_item.coordinate=device.georuby_point
+			winning_prize_item.status=PrizeItem::Status::Win
 			#We use a transaction because we only want to reduce quantity if the item is also created
 			transaction do
 				winning_prize.save!
