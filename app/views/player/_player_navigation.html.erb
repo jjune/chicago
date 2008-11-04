@@ -1,0 +1,7 @@
+<div id="nav">
+   <ul>
+     <li><a href="/player/dashboard">Dashboard</a></li>
+     <li><a href="/account">Account</a></li>
+	 <li><%= link_to "Logout (#{current_user.login})", '/logout', :confirm => 'Are you sure you want to log out?' %>
+    </ul>
+</div>

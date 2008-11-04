@@ -3,7 +3,6 @@ class PrizesController < ApplicationController
   # GET /prizes.xml
 
   before_filter :login_required
-  layout 'application'
   layout 'dashboard'
   def index
     

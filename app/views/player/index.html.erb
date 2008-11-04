@@ -1,6 +1,6 @@
 
 <div id="page-description">
-<h2>Prizes submitted by <%= current_user.first_name%> <%= current_user.last_name %></h2>
+<h2>Prizes for <%= current_user.first_name%> <%= current_user.last_name %></h2>
 </div>
 
 
@@ -12,6 +12,6 @@
 			<td scope="row">Status</td>
 		</tr>
 	<tbody>
-	<%= render :partial => @prizes %>
+
 	</tbody>
 	</table>
