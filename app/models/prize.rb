@@ -4,27 +4,16 @@ class Prize < ActiveRecord::Base
 	belongs_to :sponsor
 	
 	validates_presence_of :name, :prizetype, :prizearea, :center, :winnermsg, :quantity   #, :sponsor_id This evidently is not populated
+	#validates_uniqueness_of :cheatcode #need to supress error message here or allow non-unique via query
 	
-	#This module is used to manage and document statuses of a prize item
+	#This module is used to manage and document statuses of a prize
 	module Status
+		extend ConstantFunctions
+		
 		Active="active"
 		Inactive="inactive"
 		Complete="complete"
-		
-		def self.find_all
-			return self.local_constants
-		end
-		
-		def self.find_all_as_hash
-			all_status={}
-			self.local_constants.each do |status|
-				all_status.merge! :"#{status}" =>eval("self::#{status}")
-			end
-			all_status
-		end
 	end
-	
-	#validates_uniqueness_of :cheatcode #need to supress error message here or allow non-unique via query
 		
 	def self.find_all_exact_by_georuby_point(point)
 		return find_all_exact_by_lng_lat(point.lng,point.lat)
@@ -81,8 +70,8 @@ class Prize < ActiveRecord::Base
 		end
 	end
 	
-	def self.find_nearest_prizes(lng,lat,distance)
-		query=base_nearest_query(lng,lat,distance)
+	def self.find_nearest_prizes(device,distance)
+		query=base_nearest_query(device.lng,device.lat,distance)
 		query<< "AND quantity>0 "		
 		nearest_prizes = Prize.find_by_sql(query)
 		
