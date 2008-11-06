@@ -14,6 +14,9 @@ class Device < ActiveRecord::Base
 		#Lookup the device unique id found in the application controller and see if we have
 		#it in the database
 		#otherwise, we built it
+		#TODO --> Device.find_or_initialize_by_uniqueid(request.parameters[:device_uniqueid])
+		#if device.new_record? 
+		# generate short code
 		device = find_by_uniqueid(request.parameters[:device_uniqueid])
 	    if device.nil?
 	    	device = new
@@ -25,6 +28,7 @@ class Device < ActiveRecord::Base
 	    #Ok, we have either found or created the device
 	    #Now, extend for the device specific module that was calculated in the application controller
 	    device_module="Device#{request.parameters[:device_type].capitalize}"
+	    #TODO -->device_module.constantize
 	    device.extend(eval(device_module))
 	    
 	    #Add the request object in, so the parameters can be extracted by the device specific module
