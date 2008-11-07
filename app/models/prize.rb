@@ -144,7 +144,6 @@ class Prize < ActiveRecord::Base
 		query<<	"AND NOT ST_Contains(transform(prizearea,2163),transform(GeomFromText('POINT("+lng+" "+lat+")',4326),2163)) "
 		query<<	"AND NOT _ST_Contains(transform(prizearea,2163),transform(GeomFromText('POINT("+lng+" "+lat+")',4326),2163)) "
 	end
-	
 	def self.log_query(prize,device)
 		qt = QueryTransaction.new()
     	qt.coordinate = device.georuby_point

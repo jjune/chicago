@@ -263,7 +263,6 @@ end
   
   
   private 
-
     def gateway 
       @gateway ||= ActiveMerchant::Billing::PaypalExpressGateway.new(PAYPAL_API_CREDENTIALS) 
     end 
@@ -276,6 +275,4 @@ end
       (amount.round(2) * 100).to_i 
     end
   #end #private IS THIS NECESSARY?
-
-
 end #controller
