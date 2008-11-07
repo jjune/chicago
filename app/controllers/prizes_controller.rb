@@ -25,7 +25,7 @@ class PrizesController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @prize }
     end
-end
+  end
 
   def new
     #@bodyscript = 'onload="initialize()" onunload="GUnload()"'
@@ -53,18 +53,14 @@ end
   end
 
   def create  
-    #@prize = Prize.new(params[:prize])
-    RAILS_DEFAULT_LOGGER.error("post:"+params[:prize][:prizearea])
    	points = params[:prize][:prizearea].split(/:/)
    
    	points.collect! do |point|
-   		RAILS_DEFAULT_LOGGER.error("point:"+point.to_s+"\n")
    		j=point.split(/,/)
-   		RAILS_DEFAULT_LOGGER.error("\n" + j[0].to_s + "," + j[1].to_s + "\n")
    		[j[1].to_f, j[0].to_f]
    	end
 
-  @prize = Prize.new(params[:prize])
+  	@prize = Prize.new(params[:prize])
 	@prize.prizearea = Polygon.from_coordinates([points],4326)
 	@prize.center = Point.from_x_y(params[:center_lng],params[:center_lat],4326)
 	@prize.sponsor_id = current_user.id
