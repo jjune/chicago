@@ -24,7 +24,7 @@ config.after_initialize do
 end 
 
 PAYPAL_API_CREDENTIALS = { 
-:login => 'Your PayPal API login.', 
-:password => 'Your PayPal API password.', 
-:signature => 'Your PayPal API signature.' 
+:login => 'paypal_1226603926_biz_api1.supersecretlabs.com', 
+:password => '1226603931', 
+:signature => 'A9cAQs3AOtDvJ7W4wLRwP7y6dhgsAo132C4muED..APElRefC0FACncJ' 
 } 
