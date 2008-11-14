@@ -183,7 +183,7 @@ end
   
   def express_checkout 
     
-    product = params[:order][:product] 
+    #product = params[:order][:product] 
     
     #like to add token confirmation so we know they use web page to create (no hacking!)
     
@@ -197,25 +197,37 @@ end
   
   prize = Prize.find(params[:id])
   
-  prizecost = PRODUCTS[prize.prizetype][:price]
+  #prizecost = PRODUCTS[prize.prizetype][:price]
+  prizecost = PRODUCTS["Message"][:price] #this works
+  
   
         @response = gateway.setup_purchase( 
           amount_in_cents(prizecost), 
           :ip => request.remote_ip, 
-          :description => PRODUCTS[prize.prizetype][:description], 
+          :description => PRODUCTS["Message"][:description], 
           :return_url => url_for(:action => :express_checkout_complete), 
           :cancel_return_url => url_for(:action => :cancel_checkout) 
           ) 
   
         if !@response.success? 
+          logger.info("Paypal ERROR")
           paypal_error(@response) 
         else
           paypal_token = @response.params['token'] 
           #Is this custom below?
-          order.update_attributes( 
+          #Order is an object that stores the paypal token and state (Would be Prize in our model)
+          prize.update_attributes( 
             :paypal_token => paypal_token, 
-            :paypal_state => 'purchase_setup' 
+            :paypal_state => 'purchase_setup', 
+            :paypal_prizecost => prizecost
             ) 
+            
+      #prize.paypal_token = paypal_token
+      #prize.paypal_state = 'purchase_setup'
+      #prize.save!
+      
+      logger.info("Paypal token = " + paypal_token) 
+      logger.info("Paypal state = " + 'purchase_setup') 
       
           paypal_url = gateway.redirect_url_for(paypal_token) 
           redirect_to "#{paypal_url}&useraction=commit" 
@@ -228,7 +240,7 @@ end
   def express_checkout_complete 
     
     paypal_token = params[:token] 
-    @order = Prize.find_by_paypal_token(paypal_token) 
+    @prize = Prize.find_by_paypal_token(paypal_token) 
     @details = gateway.details_for(paypal_token) 
   
     if !@details.success?
@@ -238,7 +250,7 @@ end
       logger.info "Customer name: #{@details.params['name']}" 
       logger.info "Customer e-mail: #{@details.params['payer']}" 
       @response = gateway.purchase( 
-        amount_in_cents(@order.amount), 
+        amount_in_cents(@prize.paypal_prizecost), 
         :token => @details.params['token'], 
         :payer_id => @details.params['payer_id'] 
         )
@@ -246,8 +258,18 @@ end
       if !@response.success? 
         paypal_error(@response) 
       else 
-        @order.update_attribute(:paypal_state, 'closed') 
-        @purchase = Purchase.create(:paypal_amount => @response.params['gross_amount']) 
+        @prize.update_attributes(
+        :paypal_state => 'closed',
+        :paypal_amount => @response.params['gross_amount'] 
+        ) 
+        
+        #send to prize confirmation page
+        
+        #There is nothing as a Purchase object in our model.
+        #Here we should just update the prize
+        #@purchase = Purchase.create(:paypal_amount => @response.params['gross_amount'])  
+        
+             
       end #!@response.success? 
     end #!@details.success?
   end #express_checkout_complete
