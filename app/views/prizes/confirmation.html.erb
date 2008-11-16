@@ -27,6 +27,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse eleifend v
 				<td scope="row" class="info-prize-name" width="175px">Winner's Message</td>
 				<td><%= @prize.winnermsg %></td>
 			</tr>
+		<% if !@prize.cheatcode.nil?
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Cheat Code</td>
 				<td><%= @prize.cheatcode %></td>
@@ -35,6 +36,7 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse eleifend v
 				<td scope="row" class="info-prize-name" width="175px">Cheat Hint</td>
 				<td><%= @prize.cheathint %></td>
 			</tr>
+			end %>
 			
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Prize Location</td>
