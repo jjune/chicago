@@ -12,7 +12,7 @@ def paypal_ipn
   @ipn.payment_gross = params[:payment_gross]
   @ipn.payment_date = params[:payment_date]
   @ipn.brad = @raw
-  @ipn.verified = ipnconfirm
+  @ipn.verify_sign = ipnconfirm
   @ipn.save
 end
 
