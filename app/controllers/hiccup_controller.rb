@@ -9,7 +9,7 @@ def paypal_ipn
   logger.debug "params = #{params}"
   @ipn = Ipn.new
   @ipn.payer_email = params[:payer_email]
-  @ipn.payment_gross = params[:payment_gross]
+  @ipn.payment_gross = params[:mc_gross1]
   @ipn.payment_date = params[:payment_date]
   @ipn.brad = @raw
   @ipn.verify_sign = ipnconfirm
