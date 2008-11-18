@@ -111,9 +111,11 @@ class WhereController < ApplicationController
   #--------------------------------Static About Page--------------------------------
   def aboutus
   	@xml = Builder::XmlMarkup.new
-	@device = Device.find_or_create_device(request)
+	  @device = Device.find_or_create_device(request)
    
-	#Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
+	  #Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
+   
+    #need to add help cheat code here.
    
      respond_to do |format|
        format.xml  {render :xml => @device, :action => "aboutus.xml.builder", :layout => false }
