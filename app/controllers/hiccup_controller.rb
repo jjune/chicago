@@ -1,5 +1,7 @@
 class HiccupController < ApplicationController
 
+skip_before_filter :verify_authenticity_token
+
 #This is the PayPal Instant Payment Notification
 #It is named this way to prevent people from hacking
 
