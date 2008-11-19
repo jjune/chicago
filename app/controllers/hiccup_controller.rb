@@ -13,9 +13,21 @@ def paypal_ipn
   @ipn.payer_email = params[:payer_email]
   @ipn.payment_gross = params[:mc_gross1]
   @ipn.payment_date = params[:payment_date]
+  @ipn.txn_id = params[:txn_id]
   @ipn.brad = @raw
   @ipn.verify_sign = ipnconfirm
   @ipn.save
+
+  #Do a lookup for prize with paypal token?
+  #Set at least the prize status
+  paypal_token = params[:txn_id] 
+  @prize = Prize.find_by_paypal_token(paypal_token)
+  
+  if params[:payment_status] == "Completed" then 
+    @prize.status=Prize::Status::Active
+    @prize.save!
+  end
+
 end
 
 
