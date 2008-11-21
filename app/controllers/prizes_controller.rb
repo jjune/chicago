@@ -66,6 +66,7 @@ class PrizesController < ApplicationController
 	@prize.sponsor_id = current_user.id
 	@prize.quantity=1
 	@prize.status=Prize::Status::Hold
+	@prize.zoom=params[:zoom]
 
       if @prize.save
         flash[:notice] = 'Prize was successfully created.'

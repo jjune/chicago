@@ -13,7 +13,7 @@ class Prize < ActiveRecord::Base
 		Active="active"
 		Inactive="inactive"
 		Complete="complete"
-		Hold="hold for payment"
+		Hold="hold"
 	end
 		
 	def self.find_all_exact_by_georuby_point(point)
