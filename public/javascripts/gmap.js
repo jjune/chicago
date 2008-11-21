@@ -22,6 +22,7 @@ document.write("<script language='Javascript' src='http://gd.geobytes.com/gd?aft
 	 	document.getElementById("prize_prizearea").value = strTempGeo;
 	 	document.getElementById("center_lat").value = map.getCenter().lat();
 	 	document.getElementById("center_lng").value = map.getCenter().lng();
+		document.getElementById("zoom").value = map.getZoom();
 }
  function whereistheprizearea()
  {
