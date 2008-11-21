@@ -190,7 +190,7 @@ def express_checkout
   #sponsor id should come from session - so that only auth'd user can pay for his prizes.
   #@current_user.id
   #sponsor_id = @current_user.id
-  logger.info("Brad Current User = " + @current_user.id)
+  logger.info("Brad Current User = " + @current_user.id.to_s)
   logger.info("Brad Prize = " + params[:id])
   logger.info("Brad Sponsor = " + params[:sponsor_id])
   
