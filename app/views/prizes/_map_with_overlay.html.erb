@@ -8,7 +8,11 @@ function initialize()
 	{
 		map = new GMap2(document.getElementById("map_canvas"));
 		map.setCenter(<%=GLatLng.from_georuby(@prize.center).to_javascript%>, 13);
-        map.setZoom(<%=@prize.zoom)%>);
+<% if @prize.zoom.nil? %>        
+map.setZoom(13);
+<% else %>
+map.setZoom(<%=@prize.zoom.to_s %>);
+<% end %>
 
 		map.disableDragging();
         <%@color=@prize.quantity>0 ? "#0000FF" : "#FF0000"%>
