@@ -188,12 +188,17 @@ def express_checkout
     
   #like to add token confirmation so we know they use web page to create (no hacking!)
   #sponsor id should come from session - so that only auth'd user can pay for his prizes.
+  #@current_user.id
+  #sponsor_id = @current_user.id
+  logger.info("Brad Current User = " + @current_user.id)
   logger.info("Brad Prize = " + params[:id])
   logger.info("Brad Sponsor = " + params[:sponsor_id])
   
   #having trouble with this line of code - doesn't like my condition
-  #prize = Prize.find_by_id_and_sponsor_id(params[:id],params[:sponsor_id], :conditions => ["paypal_state != 'closed'"])
-  prize = Prize.find_by_id_and_sponsor_id(params[:id],params[:sponsor_id]) #this works
+  prize = Prize.find_by_id_and_sponsor_id(params[:id],params[:sponsor_id], :conditions => ["paypal_state IS DISTINCT FROM 'closed'"])
+  #prize = Prize.find_by_id_and_sponsor_id(params[:id],params[:sponsor_id]) #this works
+  
+  #AND prize.paypal_state IS DISTINCT FROM 35
   
   if !prize.nil? then
     logger.info("Prize " + params[:id] + " for Sponsor " + params[:sponsor_id] + " found by query.")
@@ -229,6 +234,11 @@ def express_checkout
   else
     #need to throw an error to the UI
     logger.info("Prize " + params[:id] + " for Sponsor " + params[:sponsor_id] + " already has PayPal status of closed.")
+    
+    #Either you already paid
+    #You don't own the prize
+    
+    
   end #no prize found to check out  
 end #express_checkout 
   
