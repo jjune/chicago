@@ -17,3 +17,21 @@ config.action_view.cache_template_loading            = true
 
 # Disable delivery errors, bad email addresses will be ignored
 # config.action_mailer.raise_delivery_errors = false
+
+
+
+
+
+
+
+#added by BG for ActiveMerchant
+config.after_initialize do 
+  ActiveMerchant::Billing::Base.mode = :test #need to change for prod env
+  ActiveMerchant::Billing::Base.gateway_mode = :test #need to change for prod env
+end 
+
+PAYPAL_API_CREDENTIALS = { 
+:login => 'paypal_1226603926_biz_api1.supersecretlabs.com', 
+:password => '1226603931', 
+:signature => 'A9cAQs3AOtDvJ7W4wLRwP7y6dhgsAo132C4muED..APElRefC0FACncJ' 
+}

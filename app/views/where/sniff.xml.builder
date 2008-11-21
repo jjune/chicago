@@ -131,6 +131,9 @@ xml.pr do
 xml.text(@cheathint, :align=>"center", :valign=>"center")
 end #pr
 
+xml.pr do
+xml.text("Use above cheat to help determine what area you need to travel.", :align=>"center", :valign=>"center")
+end #pr
 
 if @device.carrier.include? "Blackberry" then
 
