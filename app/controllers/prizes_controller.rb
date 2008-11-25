@@ -65,13 +65,17 @@ class PrizesController < ApplicationController
 	@prize.center = Point.from_x_y(params[:center_lng],params[:center_lat],4326)
 	@prize.sponsor_id = current_user.id
 	@prize.quantity=1
-	@prize.status=Prize::Status::Active
+	@prize.status=Prize::Status::Hold
+	@prize.zoom=params[:zoom]
 
       if @prize.save
         flash[:notice] = 'Prize was successfully created.'
         #format.html { redirect_to(@prize) }
         #format.xml  { render :xml => @prize, :status => :created, :location => @prize }
-        redirect_to :controller => 'prizes', :action => 'confirmation', :id => @prize.id
+        
+        ##Need to test if edit prize - 
+        
+        redirect_to :controller => 'prizes', :action => 'express_checkout', :id => @prize.id, :sponsor_id => @prize.sponsor_id
         
       else
         redirect_to :controller => :prizes, :action => :new
@@ -181,84 +185,109 @@ end
   } 
   
   
-  def express_checkout 
+def express_checkout 
     
-    product = params[:order][:product] 
+  #like to add token confirmation so we know they use web page to create (no hacking!)
+  #sponsor id should come from session - so that only auth'd user can pay for his prizes.
+  #@current_user.id
+  #sponsor_id = @current_user.id
+  logger.info("Brad Current User = " + @current_user.id.to_s)
+  logger.info("Brad Prize = " + params[:id])
+  logger.info("Brad Sponsor = " + params[:sponsor_id])
+  
+  #having trouble with this line of code - doesn't like my condition
+  prize = Prize.find_by_id_and_sponsor_id(params[:id],params[:sponsor_id], :conditions => ["paypal_state IS DISTINCT FROM 'closed'"])
+  #prize = Prize.find_by_id_and_sponsor_id(params[:id],params[:sponsor_id]) #this works
+  
+  #AND prize.paypal_state IS DISTINCT FROM 35
+  
+  if !prize.nil? then
+    logger.info("Prize " + params[:id] + " for Sponsor " + params[:sponsor_id] + " found by query.")
     
-    #like to add token confirmation so we know they use web page to create (no hacking!)
+    prizecost = PRODUCTS[prize.prizetype.capitalize][:price]
     
-    #This needs to change
-    #We want to enforce Status Change on successful completion
-    #order = Order.create( 
-     # :state => 'open', 
-      #:product => product, 
-      #:amount => PRODUCTS[product][:price] 
-      #) 
+    @response = gateway.setup_purchase(
+      amount_in_cents(prizecost), 
+      :ip => request.remote_ip, 
+      :description => PRODUCTS[prize.prizetype.capitalize][:description], 
+      :return_url => url_for(:action => :express_checkout_complete), 
+      :cancel_return_url => url_for(:action => :cancel_checkout) 
+      ) 
   
-  prize = Prize.find(params[:id])
+    if !@response.success? 
+      logger.info("Paypal ERROR")
+      paypal_error(@response) 
+    else
+      paypal_token = @response.params['token'] 
+      prize.update_attributes( 
+        :paypal_token => paypal_token, 
+        :paypal_state => 'purchase_setup', 
+        :paypal_prizecost => prizecost
+        ) 
+    
+        logger.info("Paypal token = " + paypal_token) 
+        logger.info("Paypal state = " + 'purchase_setup') 
+    
+        paypal_url = gateway.redirect_url_for(paypal_token) 
+        redirect_to "#{paypal_url}&useraction=commit" 
+
+    end #!@response.success?
+  else
+    #need to throw an error to the UI
+    logger.info("Prize " + params[:id] + " for Sponsor " + params[:sponsor_id] + " already has PayPal status of closed.")
+    
+    #Either you already paid
+    #You don't own the prize
+    
+    
+  end #no prize found to check out  
+end #express_checkout 
   
-  prizecost = PRODUCTS[prize.prizetype][:price]
   
-        @response = gateway.setup_purchase( 
-          amount_in_cents(prizecost), 
-          :ip => request.remote_ip, 
-          :description => PRODUCTS[prize.prizetype][:description], 
-          :return_url => url_for(:action => :express_checkout_complete), 
-          :cancel_return_url => url_for(:action => :cancel_checkout) 
-          ) 
+#called on return from PayPal
+def express_checkout_complete 
+  paypal_token = params[:token] 
+  @prize = Prize.find_by_paypal_token(paypal_token, :conditions => ["paypal_state = 'purchase_setup'"]) 
+  @details = gateway.details_for(paypal_token) 
   
-        if !@response.success? 
-          paypal_error(@response) 
-        else
-          paypal_token = @response.params['token'] 
-          #Is this custom below?
-          order.update_attributes( 
-            :paypal_token => paypal_token, 
-            :paypal_state => 'purchase_setup' 
-            ) 
+  if !@details.success?
+    #paypal has reported error back to our system
+    paypal_error(@details) 
+  else 
       
-          paypal_url = gateway.redirect_url_for(paypal_token) 
-          redirect_to "#{paypal_url}&useraction=commit" 
-  
-        end #!@response.success?
-  end #express_checkout 
-  
-  
-  #called on return from PayPal
-  def express_checkout_complete 
+    #might want to add to debug
+    logger.info "Customer name: #{@details.params['name']}" 
+    logger.info "Customer e-mail: #{@details.params['payer']}" 
     
-    paypal_token = params[:token] 
-    @order = Prize.find_by_paypal_token(paypal_token) 
-    @details = gateway.details_for(paypal_token) 
-  
-    if !@details.success?
-      paypal_error(@details) 
+    @response = gateway.purchase( 
+      amount_in_cents(@prize.paypal_prizecost), 
+      :token => @details.params['token'], 
+      :payer_id => @details.params['payer_id'] 
+      )
+       
+    if !@response.success? 
+      paypal_error(@response) 
     else 
-      
-      logger.info "Customer name: #{@details.params['name']}" 
-      logger.info "Customer e-mail: #{@details.params['payer']}" 
-      @response = gateway.purchase( 
-        amount_in_cents(@order.amount), 
-        :token => @details.params['token'], 
-        :payer_id => @details.params['payer_id'] 
-        )
-         
-      if !@response.success? 
-        paypal_error(@response) 
-      else 
-        @order.update_attribute(:paypal_state, 'closed') 
-        @purchase = Purchase.create(:paypal_amount => @response.params['gross_amount']) 
-      end #!@response.success? 
-    end #!@details.success?
-  end #express_checkout_complete
+      @prize.update_attributes(
+      :paypal_state => 'closed',
+      :paypal_amount => @response.params['gross_amount'] 
+      ) 
     
-  def cancel_checkout 
-    @order= Order.find_by_paypal_token(params[:token]) 
-    @order.update_attribute(:paypal_state,'cancelled') 
-  end 
+      #send to prize confirmation page   
+    end #!@response.success? 
+  end #!@details.success?
+end #express_checkout_complete
+
+    
+def cancel_checkout 
+  @prize = Prize.find_by_paypal_token(params[:token]) 
+  @prize.update_attribute(:paypal_state,'cancelled') 
+end 
   
   
   private 
+
+
     def gateway 
       @gateway ||= ActiveMerchant::Billing::PaypalExpressGateway.new(PAYPAL_API_CREDENTIALS) 
     end 

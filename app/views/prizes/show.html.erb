@@ -17,14 +17,20 @@
 				<td scope="row" class="info-prize-name" width="175px">Prize Type</td>
 				<td><%= @prize.prizetype.camelize %></td>
 			</tr>
+			
+			<% unless @prize.prizeamt == 0 %>
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Prize Value</td>
 				<td>$ <%= @prize.prizeamt %></td>
 			</tr>
+			<% end %>
+			
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Winner's Message</td>
 				<td><%= @prize.winnermsg %></td>
 			</tr>
+			
+			<% unless @prize.cheatcode.nil? || @prize.cheatcode == '' %>
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Cheat Code</td>
 				<td><%= @prize.cheatcode %></td>
@@ -33,6 +39,7 @@
 				<td scope="row" class="info-prize-name" width="175px">Cheat Hint</td>
 				<td><%= @prize.cheathint %></td>
 			</tr>
+			<% end %>
 			
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Prize Location</td>

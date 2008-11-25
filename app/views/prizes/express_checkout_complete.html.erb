@@ -2,10 +2,9 @@
 
 
 	  <div id="page-description">
-	  <h2>Your prize has been successfully submitted</h2>
-	  I figured we probably need some information here after a prize has been submitted.  Perhaps some instructions on what they should expect from here... perhaps some more disclaimer, etc etc. 
+	  <h2>Your prize has been successfully created!</h2>
 <p class="info-text">
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse eleifend vestibulum ipsum. Curabitur quis mauris. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ullamcorper. Maecenas at orci. Cras nisi. Curabitur quis turpis. Fusce odio. Donec enim velit, mattis eget, porttitor nec, eleifend tincidunt, orci. Etiam sit amet arcu ac eros semper dictum. Sed ac urna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla facilisi. Aenean urna turpis, ullamcorper nec, congue sit amet, feugiat et, metus. 	
+ 	So what happens next? After a short period of time, your prize will be activated for players to find. Monitor the Status from the Sponsor Dashboard to see activity for your prize. If your prize is not claimed within a reasonable period (You determine what time frame), you might edit the prize to add a Cheat Code and Cheat Hint. Remember to publicize your cheat code to get a Player to search for your prize.
 </p>
 	  </div>
 	
@@ -19,15 +18,23 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse eleifend v
 				<td scope="row" class="info-prize-name" width="175px">Prize Type</td>
 				<td><%= @prize.prizetype %></td>
 			</tr>
+			
+			
+			<% unless @prize.prizeamt == 0 %>
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Prize Value</td>
 				<td>$ <%= @prize.prizeamt %></td>
 			</tr>
+			<% end %>
+			
+			
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Winner's Message</td>
 				<td><%= @prize.winnermsg %></td>
 			</tr>
-		<% if !@prize.cheatcode.nil?
+			
+			
+			<% unless @prize.cheatcode.nil? || @prize.cheatcode == '' %>
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Cheat Code</td>
 				<td><%= @prize.cheatcode %></td>
@@ -36,7 +43,8 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse eleifend v
 				<td scope="row" class="info-prize-name" width="175px">Cheat Hint</td>
 				<td><%= @prize.cheathint %></td>
 			</tr>
-			end %>
+			<% end %>
+			
 			
 			<tr class="info-row">
 				<td scope="row" class="info-prize-name" width="175px">Prize Location</td>

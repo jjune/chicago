@@ -22,9 +22,8 @@ class WhereController < ApplicationController
   
   #--------------------------------------Cheat Hint Lookup------------------------------------
   def sniff
-  
     @xml = Builder::XmlMarkup.new
-	@device = Device.find_or_create_device(request)
+	  @device = Device.find_or_create_device(request)
 
     #Cheat code validation check
     if params[:cheatcode].nil? then
@@ -32,17 +31,18 @@ class WhereController < ApplicationController
       @cheathint = "You cannot spoof the system. Please backup and provide a valid code. Your phone may self destruct if you attempt this again."
     else
       prizewithcheat = Prize.find_by_cheatcode(params[:cheatcode])
+      #there might be multiple prizes with duplicate cheat code
+      #how about a randomizer?
       if not prizewithcheat.nil? then
         @cheathint = prizewithcheat.cheathint
       else
         @cheathint = "Your source for the code cannot be trusted. Your cover may be compromised. Please return to the beginning and forget this ever happened."
-        end
+      end
     end
     
     respond_to do |format|
       format.xml  {render :xml => @cheathint, :action => "sniff.xml.builder", :layout => false }
     end #respond to
-  
   end
   
   
@@ -111,9 +111,11 @@ class WhereController < ApplicationController
   #--------------------------------Static About Page--------------------------------
   def aboutus
   	@xml = Builder::XmlMarkup.new
-	@device = Device.find_or_create_device(request)
+	  @device = Device.find_or_create_device(request)
    
-	#Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
+	  #Need to check for device, and deliver unique cheat code that will reveal prize of how to play game.
+   
+    #need to add help cheat code here.
    
      respond_to do |format|
        format.xml  {render :xml => @device, :action => "aboutus.xml.builder", :layout => false }

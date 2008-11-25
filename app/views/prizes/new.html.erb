@@ -16,6 +16,7 @@
 			<%= f.hidden_field 'prizearea' %>
 			<%= hidden_field_tag 'center_lat' %>
 			<%= hidden_field_tag 'center_lng' %>
+			<%= hidden_field_tag 'zoom' %>
 			<%= f.hidden_field 'quantity', :value=>'0' %>
 			
 			<label for="prize_name">Prize Name</label>
@@ -52,6 +53,7 @@
 			<div id='cheat_hint' style="display:none">
 				<label for="cheathint">Cheat Hint</label>
 				<fieldset><%= f.text_field :cheathint, :size => 32 %></fieldset>
+				<p id='cheat_hint_help'>Be descriptive enough to clue where your Prize Area may be located. You could try something like, "The Battle of Atlanta took place here." and see if Players realize your prize is in Atlanta.</p>
 			</div>		
 				
 			<label for="winnermsg">Winner's Message</label>

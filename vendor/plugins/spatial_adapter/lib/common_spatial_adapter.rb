@@ -53,7 +53,7 @@ ActiveRecord::SchemaDumper.class_eval do
           tbl.print "    t.column #{column.name.inspect}, #{column.type.inspect}"
         end
         tbl.print ", :limit => #{column.limit.inspect}" if column.limit != @types[column.type][:limit] 
-        tbl.print ", :default => #{column.default.inspect}" if !column.default.nil?
+        tbl.print ", :default => #{default_string(column.default.inspect)}" if !column.default.nil?
         tbl.print ", :null => false" if !column.null
         tbl.puts
       end

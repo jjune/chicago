@@ -1,6 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resource :session
+  map.connect 'prizes/express_checkout_complete', :controller => 'prizes', :action => 'express_checkout_complete'
+  map.connect 'hiccup/paypal_ipn', :controller => 'hiccup', :action => 'paypal_ipn'
   map.resources :prizes
   map.connect '/', :controller => 'sessions', :action => 'new'
   map.connect 'sponsor/dashboard', :controller => 'prizes', :action => 'index'
