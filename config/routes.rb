@@ -5,6 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'hiccup/paypal_ipn', :controller => 'hiccup', :action => 'paypal_ipn'
   map.resources :prizes
   map.connect '/', :controller => 'sessions', :action => 'new'
+  map.connect 'player/dashboard', :controller => 'player', :action => 'index'
   map.connect 'sponsor/dashboard', :controller => 'prizes', :action => 'index'
   map.connect 'register/sponsor', :controller => 'account', :action => 'sponsor_registration'
   map.connect 'register/player', :controller => 'account', :action => 'player_registration'
