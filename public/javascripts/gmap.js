@@ -4,18 +4,24 @@ document.write("<script language='Javascript' src='http://gd.geobytes.com/gd?aft
 var map = null;
 var prizearea = null;
 var gLargeMapControl=null;
+var polygonEditMode = "show";
 
 function doStuffBeforeSubmit()
 {
-	var arrTempPrizeArea=new Array();
-	for (var x=0;x<prizearea.getVertexCount();x++)
-	{
-		var latlng = prizearea.getVertex(x);
-		arrTempPrizeArea.push(latlng.lat()+","+latlng.lng());
-	}
-	strTempGeo = arrTempPrizeArea.join(":")
-	document.getElementById("prize_prizearea").value = strTempGeo;
+	document.getElementById("prize_prizearea").value = gPolygonToJSON(prizearea);
 	document.getElementById("zoom").value = map.getZoom();
+}
+
+function gPolygonToJSON(polygon)
+{
+	var arrPointsJSON = new Array();
+	for (var x=0;x<polygon.getVertexCount();x++)
+	{
+		var latlng = polygon.getVertex(x);	
+		arrPointsJSON.push(new Array(latlng.lng(),latlng.lat()));
+	}
+	
+	return arrPointsJSON.toJSON();	
 }
 
 function initMapandCenter()
@@ -44,6 +50,7 @@ function initPolygon()
 function initFormControls()
 {
 	document.getElementById("buttonClearShape").style.display="none";
+	document.getElementById("buttonEditShape").style.display="none";
 	document.getElementById("search_box").style.display="";
 	document.getElementById("search_submit_button").style.display="";
 }
@@ -63,8 +70,9 @@ function onPolygonComplete()
 {
 	map.removeControl(gLargeMapControl);
 	map.disableDragging();
-
+	
 	document.getElementById("buttonClearShape").style.display="";
+	document.getElementById("buttonEditShape").style.display="";
 	document.getElementById("search_box").style.display="none";
 	document.getElementById("search_submit_button").style.display="none";
 }
@@ -76,4 +84,20 @@ function clearPolygon()
 	initMapControls();
 	initPolygon();
 	initFormControls();
+}
+
+function swapPolygonEditing()
+{
+	if(polygonEditMode=="show")
+	{
+		prizearea.enableEditing();
+		polygonEditMode="edit"
+		document.getElementById("buttonEditShape").value="Save Shape";
+	}
+	else
+	{
+		prizearea.disableEditing();
+		polygonEditMode="show";
+		document.getElementById("buttonEditShape").value="Edit Shape";
+	}
 }

@@ -53,13 +53,9 @@ class PrizesController < ApplicationController
   end
 
   def create  
-   	points = params[:prize][:prizearea].split(/:/)
-   
-   	points.collect! do |point|
-   		j=point.split(/,/)
-   		[j[1].to_f, j[0].to_f]
-   	end
-
+   	
+   	points = ActiveSupport::JSON.decode(params[:prize][:prizearea])
+   	
   	@prize = Prize.new(params[:prize])
 	@prize.prizearea = Polygon.from_coordinates([points],4326)
 	@prize.sponsor_id = current_user.id
