@@ -62,13 +62,12 @@ class PrizesController < ApplicationController
 
   	@prize = Prize.new(params[:prize])
 	@prize.prizearea = Polygon.from_coordinates([points],4326)
-	@prize.center = Point.from_x_y(params[:center_lng],params[:center_lat],4326)
 	@prize.sponsor_id = current_user.id
 	@prize.quantity=1
 	@prize.status=Prize::Status::Hold
 	@prize.zoom=params[:zoom]
 
-      if @prize.save
+      if @prize.save!
         flash[:notice] = 'Prize was successfully created.'
         #format.html { redirect_to(@prize) }
         #format.xml  { render :xml => @prize, :status => :created, :location => @prize }

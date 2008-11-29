@@ -3,8 +3,11 @@ class Prize < ActiveRecord::Base
 	has_many :prize_items
 	belongs_to :sponsor
 	
-	validates_presence_of :name, :prizetype, :prizearea, :center, :winnermsg, :quantity   #, :sponsor_id This evidently is not populated
+	validates_presence_of :name, :prizetype, :prizearea,:prizetype :winnermsg, :quantity   #, :sponsor_id This evidently is not populated
 	#validates_uniqueness_of :cheatcode #need to supress error message here or allow non-unique via query
+	
+	after_create :update_center_and_surface_area
+	
 	
 	#This module is used to manage and document statuses of a prize
 	module Status
@@ -34,7 +37,7 @@ class Prize < ActiveRecord::Base
 		query = base_prize_query(device.lng,device.lat)
 		query<< "AND quantity>0"
 		query<< one_prize_per_device(device)
-		query<<	"ORDER BY ST_Area(prizearea) ASC "
+		query<<	"ORDER BY surfacearea ASC "
 		query<<	"LIMIT 1"	
 				
 		#TODO - probably need optomistic locking here
@@ -144,5 +147,14 @@ class Prize < ActiveRecord::Base
     	qt.user_agent = device.user_agent if device.respond_to?("user_agent")
     	qt.screenwidth = device.screenwidth if device.respond_to?("screenwidth")
     	qt.save!
+	end
+	
+	def update_center_and_surface_area
+		query = "update prizes "
+		query<< "set center = ST_Centroid(prizearea), "
+		query<< "surfacearea= ST_Area(prizearea) "
+		query<< "where id=#{id}"
+		
+		ActiveRecord::Base.connection.update(query)
 	end
 end
