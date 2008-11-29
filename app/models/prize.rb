@@ -3,7 +3,7 @@ class Prize < ActiveRecord::Base
 	has_many :prize_items
 	belongs_to :sponsor
 	
-	validates_presence_of :name, :prizetype, :prizearea,:prizetype :winnermsg, :quantity   #, :sponsor_id This evidently is not populated
+	validates_presence_of :name, :prizetype, :prizearea,:prizetype, :winnermsg, :quantity   #, :sponsor_id This evidently is not populated
 	#validates_uniqueness_of :cheatcode #need to supress error message here or allow non-unique via query
 	
 	after_create :update_center_and_surface_area
