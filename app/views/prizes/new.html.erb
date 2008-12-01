@@ -2,12 +2,14 @@
 <% @bodyscript = 'onload="initialize()" onunload="GUnload()"' %>
 
    <h1 id="pagetitle">Create New Prize</h1>
+   <% if flash[:error] %><div class="error_message"><%= flash[:error] %></div><% end %>
+
       <div id="MainLeft">
          <form action="#" onsubmit="showAddress(this.address.value); return false">
          <input class="search_form" type="text" name="address" value="" id="search_box" />&nbsp;
          <input type="submit" value="Go!" class="form-button" id="search_submit_button" />
          <input type="button" value="Clear Shape" class="form-button" onclick="clearPolygon();" id="buttonClearShape"  />
-         <input type="button" value="Edit Shape" class="form-button" onclick="swapPolygonEditing();" id="buttonEditShape"  />
+         <input type="button" value="Edit Shape" class="form-button" id="buttonEditShape"  />
 		 <div id="map_canvas" style="width: 585px; height: 400px"></div>
          </form>
       </div>

@@ -4,12 +4,11 @@ document.write("<script language='Javascript' src='http://gd.geobytes.com/gd?aft
 var map = null;
 var prizearea = null;
 var gLargeMapControl=null;
-var polygonEditMode = "show";
 
 function doStuffBeforeSubmit()
 {
-	document.getElementById("prize_prizearea").value = gPolygonToJSON(prizearea);
-	document.getElementById("zoom").value = map.getZoom();
+	$("prize_prizearea").value = gPolygonToJSON(prizearea);
+	$("zoom").value = map.getZoom();
 }
 
 function gPolygonToJSON(polygon)
@@ -26,7 +25,7 @@ function gPolygonToJSON(polygon)
 
 function initMapandCenter()
 {
-	map = new GMap2(document.getElementById("map_canvas"));
+	map = new GMap2($("map_canvas"));
 	map.setCenter(new GLatLng(sGeobytesLatitude,sGeobytesLongitude), 13);
 }
 
@@ -49,10 +48,10 @@ function initPolygon()
 
 function initFormControls()
 {
-	document.getElementById("buttonClearShape").style.display="none";
-	document.getElementById("buttonEditShape").style.display="none";
-	document.getElementById("search_box").style.display="";
-	document.getElementById("search_submit_button").style.display="";
+	$("buttonClearShape").hide();
+	$("buttonEditShape").hide();
+	$("search_box").show();
+	$("search_submit_button").show();
 }
 
 function initialize()
@@ -71,10 +70,12 @@ function onPolygonComplete()
 	map.removeControl(gLargeMapControl);
 	map.disableDragging();
 	
-	document.getElementById("buttonClearShape").style.display="";
-	document.getElementById("buttonEditShape").style.display="";
-	document.getElementById("search_box").style.display="none";
-	document.getElementById("search_submit_button").style.display="none";
+	$("buttonClearShape").show();
+	$("buttonEditShape").show();
+	$("search_box").hide();
+	$("search_submit_button").hide();
+	
+	disablePolygonEditing();
 }
 
 function clearPolygon()
@@ -86,18 +87,17 @@ function clearPolygon()
 	initFormControls();
 }
 
-function swapPolygonEditing()
+function enablePolygonEditing()
 {
-	if(polygonEditMode=="show")
-	{
-		prizearea.enableEditing();
-		polygonEditMode="edit"
-		document.getElementById("buttonEditShape").value="Save Shape";
-	}
-	else
-	{
-		prizearea.disableEditing();
-		polygonEditMode="show";
-		document.getElementById("buttonEditShape").value="Edit Shape";
-	}
+	prizearea.enableEditing();
+	$("buttonEditShape").value="Save Shape";
+	$("buttonEditShape").onclick = disablePolygonEditing;
+	
+}
+
+function disablePolygonEditing()
+{
+	prizearea.disableEditing();
+	$("buttonEditShape").value="Edit Shape";
+	$("buttonEditShape").onclick = enablePolygonEditing;
 }

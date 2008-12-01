@@ -53,7 +53,7 @@ class PrizesController < ApplicationController
   end
 
   def create  
-   	
+   	begin
    	points = ActiveSupport::JSON.decode(params[:prize][:prizearea])
    	
   	@prize = Prize.new(params[:prize])
@@ -63,20 +63,31 @@ class PrizesController < ApplicationController
 	@prize.status=Prize::Status::Hold
 	@prize.zoom=params[:zoom]
 
-      if @prize.save!
-        flash[:notice] = 'Prize was successfully created.'
-        #format.html { redirect_to(@prize) }
-        #format.xml  { render :xml => @prize, :status => :created, :location => @prize }
-        
-        ##Need to test if edit prize - 
-        
-        redirect_to :controller => 'prizes', :action => 'express_checkout', :id => @prize.id, :sponsor_id => @prize.sponsor_id
-        
-      else
-        redirect_to :controller => :prizes, :action => :new
-        #format.html { render :action => "new" }
-        #format.xml  { render :xml => @prize.errors, :status => :unprocessable_entity }
-      end
+	 # if @prize.save
+	    @prize.save!
+	    flash[:notice] = 'Prize was successfully created.'
+	    #format.html { redirect_to(@prize) }
+	    #format.xml  { render :xml => @prize, :status => :created, :location => @prize }
+	    
+	    ##Need to test if edit prize - 
+	    
+	    redirect_to :controller => 'prizes', :action => 'express_checkout', :id => @prize.id, :sponsor_id => @prize.sponsor_id
+	    
+	  rescue
+	  	if @prize.errors.empty?
+	  		flash[:error] = "<p>The prize could not be saved at this time.</p>"
+	  		flash[:error] <<"<p>Please check that all fields are filled out and try again.</p>"
+  		else
+  			flash[:error]="<p>Please fix the following errors:</p>"
+  			flash[:error]<<"<ul>"
+	  		@prize.errors.each_full { |msg| flash[:error]<<"<li>#{msg}</li>"}
+	  		flash[:error]<<"</ul>"
+  		end
+	  	
+	    redirect_to :controller => :prizes, :action => :new
+	    #format.html { render :action => "new" }
+	    #format.xml  { render :xml => @prize.errors, :status => :unprocessable_entity }
+	  end
 
   end
 
