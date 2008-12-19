@@ -4,6 +4,7 @@ document.write("<script language='Javascript' src='http://gd.geobytes.com/gd?aft
 var map = null;
 var prizearea = null;
 var gLargeMapControl=null;
+var geocoder = null;
 
 function doStuffBeforeSubmit()
 {
@@ -26,11 +27,12 @@ function gPolygonToJSON(polygon)
 function initMapandCenter()
 {
 	map = new GMap2($("map_canvas"));
-	if sGeobytesLatitude.empty()
-		sGeobytesLatitude=41.90
-	if sGeobytesLongitude.empty()
-		sGeobytesLongitude=87.65 
+	if (sGeobytesLatitude.empty())
+		sGeobytesLatitude=41.882047
+	if (sGeobytesLongitude.empty())
+		sGeobytesLongitude=-87.627916 
 	map.setCenter(new GLatLng(sGeobytesLatitude,sGeobytesLongitude), 13);
+	geocoder = new GClientGeocoder();
 }
 
 function initMapControls()
@@ -104,4 +106,24 @@ function disablePolygonEditing()
 	prizearea.disableEditing();
 	$("buttonEditShape").value="Edit Shape";
 	$("buttonEditShape").onclick = enablePolygonEditing;
+}
+
+function showAddress(address)
+{
+	if (geocoder)
+	{
+		geocoder.getLatLng(address,
+		function(point) 
+		{
+			if (!point) {alert(address + " not found");} 
+			else {map.setCenter(point, 13);
+			var marker = new GMarker(point);
+			map.addOverlay(marker);
+			marker.openInfoWindowHtml(address);
+			prizearea = new GPolygon(map.getCenter(),'#0000FF','5','1','#0000FF','0.2');
+			map.addOverlay(prizearea);
+			prizearea.enableDrawing();
+			} 
+		})
+	}
 }
