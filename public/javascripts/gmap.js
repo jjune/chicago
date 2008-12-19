@@ -26,6 +26,10 @@ function gPolygonToJSON(polygon)
 function initMapandCenter()
 {
 	map = new GMap2($("map_canvas"));
+	if sGeobytesLatitude.empty()
+		sGeobytesLatitude=41.90
+	if sGeobytesLongitude.empty()
+		sGeobytesLongitude=87.65 
 	map.setCenter(new GLatLng(sGeobytesLatitude,sGeobytesLongitude), 13);
 }
 
