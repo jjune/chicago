@@ -103,6 +103,7 @@ class WhereController < ApplicationController
     #Builder code formats winning message or losing message
      respond_to do |format|
        format.xml  {render :xml => @device, :action => "snoop.xml.builder", :layout => false }
+       format.html {render :html}
      end #respond to
   
   end
@@ -136,6 +137,7 @@ class WhereController < ApplicationController
       #&size=240x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png
       #&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q
       #Google static map info
+      if request.parameters[:device_type]=="where"
       @googleapikey = "ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q"
       @googlebaseurl = "http://maps.google.com/staticmap?"
       @googlecoord = @device.lat + "," + @device.lng
@@ -144,7 +146,7 @@ class WhereController < ApplicationController
       @googleimageurl = @googleimageurl.to_sym
       #"http://maps.google.com/staticmap?center=33.84275,-84.49008&zoom=14&size=176x128&maptype=mobile&markers=33.84275,-84.49008,blue&format=png&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q
       #@googleimageurl = @googlebaseurl & "center=" + @googlecenter 
-      
+      end 
       
       
       #Need to add custom WHERE message set here.
@@ -159,7 +161,8 @@ class WhereController < ApplicationController
       
       
         respond_to do |format|
-          format.xml  { render :xml => @device, :action => "widget.xml.builder", :layout => false }
+          	format.html
+        	format.jin  { render :xml => @device, :action => "widget.xml.builder", :layout => false }
         end
 
   end

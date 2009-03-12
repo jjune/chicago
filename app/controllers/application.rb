@@ -20,10 +20,18 @@ class ApplicationController < ActionController::Base
 
   private
     def detect_devices
-    	request.parameters[:device_type]="where"
-    	request.parameters[:device_uniqueid]=request.parameters[:deviceid]
-    	#request.format = :iphone if request.env["HTTP_USER_AGENT"][/iPhone/]
+    	if !request.parameters[:carrier].nil?
+			request.format = :jin
+    		request.parameters[:device_type]="where"
+    		request.parameters[:device_uniqueid]=request.parameters[:deviceid]
+    	elsif request.env["HTTP_USER_AGENT"][/iPhone/]
+    		request.format = :iphone 
+    		request.parameters[:device_type]="iphone"
+		else
+			request.format = :html
+			request.parameters[:device_type]="browser"
+    		request.parameters[:device_uniqueid]=request.remote_ip()
+    	end
     end
 
-  
 end
