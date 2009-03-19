@@ -10,11 +10,15 @@
 </head>
 
 <body <%= @bodyscript %>>
-<div id="container">
-
-<div id="headersection">
 
 <%= render :partial => 'sponsor_navigation' %>
+<div id="container">
+<div id="headersection">
+
+<div class="actions">
+   <a href="/prizes/new" class="rounded">Submit a prize</a>
+</div>
+
 </div>
 <div id="container2">
 <%= yield %>
