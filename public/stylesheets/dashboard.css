@@ -79,7 +79,7 @@ body, th, td
   display:  block;
   float: left;
   color: #dab25d;
-  background-color: #4c4c4c;
+  background: #4c4c4c url("../images/actionbutton-background.gif") repeat-x left top;
   font-weight: bold;
   font-size: 0.9em;
   text-decoration: none;
