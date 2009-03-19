@@ -1,13 +1,3 @@
-/* @override 
-	http://localhost:3000/stylesheets/dashboard.css?1229571532
-	http://localhost:3000/stylesheets/dashboard.css?1224283742
-	http://localhost:3000/stylesheets/dashboard.css?1224430377
-	http://localhost:3000/stylesheets/dashboard.css?1224485527
-	http://localhost:3000/stylesheets/dashboard.css?1237492420
-	http://localhost:3000/stylesheets/dashboard.css?1237493424
-	http://localhost:3000/stylesheets/dashboard.css?1237494099
-*/
-
 body 
 {
 	margin: 0px;
@@ -89,7 +79,7 @@ body, th, td
   display:  block;
   float: left;
   color: #dab25d;
-  background: #4c4c4c url("../images/background/masthead-action.gif") repeat-x left top;
+  background-color: #4c4c4c;
   font-weight: bold;
   font-size: 0.9em;
   text-decoration: none;
