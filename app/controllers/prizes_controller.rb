@@ -62,7 +62,7 @@ class PrizesController < ApplicationController
 	@prize.quantity=1
 	@prize.status=Prize::Status::Hold
 	@prize.zoom=params[:zoom]
-
+	
 	 # if @prize.save
 	    @prize.save!
 	    flash[:notice] = 'Prize was successfully created.'
@@ -80,7 +80,7 @@ class PrizesController < ApplicationController
   		else
   			flash[:error]="<p>Please fix the following errors:</p>"
   			flash[:error]<<"<ul>"
-	  		@prize.errors.each_full { |msg| flash[:error]<<"<li>#{msg}</li>"}
+	  		@prize.errors.each { |attr,msg| flash[:error]<<"<li>#{msg}</li>"}
 	  		flash[:error]<<"</ul>"
   		end
 	  	

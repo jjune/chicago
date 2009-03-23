@@ -3,6 +3,8 @@
 
    <h1 id="pagetitle">Create New Prize</h1>
    <% if flash[:error] %><div class="error_message"><%= flash[:error] %></div><% end %>
+   
+   
 
       <div id="MainLeft">
          <form action="#" onsubmit="showAddress($('search_box').value); return false">
@@ -26,7 +28,7 @@
 			
 			<label for="prize_name">Prize Type</label>
 			<fieldset>
-				<%= f.select(:prizetype, [ ['Select Prize Type', '--'],
+				<%= f.select(:prizetype, [ ['Select Prize Type', ''],
 										   ['Message', 'message'],
 										   ['Money', 'money']], {:style => 'width:175px'} )%>
 			</fieldset>
