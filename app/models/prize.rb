@@ -7,12 +7,13 @@ class Prize < ActiveRecord::Base
 	validates_presence_of :prizetype, :message => "Please choose a prize type."
 	validates_presence_of :winnermsg, :message => "Please enter a winner's message."
 	validate_on_create :valid_prizearea?
+	validates_presence_of :cheathint, :message => "You must enter a cheat hint.", :if=>:cheatcode_exists?
 	
 	#KHL - we will have to validate these other items
 	#validates_presence_of :quantity
 	#validates_length_of :quantity, :minimum=>1
 	#validates_uniqueness_of :cheatcode #need to supress error message here or allow non-unique via query
-	#validates_presence_of :cheathint, :message => "You must enter a cheat hint.", :unless=>cheatcode.empty? 
+	
 	
 	after_create :update_center_and_surface_area
 	
@@ -168,6 +169,10 @@ class Prize < ActiveRecord::Base
 	
 	private
 	
+	def cheatcode_exists?
+		!cheatcode.empty?
+	end
+			
 	def valid_prizearea?
 		#A valid polygon will have a minimum of 4 points and will be closed (a triangle)
 		if prizearea.rings[0].points.length<4 || !prizearea.rings[0].is_closed
