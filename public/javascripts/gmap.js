@@ -4,7 +4,6 @@ document.write("<script language='Javascript' src='http://gd.geobytes.com/gd?aft
 var map = null;
 var prizearea = null;
 var gLargeMapControl=null;
-var geocoder = null;
 
 function doStuffBeforeSubmit()
 {
@@ -32,7 +31,6 @@ function initMapandCenter()
 	if (sGeobytesLongitude.empty())
 		sGeobytesLongitude=-87.627916 
 	map.setCenter(new GLatLng(sGeobytesLatitude,sGeobytesLongitude), 13);
-	geocoder = new GClientGeocoder();
 }
 
 function initMapControls()
@@ -98,7 +96,6 @@ function enablePolygonEditing()
 	prizearea.enableEditing();
 	$("buttonEditShape").value="Save Shape";
 	$("buttonEditShape").onclick = disablePolygonEditing;
-	
 }
 
 function disablePolygonEditing()
@@ -110,20 +107,30 @@ function disablePolygonEditing()
 
 function showAddress(address)
 {
-	if (geocoder)
+	var geocoder = new GClientGeocoder();	
+	
+	geocoder.getLatLng(address,
+	function(point) 
 	{
-		geocoder.getLatLng(address,
-		function(point) 
-		{
-			if (!point) {alert(address + " not found");} 
-			else {map.setCenter(point, 13);
-			var marker = new GMarker(point);
-			map.addOverlay(marker);
-			marker.openInfoWindowHtml(address);
-			prizearea = new GPolygon(map.getCenter(),'#0000FF','5','1','#0000FF','0.2');
-			map.addOverlay(prizearea);
-			prizearea.enableDrawing();
-			} 
-		})
-	}
+		if (!point) {alert(address + " not found");} 
+		else {map.setCenter(point, 13);
+		var marker = new GMarker(point);
+		map.addOverlay(marker);
+		marker.openInfoWindowHtml(address);
+		} 
+	})
+}
+
+function showStubAddress(address)
+{
+	var geocoder = new GClientGeocoder();	
+	
+	geocoder.getLatLng(address,
+	function(point) 
+	{
+		if (!point) {alert(address + " not found");} 
+		else {map.setCenter(point, 13);
+		marker.setLatLng(point);
+		} 
+	})
 }

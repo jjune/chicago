@@ -35,7 +35,7 @@ class QueryPrizeController < ApplicationController
   		@polygon = GPolygon.from_georuby(prize.prizearea,'#0000FF','5','1','#0000FF','0.2')
   		render :update do |page|
 	   		#notice=prizes.length
-			notice="winner!"	
+			notice="Winner: "+prize.winnermsg
 			page.hide 'notice'
 			
 			page.replace_html 'notice', notice
@@ -46,7 +46,7 @@ class QueryPrizeController < ApplicationController
 		 end
 	else
 		render :update do |page|
-	   		notice="Nothing for you beeotch!!!!"
+	   		notice="Loser!!!!"
 	
 			page.hide 'notice'
 			
@@ -73,7 +73,7 @@ class QueryPrizeController < ApplicationController
   		
   		render :update do |page|
 	   		
-			notice="Locals found"	
+			notice="There are prizes in the area"	
 			page.hide 'notice'
 			
 			page.replace_html 'notice', notice
@@ -88,7 +88,7 @@ class QueryPrizeController < ApplicationController
 		 end
 	 else
 		render :update do |page|
-   			notice="No locals for you beeotch!!!!"
+   			notice="Nothing near you!!!!"
 
 			page.hide 'notice'
 		
