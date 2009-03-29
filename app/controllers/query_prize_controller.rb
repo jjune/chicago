@@ -41,7 +41,7 @@ class QueryPrizeController < ApplicationController
 			page.replace_html 'notice', notice
 			page.visual_effect :appear, 'notice', :duration => 0.5
 			
-			page << @map.clear_overlays
+			#page << @map.clear_overlays
 			page << @map.add_overlay(@polygon)	
 		 end
 	else
@@ -79,7 +79,7 @@ class QueryPrizeController < ApplicationController
 			page.replace_html 'notice', notice
 			page.visual_effect :appear, 'notice', :duration => 0.5
 			
-			page << @map.clear_overlays
+			#page << @map.clear_overlays
 		
 			nearest_prizes.each do |prize|
 				@polygon = GPolygon.from_georuby(prize.prizearea,'#0000FF','5','1','#0000FF','0.2')	

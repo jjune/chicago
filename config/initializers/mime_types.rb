@@ -5,3 +5,4 @@
 # Mime::Type.register_alias "text/html", :iphone
 
 Mime::Type.register "text/xml", :jin
+Mime::Type.register "text/html", :stub

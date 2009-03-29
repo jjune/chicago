@@ -7,85 +7,21 @@
 	 <%= javascript_include_tag :defaults %>
 	 <%= GMap.header(:host=>request.host) %>
 	 <%= javascript_include_tag 'gmap', 'ym4r-gm' %> 
-	 
-	<style>
-		.controlbox{border:solid gray 3px;background-color:white;color:black;}
-	</style>
 </head>
-
-<script>
-var map=null;
-var marker=null;
-
-function initialize()
-{
-	if (GBrowserIsCompatible())
-	{
-		initMapandCenter();	   
-		initMapControls();
-		initMarker();
-	}
-}
-
-function initMarker()
-{
-	var markerIcon = new GIcon(G_DEFAULT_ICON);
-	markerIcon.image = "/images/cell.png";
-	markerOptions = {icon:markerIcon,title:"Device User",draggable : true};
-	marker = new GMarker(map.getCenter(),markerOptions);
-	map.addOverlay(marker);
-	GEvent.addListener(marker,"dragend",function() {markerMoved();});
-}
-
-function markerMoved()
-{
-	var querytype;
-	for (i=0;i<document.querytype.queryoption.length;i++)
-	{
-		if (document.querytype.queryoption[i].checked==true)
-		{
-			querytype = document.querytype.queryoption[i].value;
-		}
-	}
-	
-	if (querytype =='find')
-	{
-		<%=remote_function(:url => {:action => 'find', :controller => 'query_prize'}, :with => "'lat='+marker.getLatLng().lat()+'&'+'lng='+marker.getLatLng().lng()") %>
-	}
-	else if (querytype =='nearest')
-	{
-		<%=remote_function(:url => {:action => 'nearest', :controller => 'query_prize'}, :with => "'lat='+marker.getLatLng().lat()+'&'+'lng='+marker.getLatLng().lng()") %>
-	}	
-} 
-</script>
-</head>
-	
-<body onload="initialize()" onunload="GUnload()">
-  <div id="container">
-	<div id="headersection"></div>
-	<div id="container2">
-		<h1 id="pagetitle">Cell Phone Query Emulator</h1>
-		<form action="#" onsubmit="showStubAddress($('search_box').value); return false;">
-	         <input class="search_form" type="text" name="address" value="" id="search_box"/>
-	         <input type="submit" value="Go!" class="form-button" id="search_submit_button"  />
-		</form>	
-    	<div id="map_canvas" style="width: 585px; height: 400px"></div>
-    	<div id="featureBOX">
-    		Device ID
-    		<div class='controlbox'><%=request.parameters[:device_uniqueid]%></div>
-    		<p>
-    		Query Type
-    		<div class="controlbox">
-		  	<form name="querytype">
-		  		<div><input type="radio" name="queryoption" value="find">Query Prize</div>
-				<div><input type="radio" name="queryoption" value="nearest" checked>Query Nearest Neighbor</div>
-		  	</form>
-		  	</div>
-		  	<p>
-		  	Message
-		  	<div id="notice" class="controlbox" style="color:red;">&nbsp;</div>
-	    </div>
-  	</div>
-  </div>
+<body style="background-color:FFFFFF;font-size:<%=@device.textsize%>">
+	<img src="/images/logo_small.png" align="center">
+	<%=request.parameters[:device_type]%>
+	<form>
+		<ul>
+		<li>Snoop for Loot</li>
+		<li>Sniff for Hints</li>
+		<li>Do you know the code word?</li>
+		<li>About SuperSecretLabs</li>
+		</ul>
+		if lat lng is populated....
+		Our satellites see you here:
+		<img src="http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host)%>"
+	</form>
 </body>
 </html>
+

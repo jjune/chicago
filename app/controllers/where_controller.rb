@@ -161,7 +161,7 @@ class WhereController < ApplicationController
       
       
         respond_to do |format|
-          	format.html
+          	format.stub
         	format.jin  { render :xml => @device, :action => "widget.xml.builder", :layout => false }
         end
 
