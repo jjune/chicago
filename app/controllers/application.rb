@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 			request.format = :jin
     		request.parameters[:device_type]="where"
     		request.parameters[:device_uniqueid]=request.parameters[:deviceid]
-    	elsif request.env["HTTP_USER-AGENT"][/Windows CE/]
+    	elsif request.env["HTTP_USER_AGENT"][/Windows CE/]
     		request.format = :html
     		request.parameters[:device_type]="wince" 
     	elsif request.env["HTTP_USER_AGENT"][/iPhone/]
