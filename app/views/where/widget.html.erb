@@ -22,7 +22,7 @@
 			}
 		}
 		
-		$("status").update('Getting location...');
+		//$("status").update('Getting location...');
 	}
 
 
@@ -34,13 +34,13 @@
 		+ p.latitude + ', '
 		+ p.longitude + ')';
 		
-		$("status").update('Your address is: ' + address);
+		//$("status").update('Your address is: ' + address);
 		alert(address);
 	}
 
 	function errorCallback(err)
 	{
-		$("status").update('Error retrieving your location: ' + err.message);
+		//$("status").update('Error retrieving your location: ' + err.message);
 	}
 
 	function doLatLng()
@@ -53,7 +53,7 @@
 		}
 		catch (e) 
 		{
-			$("status").update('Error using Geolocation API: ' + e.message);
+			//$("status").update('Error using Geolocation API: ' + e.message);
 			return;
 		}
 	}
