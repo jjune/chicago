@@ -20,7 +20,11 @@
 		</ul>
 		if lat lng is populated....
 		Our satellites see you here:
-		<img src="http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host)%>"
+		<!--<img src="http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host)%>"-->
+		<%
+		request.env.each_pair {|key, value| puts "#{key} is #{value}" }
+
+		%>
 	</form>
 </body>
 </html>

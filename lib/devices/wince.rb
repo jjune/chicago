@@ -39,11 +39,11 @@ module Devices
 		end
 		
 		def screenwidth
-			if @current_request.env[:UA-pixels].nil?
+			#if @current_request.env[:UA-pixels].nil?
 				"240"
-			else
-				pixels = @current_request.env[:UA-pixels].split("x")
-				pixels[0]
+			#else
+			#	pixels = @current_request.env[:UA-pixels].split("x")
+			#	pixels[0]
 			end
 		end
 		
