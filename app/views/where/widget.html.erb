@@ -35,7 +35,8 @@
 		+ p.longitude + ')';
 		
 		document.getElementById("status").innerHTML = 'Your address is: ' + address;
-		document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
+		//document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
+		document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center="+p.latitude+","+p.longitude+"&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers="+p.latitude+","+p.longitude+",blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
 	}
 
 	function errorCallback(err)
