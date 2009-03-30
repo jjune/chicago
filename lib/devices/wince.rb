@@ -23,10 +23,10 @@ module Devices
 		end
 	
 		def device_type
-			if @current_request.parameters[:x-wap-profile].nil?
+			if @current_request.parameters["HTTP_X_WAP_PROFILE"].nil?
 				"unknown"
 			else
-				@current_request.parameters[:x-wap-profile]
+				@current_request.parameters["HTTP_X_WAP_PROFILE"]
 			end
 		end
 		
@@ -39,12 +39,12 @@ module Devices
 		end
 		
 		def screenwidth
-			#if @current_request.env[:UA-pixels].nil?
+			if @current_request.env["HTTP_UA_PIXELS"].nil?
 				"240"
-			#else
-			#	pixels = @current_request.env[:UA-pixels].split("x")
-			#	pixels[0]
-			#end
+			else
+				pixels = @current_request.env["HTTP_UA_PIXELS"].split("x")
+				pixels[0]
+			end
 		end
 		
 		def textsize

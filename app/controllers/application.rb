@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
     	elsif request.env["HTTP_USER_AGENT"][/Windows CE/]
     		request.format = :html
     		request.parameters[:device_type]="wince" 
+    		request.parameters[:device_uniqueid]=request.env["HTTP_X_UP_SUBNO"]
     	elsif request.env["HTTP_USER_AGENT"][/iPhone/]
     		request.format = :iphone 
     		request.parameters[:device_type]="iphone"
