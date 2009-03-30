@@ -39,12 +39,11 @@ module Devices
 		end
 		
 		def screenwidth
-			if @current_request.parameters[:UA-pixels].nil?
+			if @current_request.env[:UA-pixels].nil?
 				"240"
 			else
-				RAILS_DEFAULT_LOGGER.info("pixesls" + @current_request.parameters[:UA-pixels])
-				pixels = @current_request.parameters[:UA-pixels].split("x")
-				return pixels[0]
+				pixels = @current_request.env[:UA-pixels].split("x")
+				pixels[0]
 			end
 		end
 		
