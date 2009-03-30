@@ -3,7 +3,7 @@
 <head>
 	<title></title>
 	 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	 <%= stylesheet_link_tag 'dashboard' %>
+	 <!--<%= stylesheet_link_tag 'dashboard' %>-->
 	 <%= javascript_include_tag :defaults %>
 	 <%= GMap.header(:host=>request.host) %>
 	 <%= javascript_include_tag 'gmap', 'ym4r-gm', 'gears_init'%> 
@@ -22,7 +22,7 @@
 			}
 		}
 		
-		//$("status").update('Getting location...');
+		document.getElementById("status").innerHTML = 'Getting location...';
 	}
 
 
@@ -34,13 +34,13 @@
 		+ p.latitude + ', '
 		+ p.longitude + ')';
 		
-		$("status").update('Your address is: ' + address);
-		alert(address);
+		document.getElementById("status").innerHTML = 'Your address is: ' + address;
+		document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
 	}
 
 	function errorCallback(err)
 	{
-		//$("status").update('Error retrieving your location: ' + err.message);
+		document.getElementById("status").innerHTML = 'Error retrieving your location: ' + err.message;
 	}
 
 	function doLatLng()
@@ -53,7 +53,7 @@
 		}
 		catch (e) 
 		{
-			//$("status").update('Error using Geolocation API: ' + e.message);
+			document.getElementById("status").innerHTML = 'Error using Geolocation API: ' + e.message;
 			return;
 		}
 	}
@@ -62,7 +62,7 @@
 <body style="background-color:FFFFFF;font-size:<%=@device.textsize%>" onload="doLatLng()">
 	<img src="/images/logo_small.png" align="center">
 	<form>
-		<p id="status">Keith</p>
+		<p id="status"></p>
 		<ul>
 		<li>Snoop for Loot</li>
 		<li>Sniff for Hints</li>
@@ -71,7 +71,7 @@
 		</ul>
 		if lat lng is populated....
 		Our satellites see you here:
-		<img src="http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>"
+		<img id="locationMap" scr/>
 		<%=
 		#request.env.each_pair {|key, value| puts "#{key}::#{value}<br><br>" }
 
