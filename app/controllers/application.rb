@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
     		request.format = :iphone 
     		request.parameters[:device_type]="iphone"
 		else
-			request.format = :stub
+			request.format = :html
 			request.parameters[:device_type]="stub"
     		request.parameters[:device_uniqueid]=request.remote_ip()
     	end
