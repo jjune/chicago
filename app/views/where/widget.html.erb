@@ -43,21 +43,23 @@
 		$("status").value = 'Error retrieving your location: ' + err.message;
 	}
 
-	try 
+	function doLatLng()
 	{
-		init();
-		var geolocation = google.gears.factory.create('beta.geolocation');
-		geolocation.getCurrentPosition(successCallback,errorCallback,{enableHighAccuracy: true,gearsRequestAddress: true });
+		try 
+		{
+			init();
+			var geolocation = google.gears.factory.create('beta.geolocation');
+			geolocation.getCurrentPosition(successCallback,errorCallback,{enableHighAccuracy: true,gearsRequestAddress: true });
+		}
+		catch (e) 
+		{
+			$("status").value='Error using Geolocation API: ' + e.message;
+			return;
+		}
 	}
-	catch (e) 
-	{
-		$("status").value='Error using Geolocation API: ' + e.message;
-		return;
-	}
-
   	</script>
 </head>
-<body style="background-color:FFFFFF;font-size:<%=@device.textsize%>">
+<body style="background-color:FFFFFF;font-size:<%=@device.textsize%>" onload="doLatLng()">
 	<img src="/images/logo_small.png" align="center">
 	<form>
 		<p id="status"></p>
