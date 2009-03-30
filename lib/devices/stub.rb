@@ -26,5 +26,12 @@ module Devices
 			@current_request.user_agent
 		end
 		
+		def screenwidth
+			"800"
+		end
+		
+		def textsize
+			"medium"
+		end
 	end
 end
