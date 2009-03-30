@@ -44,7 +44,7 @@ module Devices
 			#else
 			#	pixels = @current_request.env[:UA-pixels].split("x")
 			#	pixels[0]
-			end
+			#end
 		end
 		
 		def textsize
