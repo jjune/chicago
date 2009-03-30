@@ -22,41 +22,37 @@
 			}
 		}
 		
-		$("status").value='Getting location...';
+		$("status").update('Getting location...');
 	}
 
 
 	function successCallback(p)
 	{
-		alert(2);
 		var address = p.gearsAddress.city + ', '
 		+ p.gearsAddress.region + ', '
 		+ p.gearsAddress.country + ' ('
 		+ p.latitude + ', '
 		+ p.longitude + ')';
 		
-		alert(address);
-		$("status").value="";
-		$("status").value='Your address is: ' + address;
+		$("status").update('Your address is: ' + address);
 	}
 
 	function errorCallback(err)
 	{
-		$("status").value = 'Error retrieving your location: ' + err.message;
+		$("status").update('Error retrieving your location: ' + err.message);
 	}
 
 	function doLatLng()
 	{
 		try 
-		{alert(1);
+		{
 			//init();
 			var geolocation = google.gears.factory.create('beta.geolocation');
-			alert(geolocation);
 			geolocation.getCurrentPosition(successCallback,errorCallback,{enableHighAccuracy: true,gearsRequestAddress: true });
 		}
 		catch (e) 
 		{
-			$("status").value='Error using Geolocation API: ' + e.message;
+			$("status").update('Error using Geolocation API: ' + e.message);
 			return;
 		}
 	}
