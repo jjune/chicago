@@ -28,12 +28,14 @@
 
 	function successCallback(p)
 	{
+		alert(2);
 		var address = p.gearsAddress.city + ', '
 		+ p.gearsAddress.region + ', '
 		+ p.gearsAddress.country + ' ('
 		+ p.latitude + ', '
 		+ p.longitude + ')';
 		
+		alert(address);
 		$("status").value="";
 		$("status").value='Your address is: ' + address;
 	}
@@ -44,11 +46,12 @@
 	}
 
 	function doLatLng()
-	{alert($("status").value);
+	{
 		try 
-		{
+		{alert(1);
 			//init();
 			var geolocation = google.gears.factory.create('beta.geolocation');
+			alert(geolocation);
 			geolocation.getCurrentPosition(successCallback,errorCallback,{enableHighAccuracy: true,gearsRequestAddress: true });
 		}
 		catch (e) 
