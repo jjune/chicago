@@ -47,7 +47,7 @@
 	{
 		try 
 		{
-			//init();
+			init();
 			var geolocation = google.gears.factory.create('beta.geolocation');
 			geolocation.getCurrentPosition(successCallback,errorCallback,{enableHighAccuracy: true,gearsRequestAddress: true });
 		}
