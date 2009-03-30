@@ -43,9 +43,8 @@
 		$("status").value = 'Error retrieving your location: ' + err.message;
 	}
 
-	alert(1);
 	function doLatLng()
-	{alert(2);
+	{alert($("status").value);
 		try 
 		{
 			init();
@@ -63,7 +62,7 @@
 <body style="background-color:FFFFFF;font-size:<%=@device.textsize%>" onload="doLatLng()">
 	<img src="/images/logo_small.png" align="center">
 	<form>
-		<p id="status"></p>
+		<p id="status">Keith</p>
 		<ul>
 		<li>Snoop for Loot</li>
 		<li>Sniff for Hints</li>
