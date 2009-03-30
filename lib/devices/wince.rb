@@ -42,8 +42,9 @@ module Devices
 			if @current_request.parameters[:UA-pixels].nil?
 				"240"
 			else
-				@pixels = @current_request.parameters[:UA-pixels].split("x")
-				@pixels[0]
+				RAILS_DEFAULT_LOGGER.info("pixesls" + @current_request.parameters[:UA-pixels])
+				pixels = @current_request.parameters[:UA-pixels].split("x")
+				return pixels[0]
 			end
 		end
 		
