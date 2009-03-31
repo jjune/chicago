@@ -3,6 +3,11 @@
 <span class="notification-message">Shortcode identified</span><br>
 Unique ID: <%= @device.uniqueid %><br>
 </div>
+<tr>
+         <td class="var"><label>Nickname</label></td><td><%= f.text_field :nickname, :class => "textbox340" %></td>
+         <td class="register-error-message"></td>							         
+</tr>
+
 <% else %>
 <div id="register-error-message">Shortcode not recognized</span>
 <% end %>
