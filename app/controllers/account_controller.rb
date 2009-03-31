@@ -50,6 +50,13 @@ class AccountController < ApplicationController
     
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
+      shortcode = params[:shortcode]
+      
+      if shortcode
+        device = find_by_short_code(shortcode)
+        device.update_attributes(:player_id => @user.id)
+      end
+      
       @user.activate
       
       @action_class = 'register'
