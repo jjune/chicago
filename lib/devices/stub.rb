@@ -1,6 +1,6 @@
 #lng, lat, and georuby_point should be defined in every device module at a minimum
 module Devices
-	module Browser
+	module Stub
 		
 		def lng
 		    if @current_request.parameters[:lng].nil?
@@ -26,5 +26,12 @@ module Devices
 			@current_request.user_agent
 		end
 		
+		def screenwidth
+			"800"
+		end
+		
+		def textsize
+			"medium"
+		end
 	end
 end
