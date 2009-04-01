@@ -149,9 +149,9 @@ class Prize < ActiveRecord::Base
 	def self.log_query(prize,device)
 		qt = QueryTransaction.new()
     	qt.coordinate = device.georuby_point
-    	qt.player ||=device.player 
+    	#qt.player ||=device.player 
     	qt.device = device
-    	qt.prize ||=prize
+    	#qt.prize ||=prize
     	qt.carrier = device.carrier if device.respond_to?("carrier")
     	qt.user_agent = device.user_agent if device.respond_to?("user_agent")
     	qt.screenwidth = device.screenwidth if device.respond_to?("screenwidth")

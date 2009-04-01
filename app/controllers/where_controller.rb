@@ -103,7 +103,7 @@ class WhereController < ApplicationController
     #Builder code formats winning message or losing message
      respond_to do |format|
        format.xml  {render :xml => @device, :action => "snoop.xml.builder", :layout => false }
-       format.html {render :html}
+       format.html
      end #respond to
   
   end
