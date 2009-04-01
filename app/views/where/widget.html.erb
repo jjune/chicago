@@ -5,8 +5,7 @@
 	 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 	 <!--<%= stylesheet_link_tag 'dashboard' %>-->
 	 <%= javascript_include_tag :defaults %>
-	 <%= GMap.header(:host=>request.host) %>
-	 <%= javascript_include_tag 'gmap', 'ym4r-gm', 'gears_init'%> 
+	 <%= javascript_include_tag 'gears_init'%> 
 	<script> 
 	
 	function init()
@@ -28,7 +27,10 @@
 
 	function successCallback(p)
 	{
-		var address = p.gearsAddress.city + ', '
+		var address = 
+		p.gearsAddress.streetNumber + ' '
+		+ p.gearsAddress.street + ','
+		+ p.gearsAddress.city + ', '
 		+ p.gearsAddress.region + ', '
 		+ p.gearsAddress.country + ' ('
 		+ p.latitude + ', '
@@ -36,7 +38,7 @@
 		
 		document.getElementById("status").innerHTML = 'Your address is: ' + address;
 		//document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
-		document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center="+p.latitude+","+p.longitude+"&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers="+p.latitude+","+p.longitude+",blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
+		document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center="+p.latitude+","+p.longitude+"&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers="+p.latitude+","+p.longitude+",blue&format=png&sensor=false&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
 	}
 
 	function errorCallback(err)
@@ -60,8 +62,8 @@
 	}
   	</script>
 </head>
-<body style="background-color:FFFFFF;font-size:<%=@device.textsize%>" onload="doLatLng()">
-	<img src="/images/logo_small.png" align="center">
+<body style="background-color:#FFFFFF;font-size:<%=@device.textsize%>" onload="doLatLng()">
+	<img src="/images/logo_small.png" style="background-color:#FFFFFF;text-align:center;">
 	<form>
 		<p id="status"></p>
 		<ul>
@@ -72,12 +74,13 @@
 		</ul>
 		if lat lng is populated....
 		Our satellites see you here:
-		<img id="locationMap" scr/>
+		<img id="locationMap"/>
 		<%=
 		#request.env.each_pair {|key, value| puts "#{key}::#{value}<br><br>" }
 
 		%>
 	</form>
+	<img src="http://maps.google.com/staticmap?center=41.974388,-87.8977195&zoom=14&size=800x128&maptype=mobile&markers=41.974388,-87.8977195,blue&format=png&sensor=false&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q">
 </body>
 </html>
 
