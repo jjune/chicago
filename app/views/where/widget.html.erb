@@ -70,9 +70,10 @@
 	
 	function postCallbackSubmit(position)
 	{
+		alert(position.latitude);
 		document.getElementById("lat").value = position.latitude;
 		document.getElementById("lng").value = position.longitude;
-		document.getElementById("queryForm").submit();
+		//document.getElementById("queryForm").submit();
 	}
   	</script>
 </head>
