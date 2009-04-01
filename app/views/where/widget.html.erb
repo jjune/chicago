@@ -25,20 +25,19 @@
 	}
 
 
-	function successCallback(p)
+	function successCallback(position)
 	{
 		var address = 
-		p.gearsAddress.streetNumber + ' '
-		+ p.gearsAddress.street + ','
-		+ p.gearsAddress.city + ', '
-		+ p.gearsAddress.region + ', '
-		+ p.gearsAddress.country + ' ('
-		+ p.latitude + ', '
-		+ p.longitude + ')';
+		position.gearsAddress.streetNumber + ' '
+		+ position.gearsAddress.street + ','
+		+ position.gearsAddress.city + ', '
+		+ position.gearsAddress.region + ', '
+		+ position.gearsAddress.country + ' ('
+		+ position.latitude + ', '
+		+ position.longitude + ')';
 		
-		document.getElementById("status").innerHTML = 'Your address is: ' + address;
-		//document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center=<%=@device.lat%>,<%=@device.lng%>&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers=<%=@device.lat%>,<%=@device.lng%>,blue&format=png&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
-		document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center="+p.latitude+","+p.longitude+"&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers="+p.latitude+","+p.longitude+",blue&format=png&sensor=false&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
+		document.getElementById("status").innerHTML = address;
+		document.getElementById("locationMap").src = "http://maps.google.com/staticmap?center="+position.latitude+","+position.longitude+"&zoom=14&size=<%=@device.screenwidth%>x128&maptype=mobile&markers="+position.latitude+","+position.longitude+",blue&format=png&sensor=false&key=<%=Ym4r::GmPlugin::ApiKey.get(:host=>request.host)%>";
 	}
 
 	function errorCallback(err)
@@ -60,20 +59,37 @@
 			return;
 		}
 	}
+	
+	function doSubmit(action)
+	{
+		document.getElementById("queryForm").action = "/where/"+action;
+		
+		var geolocation = google.gears.factory.create('beta.geolocation');
+		geolocation.getCurrentPosition(postCallbackSubmit,errorCallback,{enableHighAccuracy: true,gearsRequestAddress: true });
+	}
+	
+	function postCallbackSubmit(position)
+	{
+		document.getElementById("lat").value = position.latitude;
+		document.getElementById("lon").value = position.longitude;
+		document.getElementById("queryForm").submit();
+	}
   	</script>
 </head>
 <body style="background-color:#FFFFFF;font-size:<%=@device.textsize%>" onload="doLatLng()">
-	<img src="/images/logo_small.png" style="background-color:#FFFFFF;text-align:center;" />
-	<form>
+	<div style="background-color:#FFFFFF;text-align:center;"><img src="/images/logo_small.png"/></div>
+	<div>
+		Our satellites see you here...
 		<p id="status"></p>
-		<ul>
-		<li>Snoop for Loot</li>
-		<li>Sniff for Hints</li>
-		<li>Do you know the code word?</li>
-		<li>About SuperSecretLabs</li>
-		</ul>
-		Our satellites see you here:
 		<img id="locationMap"/>
+	</div>
+	<form id="queryForm">		
+		<input type="button" value="Snoop for Loot" onClick="doSubmit('snoop');">
+		Sniff for Hints
+		Do you know the code word?
+		About SuperSecretLabs
+		<input type="hidden" name="lat" id="lat"/>
+		<input type="hidden" name="lon" id="lon"/>
 	</form>
 </body>
 </html>
