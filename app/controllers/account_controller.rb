@@ -7,6 +7,11 @@ class AccountController < ApplicationController
   def index
     redirect_to(:action => 'register') unless logged_in? || User.count > 0
   end
+  
+  def settings
+    @action_class = ""
+    render :layout => 'dashboard'
+  end
 
   def login
     @title = 'SupersecretLabs Login'
@@ -45,6 +50,13 @@ class AccountController < ApplicationController
     
     if @user.save
       flash[:notice] = "User account #{@user.login} successfully created."
+      shortcode = params[:shortcode]
+      
+      if shortcode
+        device = find_by_short_code(shortcode)
+        device.update_attributes(:player_id => @user.id)
+      end
+      
       @user.activate
       
       @action_class = 'register'
@@ -88,19 +100,9 @@ class AccountController < ApplicationController
   def check_shortcode
     
     @device = Device.find_by_short_code(params[:shortcode])
-    
-        
-    if params[:shortcode] == "123"
-       @shortcode_device = "yes"
-    elsif params[:shortcode] == ""
-       @shortcode_device = "empty"
-    else
-       @shortcode_device = "no"
-    end
-   render :partial => 'global/shortcode_device_description'
+    render :partial => 'global/shortcode_device_description'
   end
   
-
   def register_login
     @action_class = 'register'
     @user = User.new(params[:user])
