@@ -70,8 +70,8 @@
 	
 	function postCallbackSubmit(position)
 	{
-		document.getElementById("lat").value = position.latitude;
-		document.getElementById("lng").value = position.longitude;
+		document.queryForm.lat.value = position.latitude;
+		document.queryForm.lng.value = position.longitude;
 		document.getElementById("queryForm").submit();
 	}
   	</script>
@@ -83,8 +83,8 @@
 		<p id="status"></p>
 		<img id="locationMap"/>
 	</div>
-	<form id="queryForm">		
-		<input type="button" value="Snoop for Loot" onClick="this.disabled='true';doSubmit('snoop');">
+	<form id="queryForm" name="queryForm">		
+		<input type="button" value="Snoop for Loot" onClick="doSubmit('snoop');">
 		Sniff for Hints
 		Do you know the code word?
 		About SuperSecretLabs
