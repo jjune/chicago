@@ -63,7 +63,7 @@
   	</script>
 </head>
 <body style="background-color:#FFFFFF;font-size:<%=@device.textsize%>" onload="doLatLng()">
-	<img src="/images/logo_small.png" style="background-color:#FFFFFF;text-align:center;">
+	<img src="/images/logo_small.png" style="background-color:#FFFFFF;text-align:center;" />
 	<form>
 		<p id="status"></p>
 		<ul>
@@ -72,15 +72,9 @@
 		<li>Do you know the code word?</li>
 		<li>About SuperSecretLabs</li>
 		</ul>
-		if lat lng is populated....
 		Our satellites see you here:
 		<img id="locationMap"/>
-		<%=
-		#request.env.each_pair {|key, value| puts "#{key}::#{value}<br><br>" }
-
-		%>
 	</form>
-	<img src="http://maps.google.com/staticmap?center=41.974388,-87.8977195&zoom=14&size=800x128&maptype=mobile&markers=41.974388,-87.8977195,blue&format=png&sensor=false&key=ABQIAAAA6RZP3ZouLBJsRfEv4s3jzhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxT6qAbsBjBmEKqdpIQq_13niSn_-Q">
 </body>
 </html>
 
