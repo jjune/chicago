@@ -62,15 +62,19 @@
 	
 	function doSubmit(action)
 	{
+		document.getElementById("queryForm").action = "/where/"+action;
 		var geolocation = google.gears.factory.create('beta.geolocation');
 		geolocation.getCurrentPosition(postCallbackSubmit,errorCallback,{enableHighAccuracy: true,gearsRequestAddress: true });
 	}
 	
 	function postCallbackSubmit(position)
 	{
-		document.getElementById("queryForm").action = "/where/"+action+"?lat="+position.latitude+"&lng="+position.longitude;
-		//document.queryForm.lat.value = position.latitude;
-		//document.queryForm.lng.value = position.longitude;
+		alert(position.latitude);
+		//document.getElementById("queryForm").action = "/where/"+action+"?lat="+position.latitude+"&lng="+position.longitude;
+		alert(document.queryForm.lat.value);
+		document.queryForm.lat.value = position.latitude;
+		document.queryForm.lng.value = position.longitude;
+		alert(document.queryForm.lat.value);
 		document.getElementById("queryForm").submit();
 	}
   	</script>
