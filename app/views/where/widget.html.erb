@@ -8,6 +8,7 @@
 	 
 </head>
 <body style="background-color:#FFFFFF;font-size:<%=@device.textsize%>" onload="doLatLng()">
+	<%=#request.env.each_pair {|key, value| puts "#{key}::#{value}<br><br>" }%>
 	<div style="background-color:#FFFFFF;text-align:center;"><img src="/images/logo_small.png"/></div>
 	<div>
 		Our satellites see you here...
