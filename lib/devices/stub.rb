@@ -33,5 +33,9 @@ module Devices
 		def textsize
 			"medium"
 		end
+		
+		def jsinclude
+			"device_gears"
+		end
 	end
 end

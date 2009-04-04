@@ -1,6 +1,6 @@
 #lng, lat, and georuby_point should be defined in every device module at a minimum
 module Devices
-	module Wince
+	module S60
 		
 		def lng
 		    if @current_request.parameters[:lng].nil?
@@ -39,11 +39,11 @@ module Devices
 		end
 		
 		def screenwidth
-			if @current_request.env["HTTP_UA_PIXELS"].nil?
+			if @current_request.env["HTTP_X_UPDEVCAP_SCREENPIXELS"].nil?
 				"240"
 			else
-				pixels = @current_request.env["HTTP_UA_PIXELS"].split("x")
-				pixels[0]
+				pixels = @current_request.env["HTTP_X_UPDEVCAP_SCREENPIXELS"].split(",")
+				pixels[1]
 			end
 		end
 		
@@ -60,7 +60,7 @@ module Devices
 		end
 		
 		def jsinclude
-			"device_gears"
+			"device_s60"
 		end
 		
 	end
