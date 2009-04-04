@@ -1,4 +1,3 @@
-document.write("<script language='Javascript' src='/javascripts/gears_init.js' ></script>");	
 function init()
 {
 
