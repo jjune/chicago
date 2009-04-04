@@ -16,21 +16,20 @@ function errorCallback(err)
 
 function getLocation()
 {
-	alert(1);
-	var so = device.getServiceObject("Service.Location", "ILocation");
-	alert(so);
-	// This specifies update option used while retrieving location estimation. 
-	var updateoptions = new Object();
-	// Setting PartialUpdates to 'FALSE' ensures that user get atleast 
-	// BasicLocationInformation (Longitude, Lattitude, and Altitude.)
-	updateoptions.PartialUpdates = false;
-	
-	var criteria = new Object();
-	criteria.LocationInformationClass = "GenericLocationInfo";
-	criteria.Updateoptions = updateoptions;
-	
 	try
 	{
+		var so = device.getServiceObject("Service.Location", "ILocation");
+		
+		// This specifies update option used while retrieving location estimation. 
+		var updateoptions = new Object();
+		// Setting PartialUpdates to 'FALSE' ensures that user get atleast 
+		// BasicLocationInformation (Longitude, Lattitude, and Altitude.)
+		updateoptions.PartialUpdates = false;
+		
+		var criteria = new Object();
+		criteria.LocationInformationClass = "GenericLocationInfo";
+		criteria.Updateoptions = updateoptions;
+	
 		var result = so.ILocation.GetLocation(criteria);
 		var location = result.ReturnValue
 		return location;
