@@ -16,7 +16,9 @@ function errorCallback(err)
 
 function getLocation()
 {
+	alert(1);
 	var so = device.getServiceObject("Service.Location", "ILocation");
+	alert(so)l
 	// This specifies update option used while retrieving location estimation. 
 	var updateoptions = new Object();
 	// Setting PartialUpdates to 'FALSE' ensures that user get atleast 
