@@ -35,6 +35,9 @@ class ApplicationController < ActionController::Base
     	elsif request.env["HTTP_USER_AGENT"][/iPhone/]
     		request.format = :iphone 
     		request.parameters[:device_type]="iphone"
+    	elsif request.env["HTTP_ACCEPT"][/application/json/]
+    		request.format= :json
+    		request.parameters[:device_type]="s60"
 		else
 			request.format = :html
 			request.parameters[:device_type]="stub"
