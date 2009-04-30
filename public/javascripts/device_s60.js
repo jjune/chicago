@@ -18,7 +18,6 @@ function getLocation()
 {
 	try
 	{
-		alert(widget.identifier);
 		var so = device.getServiceObject("Service.Location", "ILocation");
 		
 		// This specifies update option used while retrieving location estimation. 

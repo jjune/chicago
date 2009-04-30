@@ -104,6 +104,7 @@ class WhereController < ApplicationController
      respond_to do |format|
        format.xml  {render :xml => @device, :action => "snoop.xml.builder", :layout => false }
        format.html
+       format.json {render :json =>@prize.to_json }
      end #respond to
   
   end
